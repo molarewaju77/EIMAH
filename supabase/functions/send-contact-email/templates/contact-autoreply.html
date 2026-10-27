@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We've received your message - EIMAH</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: #fafafa;
+        color: #1c1f26;
+        margin: 0;
+        padding: 24px;
+      }
+      .card {
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        max-width: 560px;
+        margin: 0 auto;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      }
+      .header {
+        background-color: #12141a;
+        padding: 36px 28px;
+        text-align: center;
+      }
+      .brand {
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        color: #ffffff;
+        margin: 0;
+      }
+      .brand span {
+        color: #f590dd;
+      }
+      .content {
+        padding: 32px 28px;
+      }
+      h2 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: #12141a;
+      }
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #4b5563;
+        margin: 0 0 16px;
+      }
+      .highlight {
+        background: #fdf2f9;
+        border-left: 3px solid #f590dd;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 20px 0;
+        font-size: 13px;
+        color: #6b7280;
+        white-space: pre-wrap;
+      }
+      .footer {
+        padding: 20px 28px;
+        background: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+      }
+      .whatsapp-link {
+        color: #12141a;
+        font-weight: 600;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <h1 class="brand">EIMAH<span>.</span></h1>
+      </div>
+      <div class="content">
+        <h2>Thank you for reaching out, {{name}}.</h2>
+        <p>We have successfully received your inquiry regarding <strong>{{subject}}</strong>.</p>
+        <p>Our team reviews all incoming requests promptly, and a dedicated representative will reply to you within <strong>one business day</strong>.</p>
+        <div class="highlight">
+          <strong>Your Message Summary:</strong><br />
+          "{{message}}"
+        </div>
+        <p>If you have urgent order questions in the meantime, feel free to reply directly to this email or chat with us on WhatsApp at <a href="https://wa.me/2349071464295" class="whatsapp-link">+234 907 146 4295</a>.</p>
+      </div>
+      <div class="footer">
+        &copy; {{year}} EIMAH Studio. All rights reserved.
+      </div>
+    </div>
+  </body>
+</html>

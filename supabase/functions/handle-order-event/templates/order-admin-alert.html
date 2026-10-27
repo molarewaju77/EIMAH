@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Paid Order Alert - {{orderId}}</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: #0d0f12;
+        color: #ffffff;
+        margin: 0;
+        padding: 24px 12px;
+      }
+      .card {
+        background-color: #161920;
+        border: 1px solid #2a2e39;
+        border-radius: 16px;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+      .header {
+        background: linear-gradient(135deg, #1c202a 0%, #12141a 100%);
+        padding: 32px 28px;
+        border-bottom: 1px solid #2a2e39;
+        text-align: center;
+      }
+      .brand {
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        color: #ffffff;
+        margin: 0;
+      }
+      .brand span {
+        color: #f590dd;
+      }
+      .badge {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 4px 12px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 20px;
+        color: #34d399;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .content {
+        padding: 28px;
+      }
+      .amount-banner {
+        background: #1f2430;
+        border: 1px solid #32394a;
+        border-radius: 12px;
+        padding: 16px 20px;
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .amount-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #8e95a5;
+        font-weight: 600;
+      }
+      .amount-val {
+        font-size: 26px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-top: 4px;
+      }
+      .field-grid {
+        display: table;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .field-row {
+        display: table-row;
+      }
+      .field-cell {
+        display: table-cell;
+        padding-bottom: 16px;
+        width: 50%;
+        vertical-align: top;
+      }
+      .label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #8e95a5;
+        margin-bottom: 4px;
+      }
+      .value {
+        font-size: 14px;
+        color: #ffffff;
+        font-weight: 600;
+      }
+      .admin-btn {
+        display: block;
+        background: #f590dd;
+        color: #12141a !important;
+        text-decoration: none;
+        padding: 14px 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin: 24px 0 16px;
+      }
+      .items-section {
+        background: #0d0f12;
+        border: 1px solid #2a2e39;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+      }
+      .items-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .items-table th {
+        text-align: left;
+        font-size: 11px;
+        color: #8e95a5;
+        text-transform: uppercase;
+        padding: 6px 0;
+        border-bottom: 1px solid #2a2e39;
+      }
+      .items-table td {
+        padding: 10px 0;
+        border-bottom: 1px solid #1c202a;
+        font-size: 13px;
+        color: #e1e4ea;
+      }
+      .footer {
+        padding: 20px 28px;
+        background: #12141a;
+        border-top: 1px solid #2a2e39;
+        font-size: 12px;
+        color: #6b7280;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <h1 class="brand">EIMAH<span>.</span></h1>
+        <div class="badge">💰 New Paid Order Received</div>
+      </div>
+      <div class="content">
+        <div class="amount-banner">
+          <div class="amount-label">Total Revenue Collected</div>
+          <div class="amount-val">{{total}}</div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-row">
+            <div class="field-cell">
+              <div class="label">Order ID</div>
+              <div class="value">#{{orderId}}</div>
+            </div>
+            <div class="field-cell">
+              <div class="label">Tracking ID</div>
+              <div class="value" style="color: #f590dd;">{{trackingId}}</div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-cell">
+              <div class="label">Customer Name</div>
+              <div class="value">{{customerName}}</div>
+            </div>
+            <div class="field-cell">
+              <div class="label">Phone Number</div>
+              <div class="value">
+                <a href="tel:{{customerPhone}}" style="color: #ffffff; text-decoration: none;">{{customerPhone}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-cell" style="width: 100%;" colspan="2">
+              <div class="label">Customer Email</div>
+              <div class="value">
+                <a href="mailto:{{customerEmail}}" style="color: #f590dd; text-decoration: none;">{{customerEmail}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-cell" style="width: 100%;" colspan="2">
+              <div class="label">Fulfillment Details ({{deliveryMethod}})</div>
+              <div class="value" style="font-weight: 400; color: #cbd5e1; font-size: 13px;">{{shippingAddress}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="items-section">
+          <div class="label" style="margin-bottom: 8px;">Order Breakdown</div>
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th style="text-align: center;">Qty</th>
+                <th style="text-align: right;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{itemsHtml}}
+            </tbody>
+          </table>
+        </div>
+
+        <a href="https://emah-brand-studio.vercel.app/admin/orders_/{{orderId}}" class="admin-btn">
+          Open Order in Admin Dashboard &rarr;
+        </a>
+      </div>
+      <div class="footer">
+        EIMAH Studio Admin Notification System
+      </div>
+    </div>
+  </body>
+</html>
