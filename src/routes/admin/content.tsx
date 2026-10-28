@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Plus, Edit3, Trash2, X, Eye, ArrowRight, Upload, Bell } from "lucide-react";
 import { toast } from "react-toastify";
 import { AdminPageHeader } from "@/components/admin/AdminLayout";
@@ -19,8 +19,9 @@ import {
   useSolutionsQuery,
   useUpdateSolutionMutation,
 } from "@/hooks/queries/useContentQuery";
+import { useCategoriesQuery } from "@/hooks/queries/useCategoriesQuery";
 import { formatNaira } from "@/lib/mock-data";
-import { getPopupTargetUrl, getBannerTargetUrl } from "@/lib/admin-data";
+import { getPopupTargetUrl, getBannerTargetUrl, adminCategories } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/admin/content")({
   component: ContentPage,
@@ -257,6 +258,12 @@ function BannerForm({
   onClose: () => void;
   onSave: (b: Banner) => void;
 }) {
+  const { data: categories = [], isLoading: categoriesLoading } = useCategoriesQuery();
+  const availableCategories = useMemo(() => {
+    const list = categories.length > 0 ? categories : adminCategories;
+    return list.filter((c) => c.active !== false);
+  }, [categories]);
+
   const [f, setF] = useState<Banner>(
     initial ?? {
       id: "",
@@ -276,14 +283,27 @@ function BannerForm({
   const [useUrl, setUseUrl] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleTargetChange = (target: Banner["ctaTarget"]) => {
+  const normalizedSelectedTarget = useMemo(() => {
+    if (!f.ctaTarget) return "shop";
+    if (f.ctaTarget.startsWith("category:")) return f.ctaTarget;
+    const matching = availableCategories.find(
+      (c) => c.slug === f.ctaTarget || (f.ctaTarget === "gifts" && c.slug === "gifts-sets"),
+    );
+    if (matching) return `category:${matching.slug}`;
+    return f.ctaTarget;
+  }, [f.ctaTarget, availableCategories]);
+
+  const handleTargetChange = (target: string) => {
     let url = f.ctaUrl;
-    if (target === "home") url = "/";
+    if (target.startsWith("category:")) {
+      const slug = target.slice("category:".length);
+      url = `/shop?category=${encodeURIComponent(slug)}`;
+    } else if (target === "home") url = "/";
     else if (target === "shop") url = "/shop";
-    else if (target === "clothing") url = "/shop/clothing";
-    else if (target === "shoes") url = "/shop/shoes";
-    else if (target === "bags") url = "/shop/bags";
-    else if (target === "gifts") url = "/shop/gifts-sets";
+    else if (target === "clothing") url = "/shop?category=clothing";
+    else if (target === "shoes") url = "/shop?category=shoes";
+    else if (target === "bags") url = "/shop?category=bags";
+    else if (target === "gifts") url = "/shop?category=gifts-sets";
     else if (target === "solutions") url = "/solutions";
     else if (target === "solutions-business") url = "/solutions/business";
     else if (target === "sourcing") url = "/solutions/business/sourcing";
@@ -402,24 +422,33 @@ function BannerForm({
           </div>
 
           <div>
-            <label className="text-xs uppercase tracking-widest font-semibold text-muted-foreground block mb-1">
-              CTA Destination Target
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-xs uppercase tracking-widest font-semibold text-muted-foreground block">
+                CTA Destination Target
+              </label>
+              {categoriesLoading && (
+                <span className="text-[10px] text-muted-foreground">Loading categories...</span>
+              )}
+            </div>
             <select
-              value={f.ctaTarget || "shop"}
-              onChange={(e) => handleTargetChange(e.target.value as Banner["ctaTarget"])}
+              value={normalizedSelectedTarget}
+              onChange={(e) => handleTargetChange(e.target.value)}
               className="w-full h-10 rounded-xl border border-border px-3 text-sm focus:border-foreground outline-none cursor-pointer"
             >
               <optgroup label="Main Header & Shop Pages">
                 <option value="shop">Shop Page (/shop)</option>
-                <option value="clothing">Clothing Category (/shop/clothing)</option>
-                <option value="shoes">Shoes Category (/shop/shoes)</option>
-                <option value="bags">Bags Category (/shop/bags)</option>
-                <option value="gifts">Gifts & Sets Category (/shop/gifts-sets)</option>
                 <option value="home">Home Page (/)</option>
                 <option value="about">About Us (/about)</option>
                 <option value="track">Track Order (/track)</option>
                 <option value="contact">Contact Us (/contact)</option>
+              </optgroup>
+
+              <optgroup label="Shop Categories">
+                {availableCategories.map((c) => (
+                  <option key={c.slug} value={`category:${c.slug}`}>
+                    {c.name} Category (/shop?category={c.slug})
+                  </option>
+                ))}
               </optgroup>
 
               <optgroup label="Business Advisory Solutions">
@@ -451,7 +480,7 @@ function BannerForm({
                 required
                 value={f.ctaUrl || ""}
                 onChange={(e) => setF({ ...f, ctaUrl: e.target.value })}
-                placeholder="e.g. /shop/clothing or https://..."
+                placeholder="e.g. /shop?category=clothing or https://..."
                 className="w-full h-10 rounded-xl border border-border px-3 text-sm focus:border-foreground outline-none"
               />
             </div>

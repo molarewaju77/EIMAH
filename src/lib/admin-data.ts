@@ -139,7 +139,9 @@ export type CtaTarget =
   | "about"
   | "track"
   | "contact"
-  | "custom";
+  | "custom"
+  | `category:${string}`
+  | (string & {});
 
 export type BannerCtaTarget = CtaTarget;
 
@@ -209,19 +211,32 @@ export type PopupCtaTarget = CtaTarget;
 export function getCtaTargetUrl(target?: CtaTarget, customUrl?: string, fallback = "/shop"): string {
   if (customUrl && target === "custom") return customUrl;
 
+  if (target?.startsWith("category:")) {
+    const slug = target.slice("category:".length);
+    return customUrl || `/shop?category=${encodeURIComponent(slug)}`;
+  }
+
+  // Normalize legacy category paths if stored in customUrl
+  if (customUrl) {
+    if (customUrl === "/shop/clothing") return "/shop?category=clothing";
+    if (customUrl === "/shop/shoes") return "/shop?category=shoes";
+    if (customUrl === "/shop/bags") return "/shop?category=bags";
+    if (customUrl === "/shop/gifts-sets") return "/shop?category=gifts-sets";
+  }
+
   switch (target) {
     case "home":
       return "/";
     case "shop":
       return "/shop";
     case "clothing":
-      return "/shop/clothing";
+      return "/shop?category=clothing";
     case "shoes":
-      return "/shop/shoes";
+      return "/shop?category=shoes";
     case "bags":
-      return "/shop/bags";
+      return "/shop?category=bags";
     case "gifts":
-      return "/shop/gifts-sets";
+      return "/shop?category=gifts-sets";
     case "solutions":
       return "/solutions";
     case "solutions-business":
