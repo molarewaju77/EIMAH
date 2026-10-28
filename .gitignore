@@ -35,3 +35,7 @@ dist-ssr
 .env
 .env.local
 .env.production
+
+
+# Database schema
+supabase_schema.sql
