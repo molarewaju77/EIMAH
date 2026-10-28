@@ -98,7 +98,7 @@ export function RestockNoticeModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="w-[92vw] max-w-[430px] rounded-2xl p-5 sm:p-6 bg-background shadow-2xl border border-border/80 focus:outline-none max-h-[92vh] overflow-y-auto">
+      <DialogContent className="w-[92vw] max-w-[430px] rounded-2xl p-5 sm:p-6 bg-background shadow-2xl border border-border/80 focus:outline-none max-h-[92vh] overflow-y-auto overflow-x-hidden min-w-0">
         <DialogHeader className="sr-only">
           <DialogTitle>
             {step === "oops"
@@ -111,12 +111,12 @@ export function RestockNoticeModal({
 
         {/* STEP 1: OOPS / STOCK NOTICE VIEW */}
         {step === "oops" && (
-          <div className="py-2 space-y-5 text-center animate-in fade-in-50 duration-200">
+          <div className="py-2 space-y-5 text-center animate-in fade-in-50 duration-200 w-full min-w-0 max-w-full overflow-hidden">
             <div className="mx-auto size-12 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/60 flex items-center justify-center text-amber-600 dark:text-amber-400 shadow-2xs">
               <ShoppingBag className="size-6 stroke-[1.75]" />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 w-full min-w-0">
               <h3 className="font-display font-bold text-xl text-foreground tracking-tight">
                 {availableStock === 0 ? "Currently Out of Stock" : "Oops! Almost yours"}
               </h3>
@@ -136,23 +136,27 @@ export function RestockNoticeModal({
             </div>
 
             {/* Demanded Item Details Box */}
-            <div className="p-3.5 rounded-xl border border-border/70 bg-surface/60 flex items-center gap-3 text-left">
+            <div className="p-3.5 rounded-xl border border-border/70 bg-surface/60 flex items-center gap-3 text-left w-full min-w-0 max-w-full overflow-hidden">
               <img
                 src={productImage}
                 alt={product.name}
                 className="size-14 rounded-lg object-cover shrink-0 border border-border/50"
               />
-              <div className="min-w-0 flex-1 text-xs">
-                <p className="font-semibold text-foreground truncate text-sm">{product.name}</p>
+              <div className="min-w-0 flex-1 text-xs overflow-hidden">
+                <p className="font-semibold text-foreground truncate text-sm block min-w-0" title={product.name}>
+                  {product.name}
+                </p>
                 {variantSummary && (
-                  <p className="text-muted-foreground mt-0.5 truncate">{variantSummary}</p>
+                  <p className="text-muted-foreground mt-0.5 truncate block min-w-0" title={variantSummary}>
+                    {variantSummary}
+                  </p>
                 )}
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-muted-foreground font-medium">
+                <div className="flex items-center gap-2 mt-1 min-w-0 truncate">
+                  <span className="text-muted-foreground font-medium shrink-0">
                     Requested: <strong className="text-foreground">{demandedQuantity}</strong>
                   </span>
-                  <span className="text-muted-foreground">·</span>
-                  <span className="text-amber-700 dark:text-amber-400 font-medium">
+                  <span className="text-muted-foreground shrink-0">·</span>
+                  <span className="text-amber-700 dark:text-amber-400 font-medium shrink-0">
                     Available: <strong>{availableStock}</strong>
                   </span>
                 </div>
@@ -160,7 +164,7 @@ export function RestockNoticeModal({
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-2.5 pt-1">
+            <div className="space-y-2.5 pt-1 w-full min-w-0">
               <button
                 type="button"
                 onClick={() => setStep("notify")}
@@ -199,12 +203,12 @@ export function RestockNoticeModal({
 
         {/* STEP 2: NOTIFY FORM */}
         {step === "notify" && (
-          <form onSubmit={handleSubmitNotify} className="py-2 space-y-5 animate-in fade-in-50 duration-200">
+          <form onSubmit={handleSubmitNotify} className="py-2 space-y-5 animate-in fade-in-50 duration-200 w-full min-w-0 max-w-full overflow-hidden">
             <div className="mx-auto size-12 rounded-full bg-pink-50 dark:bg-pink-950/40 border border-brand-pink/30 flex items-center justify-center text-brand-pink shadow-2xs">
               <Bell className="size-6 stroke-[1.75]" />
             </div>
 
-            <div className="space-y-1.5 text-center">
+            <div className="space-y-1.5 text-center w-full min-w-0">
               <h3 className="font-display font-bold text-xl text-foreground tracking-tight">
                 Get Notified When Available
               </h3>
@@ -214,20 +218,27 @@ export function RestockNoticeModal({
             </div>
 
             {/* Item Preview Card */}
-            <div className="p-3.5 rounded-xl border border-border/70 bg-surface/60 flex items-center gap-3">
+            <div className="p-3.5 rounded-xl border border-border/70 bg-surface/60 flex items-center gap-3 text-left w-full min-w-0 max-w-full overflow-hidden">
               <img
                 src={productImage}
                 alt={product.name}
                 className="size-14 rounded-lg object-cover shrink-0 border border-border/50"
               />
-              <div className="min-w-0 flex-1 text-xs">
-                <p className="font-semibold text-foreground truncate text-sm">{product.name}</p>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-muted-foreground font-medium">
+              <div className="min-w-0 flex-1 text-xs overflow-hidden">
+                <p className="font-semibold text-foreground truncate text-sm block min-w-0" title={product.name}>
+                  {product.name}
+                </p>
+                {variantSummary && (
+                  <p className="text-muted-foreground mt-0.5 truncate block min-w-0" title={variantSummary}>
+                    {variantSummary}
+                  </p>
+                )}
+                <div className="flex items-center gap-2 mt-1 min-w-0 truncate">
+                  <span className="text-muted-foreground font-medium shrink-0">
                     Requested: <strong className="text-foreground">{demandedQuantity}</strong>
                   </span>
-                  <span className="text-muted-foreground">·</span>
-                  <span className="text-amber-700 dark:text-amber-400 font-medium">
+                  <span className="text-muted-foreground shrink-0">·</span>
+                  <span className="text-amber-700 dark:text-amber-400 font-medium shrink-0">
                     Available: <strong>{availableStock}</strong>
                   </span>
                 </div>
@@ -283,22 +294,22 @@ export function RestockNoticeModal({
 
         {/* STEP 3: SUBMITTED CONFIRMATION */}
         {step === "submitted" && (
-          <div className="py-4 space-y-5 text-center animate-in fade-in-50 duration-200">
+          <div className="py-4 space-y-5 text-center animate-in fade-in-50 duration-200 w-full min-w-0 max-w-full overflow-hidden">
             <div className="mx-auto size-14 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shadow-2xs">
               <CheckCircle2 className="size-7 stroke-[2]" />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 w-full min-w-0">
               <h3 className="font-display font-bold text-xl text-foreground tracking-tight">
                 You're on the list!
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto break-words">
                 We've noted your demand for{" "}
                 <strong className="text-foreground">
                   {demandedQuantity}x {product.name}
                 </strong>
                 {variantSummary ? ` (${variantSummary})` : ""}.
-                We'll email you at <strong className="text-foreground">{submittedEmail}</strong> as soon as more stock becomes available.
+                We'll email you at <strong className="text-foreground break-all">{submittedEmail}</strong> as soon as more stock becomes available.
               </p>
             </div>
 
