@@ -214,13 +214,13 @@ export function ProductCard({ product }: { product: Product }) {
     : null;
 
   return (
-    <div className="group">
+    <div className="group flex flex-col w-full min-w-0 max-w-full overflow-hidden">
       <Link
         to="/product/$id"
         params={{ id: product.slug }}
-        className="block"
+        className="block w-full min-w-0 overflow-hidden"
       >
-        <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-surface-2">
+        <div className="relative aspect-[4/5] w-full max-w-full overflow-hidden rounded-lg bg-surface-2 select-none">
           {/* Light Ash Watermark Skeleton Loader shown while image is loading */}
           {!imageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-neutral-100/90 dark:bg-neutral-800/50 z-0">
@@ -249,20 +249,20 @@ export function ProductCard({ product }: { product: Product }) {
             loading="lazy"
             onLoad={() => setImageLoaded(true)}
             className={cn(
-              "h-full w-full object-cover transition-all duration-700",
+              "h-full w-full max-w-full max-h-full object-cover transition-all duration-700",
               isOutOfStock ? "opacity-75 grayscale-[35%]" : "group-hover:scale-[1.04]",
               imageLoaded ? "scale-100" : "opacity-0 scale-95",
             )}
           />
 
           {/* Status Badges */}
-          <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5 pointer-events-none">
+          <div className="absolute left-2.5 top-2.5 sm:left-3 sm:top-3 z-10 flex flex-col gap-1.5 pointer-events-none">
             {isOutOfStock ? (
-              <span className="rounded-full bg-neutral-900/85 backdrop-blur-sm px-2.5 py-1 text-[11px] font-semibold text-white tracking-wide shadow-xs uppercase">
+              <span className="rounded-full bg-neutral-900/85 backdrop-blur-sm px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-semibold text-white tracking-wide shadow-xs uppercase">
                 Out of Stock
               </span>
             ) : product.compareAt && product.compareAt > product.price ? (
-              <span className="rounded-full bg-brand-yellow px-2.5 py-1 text-[11px] font-semibold text-ink shadow-xs">
+              <span className="rounded-full bg-brand-yellow px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-semibold text-ink shadow-xs">
                 Sale
               </span>
             ) : null}
@@ -278,11 +278,11 @@ export function ProductCard({ product }: { product: Product }) {
                   : `${product.name} added to wishlist`,
               );
             }}
-            className="absolute right-3 top-3 p-2 rounded-full bg-background/80 backdrop-blur shadow-sm hover:bg-brand-pink transition-colors z-10 group/wish"
+            className="absolute right-2.5 top-2.5 sm:right-3 sm:top-3 p-1.5 sm:p-2 rounded-full bg-background/80 backdrop-blur shadow-sm hover:bg-brand-pink transition-colors z-10 group/wish"
           >
             <Heart
               className={cn(
-                "size-4 transition-colors",
+                "size-3.5 sm:size-4 transition-colors",
                 hasWishlist
                   ? "fill-brand-pink text-brand-pink group-hover/wish:text-ink group-hover/wish:fill-ink"
                   : "text-ink",
@@ -291,22 +291,23 @@ export function ProductCard({ product }: { product: Product }) {
           </button>
         </div>
       </Link>
-      <div className="mt-3 flex items-start justify-between gap-3">
-        <div className="min-w-0">
+      <div className="mt-2.5 sm:mt-3 flex items-start justify-between gap-1.5 sm:gap-3 min-w-0 w-full">
+        <div className="min-w-0 flex-1">
           <Link
             to="/product/$id"
             params={{ id: product.slug }}
+            className="block min-w-0"
           >
-            <h3 className="font-display font-semibold text-sm truncate">{product.name}</h3>
+            <h3 className="font-display font-semibold text-xs sm:text-sm truncate leading-snug">{product.name}</h3>
           </Link>
-          <p className="mt-2 text-sm text-muted-foreground truncate">
+          <p className="mt-1 text-xs text-muted-foreground truncate">
             {product.attributes?.length ? product.attributes[0].values.join(" · ") : "Standard"}
           </p>
         </div>
-        <div className="text-right shrink-0">
-          <p className="font-display font-semibold text-sm">{formatNaira(product.price)}</p>
+        <div className="text-right shrink-0 min-w-0 pl-1">
+          <p className="font-display font-semibold text-xs sm:text-sm whitespace-nowrap">{formatNaira(product.price)}</p>
           {product.compareAt && product.compareAt > product.price && (
-            <p className="text-xs text-muted-foreground line-through">
+            <p className="text-[11px] sm:text-xs text-muted-foreground line-through whitespace-nowrap">
               {formatNaira(product.compareAt)}
             </p>
           )}
@@ -323,9 +324,10 @@ export function ProductCard({ product }: { product: Product }) {
           setQuantity(1);
           setOpen(true);
         }}
-        className="w-full mt-3 bg-surface border border-border text-foreground text-sm font-semibold py-2.5 rounded-md flex items-center justify-center gap-2 hover:bg-brand-pink hover:border-brand-pink hover:text-ink transition-colors cursor-pointer"
+        className="w-full mt-2.5 sm:mt-3 bg-surface border border-border text-foreground text-xs sm:text-sm font-semibold py-2 sm:py-2.5 px-2 rounded-md flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-brand-pink hover:border-brand-pink hover:text-ink transition-colors cursor-pointer truncate"
       >
-        <ShoppingBag className="size-4" /> Add to cart
+        <ShoppingBag className="size-3.5 sm:size-4 shrink-0" />
+        <span className="truncate">Add to cart</span>
       </button>
 
       {/* Synchronized Options & Quantity Drawer/Dialog for both Mobile and Desktop */}

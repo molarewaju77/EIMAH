@@ -348,11 +348,11 @@ export function ShopInner({
           </div>
         </div>
 
-        <div className="grid md:grid-cols-12 gap-8 items-start">
+        <div className="grid md:grid-cols-12 gap-8 items-start w-full min-w-0">
           <aside className="hidden md:block md:col-span-4 lg:col-span-3 border border-border/60 bg-white rounded-2xl p-6 shadow-sm sticky top-24">
             {Filters}
           </aside>
-          <div className={cn("md:col-span-8 lg:col-span-9 relative", (isFiltering || (isLoading && !productsData) || products.length === 0) && "min-h-[220px] md:min-h-[260px]")}>
+          <div className={cn("md:col-span-8 lg:col-span-9 relative w-full min-w-0", (isFiltering || (isLoading && !productsData) || products.length === 0) && "min-h-[220px] md:min-h-[260px]")}>
             {isFiltering || (isLoading && !productsData) ? (
               <div className="py-8 md:py-12 flex items-center justify-center">
                 <BrandOverlayLoader show mode="block" />
@@ -373,7 +373,7 @@ export function ShopInner({
                 </button>
               </div>
             ) : (
-              <div className="grid gap-6 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid gap-3.5 sm:gap-6 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full min-w-0">
                 {products.map((p) => (
                   <ProductCard key={p.id} product={p as any} />
                 ))}

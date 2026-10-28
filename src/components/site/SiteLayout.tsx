@@ -18,10 +18,10 @@ export function SiteLayout({
   useInitAdminData();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-background overflow-x-hidden w-full max-w-[100vw]">
       {/* {showAnnouncement && <AnnouncementBar />} */}
       <Header transparentOnTop={transparentHeader} />
-      <main className="flex-1 flex flex-col">{children}</main>
+      <main className="flex-1 flex flex-col w-full min-w-0">{children}</main>
       <Footer />
       <CartDrawer />
       <PromoPopupModal />

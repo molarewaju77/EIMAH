@@ -20,7 +20,7 @@ export function EimahEmblemWatermark({ className }: { className?: string }) {
 
 export function ProductCardSkeleton({ className }: { className?: string }) {
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("space-y-3 w-full min-w-0 max-w-full overflow-hidden", className)}>
       {/* Aspect Ratio Image Skeleton with Centered Light Ash Emblem Watermark */}
       <div className="relative aspect-[4/5] w-full rounded-lg bg-neutral-100/90 dark:bg-neutral-800/50 border border-border/40 overflow-hidden flex items-center justify-center">
         {/* Shimmer sweep animation */}
