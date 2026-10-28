@@ -150,6 +150,7 @@ function rowToSolution(r: Record<string, unknown>): Solution {
   };
 }
 
+
 export async function fetchSolutions(): Promise<Solution[]> {
   try {
     const { data, error } = await supabase.from("solutions").select("*").order("category");

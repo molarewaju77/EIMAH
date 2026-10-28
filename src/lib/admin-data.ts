@@ -353,68 +353,6 @@ export type Solution = {
   visible?: boolean;
 };
 
-export const seedSolutions: Solution[] = [
-  {
-    id: "S-01",
-    category: "Business",
-    title: "Supplier Verification",
-    description: "Vet manufacturers and vendors before you commit.",
-    price: 35000,
-    discountPercent: 10,
-    discountPrice: 31500,
-    visible: true,
-  },
-  {
-    id: "S-02",
-    category: "Business",
-    title: "Procurement",
-    description: "End-to-end purchasing managed by our team.",
-    price: 45000,
-    discountPercent: 5,
-    discountPrice: 42750,
-    visible: true,
-  },
-  {
-    id: "S-03",
-    category: "Business",
-    title: "Product Sourcing",
-    description: "Find the right product at the right price, globally.",
-    price: 20000,
-    discountPercent: 15,
-    discountPrice: 17000,
-    visible: true,
-  },
-  {
-    id: "S-04",
-    category: "Business",
-    title: "Importation",
-    description: "Freight, clearance and last-mile — handled.",
-    price: 65000,
-    discountPercent: 10,
-    discountPrice: 58500,
-    visible: true,
-  },
-  {
-    id: "S-05",
-    category: "Learning",
-    title: "Importation Training",
-    description: "Learn to import profitably from sourcing to clearance.",
-    price: 40000,
-    discountPercent: 5,
-    discountPrice: 38000,
-    visible: true,
-  },
-  {
-    id: "S-06",
-    category: "Learning",
-    title: "Procurement Training",
-    description: "Build a procurement function that saves you money.",
-    price: 50000,
-    discountPercent: 10,
-    discountPrice: 45000,
-    visible: true,
-  },
-];
 
 export type SolutionPayment = {
   id: string;

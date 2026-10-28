@@ -114,7 +114,10 @@ function BannersTab() {
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {banners.map((b) => (
-          <div key={b.id} className="rounded-3xl border border-border bg-white p-5 shadow-sm space-y-4 flex flex-col justify-between">
+          <div
+            key={b.id}
+            className="rounded-3xl border border-border bg-white p-5 shadow-sm space-y-4 flex flex-col justify-between"
+          >
             <div className="space-y-3">
               {/* Mini Banner Preview Box Matching Customer Storefront Banner */}
               <div className="relative rounded-2xl bg-ink text-white p-4 sm:p-5 overflow-hidden space-y-3 shadow-xs">
@@ -133,21 +136,21 @@ function BannersTab() {
                     <h4 className="font-display font-bold text-sm text-white line-clamp-2 leading-snug">
                       {b.title}
                     </h4>
-                    <p className="text-[11px] text-white/70 line-clamp-2">
-                      {b.supportingText}
-                    </p>
+                    <p className="text-[11px] text-white/70 line-clamp-2">{b.supportingText}</p>
                     <div className="pt-1">
                       <span className="inline-flex items-center gap-1 bg-[#F590DD] text-ink font-semibold text-[10px] px-2.5 py-1 rounded-full">
                         {b.ctaText || "Shop now"} <ArrowRight className="size-3" />
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="col-span-2 aspect-[4/3] rounded-xl overflow-hidden border border-white/10 shrink-0 bg-white/5">
                     {b.image ? (
                       <img src={b.image} alt="" className="h-full w-full object-cover" />
                     ) : (
-                      <div className="h-full w-full grid place-items-center text-[10px] text-white/40">No Image</div>
+                      <div className="h-full w-full grid place-items-center text-[10px] text-white/40">
+                        No Image
+                      </div>
                     )}
                   </div>
                 </div>
@@ -177,11 +180,7 @@ function BannersTab() {
                 className="h-9 px-3 rounded-xl border border-border text-xs font-semibold text-destructive hover:bg-red-50 inline-flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50 min-w-[36px]"
                 title="Delete Banner"
               >
-                {deletingId === b.id ? (
-                  <Loader size="xs" />
-                ) : (
-                  <Trash2 className="size-3.5" />
-                )}
+                {deletingId === b.id ? <Loader size="xs" /> : <Trash2 className="size-3.5" />}
               </button>
             </div>
           </div>
@@ -351,7 +350,6 @@ function BannerForm({
         className="fixed inset-0 bg-ink/50 backdrop-blur-xs transition-opacity cursor-pointer animate-in fade-in"
       />
       <div className="relative w-full max-w-lg bg-white rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col my-auto max-h-[85dvh] sm:max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-200">
-        
         {/* Fixed Header */}
         <header className="h-14 sm:h-16 px-5 sm:px-6 border-b border-border flex items-center justify-between shrink-0 bg-white sticky top-0 z-20">
           <h3 className="font-display font-bold text-base sm:text-lg text-foreground">
@@ -453,16 +451,28 @@ function BannerForm({
 
               <optgroup label="Business Advisory Solutions">
                 <option value="solutions">Solutions Hub (/solutions)</option>
-                <option value="solutions-business">Business Solutions Overview (/solutions/business)</option>
-                <option value="sourcing">Product Sourcing Service (/solutions/business/sourcing)</option>
-                <option value="procurement">Business Procurement Service (/solutions/business/procurement)</option>
-                <option value="importation">Business Importation Service (/solutions/business/importation)</option>
+                <option value="solutions-business">
+                  Business Solutions Overview (/solutions/business)
+                </option>
+                <option value="sourcing">
+                  Product Sourcing Service (/solutions/business/sourcing)
+                </option>
+                <option value="procurement">
+                  Business Procurement Service (/solutions/business/procurement)
+                </option>
+                <option value="importation">
+                  Business Importation Service (/solutions/business/importation)
+                </option>
               </optgroup>
 
               <optgroup label="EIMAH Training Academy">
                 <option value="academy">Training Academy Overview (/solutions/academy)</option>
-                <option value="academy-procurement">Procurement Training (/solutions/academy/procurement)</option>
-                <option value="academy-importation">China Importation Training (/solutions/academy/importation)</option>
+                <option value="academy-procurement">
+                  Procurement Training (/solutions/academy/procurement)
+                </option>
+                <option value="academy-importation">
+                  China Importation Training (/solutions/academy/importation)
+                </option>
               </optgroup>
 
               <optgroup label="Custom Destination">
@@ -606,7 +616,6 @@ function BannerForm({
             )}
           </button>
         </footer>
-
       </div>
     </div>
   );
@@ -733,7 +742,10 @@ function PopupsTab() {
       )}
       {show && (
         <div className="fixed inset-0 z-[70] grid place-items-center p-4">
-          <button onClick={() => setShow(false)} className="absolute inset-0 bg-ink/40 backdrop-blur-xs cursor-pointer" />
+          <button
+            onClick={() => setShow(false)}
+            className="absolute inset-0 bg-ink/40 backdrop-blur-xs cursor-pointer"
+          />
           <PopupForm
             initial={edit}
             isPending={createMutation.isPending || updateMutation.isPending}
@@ -795,7 +807,10 @@ function PopupForm({
         <h3 className="font-display font-bold text-lg">
           {initial ? "Edit Popup" : "Create Popup"}
         </h3>
-        <button onClick={onClose} className="p-1 rounded-full hover:bg-secondary text-muted-foreground">
+        <button
+          onClick={onClose}
+          className="p-1 rounded-full hover:bg-secondary text-muted-foreground"
+        >
           <X className="size-4" />
         </button>
       </div>
@@ -854,16 +869,28 @@ function PopupForm({
             </optgroup>
 
             <optgroup label="Business Advisory Solutions">
-              <option value="solutions-business">Business Solutions Overview (/solutions/business)</option>
-              <option value="sourcing">Product Sourcing Service (/solutions/business/sourcing)</option>
-              <option value="procurement">Business Procurement Service (/solutions/business/procurement)</option>
-              <option value="importation">Business Importation Service (/solutions/business/importation)</option>
+              <option value="solutions-business">
+                Business Solutions Overview (/solutions/business)
+              </option>
+              <option value="sourcing">
+                Product Sourcing Service (/solutions/business/sourcing)
+              </option>
+              <option value="procurement">
+                Business Procurement Service (/solutions/business/procurement)
+              </option>
+              <option value="importation">
+                Business Importation Service (/solutions/business/importation)
+              </option>
             </optgroup>
 
             <optgroup label="EIMAH Training Academy">
               <option value="academy">Training Academy Overview (/solutions/academy)</option>
-              <option value="academy-procurement">Procurement Training (/solutions/academy/procurement)</option>
-              <option value="academy-importation">China Importation Training (/solutions/academy/importation)</option>
+              <option value="academy-procurement">
+                Procurement Training (/solutions/academy/procurement)
+              </option>
+              <option value="academy-importation">
+                China Importation Training (/solutions/academy/importation)
+              </option>
             </optgroup>
 
             <optgroup label="Custom Destination">
@@ -885,7 +912,10 @@ function PopupForm({
               className="w-full h-10 rounded-xl border border-border px-3 text-sm focus:border-foreground outline-none font-mono text-xs"
             />
             <p className="text-[11px] text-muted-foreground mt-1">
-              Enter internal route (e.g. <code className="bg-surface px-1 py-0.5 rounded">/solutions/business/sourcing</code>) or full external URL (<code className="bg-surface px-1 py-0.5 rounded">https://...</code>).
+              Enter internal route (e.g.{" "}
+              <code className="bg-surface px-1 py-0.5 rounded">/solutions/business/sourcing</code>)
+              or full external URL (
+              <code className="bg-surface px-1 py-0.5 rounded">https://...</code>).
             </p>
           </div>
         )}
@@ -992,7 +1022,9 @@ function SolutionsTab() {
     }
 
     const hasDisc = currentDiscountPct >= 1 && currentDiscountPct <= 100;
-    const calcDiscPrice = hasDisc ? Math.round(currentPriceNum * (1 - currentDiscountPct / 100)) : undefined;
+    const calcDiscPrice = hasDisc
+      ? Math.round(currentPriceNum * (1 - currentDiscountPct / 100))
+      : undefined;
 
     await updateMutation.mutateAsync({
       id: editSolution.id,
@@ -1008,65 +1040,87 @@ function SolutionsTab() {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {solutions.map((s) => {
-          const hasDiscount = Boolean(s.discountPercent && s.discountPercent > 0);
+      <div>
+        <h3 className="font-display font-bold text-lg text-foreground">
+          Business & Learning Solutions
+        </h3>
+        <p className="text-xs text-muted-foreground">
+          Manage service packages and pricing for business advisory & academy training.
+        </p>
+      </div>
 
-          return (
-            <div
-              key={s.id}
-              className="rounded-3xl border border-border bg-white p-5 sm:p-6 shadow-sm space-y-4 flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-ink text-white shadow-xs">
-                    {s.category}
-                  </span>
-                  {hasDiscount && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-pink text-ink shadow-xs">
-                      {s.discountPercent}% OFF
+      {solutions.length === 0 ? (
+        <div className="py-16 px-6 text-center rounded-3xl border border-dashed border-border bg-white flex flex-col items-center justify-center space-y-2">
+          <h4 className="font-display font-bold text-base text-foreground">
+            No Solutions Found
+          </h4>
+          <p className="text-xs text-muted-foreground max-w-sm">
+            No business or learning solution packages found in the database.
+          </p>
+        </div>
+      ) : (
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {solutions.map((s) => {
+            const hasDiscount = Boolean(s.discountPercent && s.discountPercent > 0);
+
+            return (
+              <div
+                key={s.id}
+                className="rounded-3xl border border-border bg-white p-5 sm:p-6 shadow-sm space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-ink text-white shadow-xs">
+                      {s.category}
                     </span>
-                  )}
-                </div>
-
-                <div>
-                  <h4 className="font-display font-bold text-base text-foreground mb-1">{s.title}</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {s.description}
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border/60 flex items-center justify-between gap-2.5">
-                <div className="min-w-0">
-                  <span className="text-[11px] text-muted-foreground block font-medium">Service Fee:</span>
-                  {hasDiscount ? (
-                    <div className="flex flex-wrap items-baseline gap-1.5">
-                      <span className="font-bold text-base text-foreground">
-                        {formatNaira(s.discountPrice || s.price)}
+                    {hasDiscount && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-pink text-ink shadow-xs">
+                        {s.discountPercent}% OFF
                       </span>
-                      <span className="text-xs text-muted-foreground line-through font-medium">
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 className="font-display font-bold text-base text-foreground mb-1">
+                      {s.title}
+                    </h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{s.description}</p>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-border/60 flex items-center justify-between gap-2.5">
+                  <div className="min-w-0">
+                    <span className="text-[11px] text-muted-foreground block font-medium">
+                      Service Fee:
+                    </span>
+                    {hasDiscount ? (
+                      <div className="flex flex-wrap items-baseline gap-1.5">
+                        <span className="font-bold text-base text-foreground">
+                          {formatNaira(s.discountPrice || s.price)}
+                        </span>
+                        <span className="text-xs text-muted-foreground line-through font-medium">
+                          {formatNaira(s.price)}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="font-bold text-base text-foreground">
                         {formatNaira(s.price)}
                       </span>
-                    </div>
-                  ) : (
-                    <span className="font-bold text-base text-foreground">
-                      {formatNaira(s.price)}
-                    </span>
-                  )}
-                </div>
+                    )}
+                  </div>
 
-                <button
-                  onClick={() => handleOpenEdit(s)}
-                  className="h-8.5 px-3.5 rounded-xl text-xs font-semibold bg-brand-pink/20 text-ink border border-brand-pink/40 hover:bg-brand-pink transition-all cursor-pointer shadow-2xs inline-flex items-center gap-1.5 shrink-0"
-                >
-                  <Edit3 className="size-3.5 text-ink" /> Edit Price
-                </button>
+                  <button
+                    onClick={() => handleOpenEdit(s)}
+                    className="h-8.5 px-3.5 rounded-xl text-xs font-semibold bg-brand-pink/20 text-ink border border-brand-pink/40 hover:bg-brand-pink transition-all cursor-pointer shadow-2xs inline-flex items-center gap-1.5 shrink-0"
+                  >
+                    <Edit3 className="size-3.5 text-ink" /> Edit Price
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Edit Solution Price Modal */}
       {editSolution && (
@@ -1080,7 +1134,9 @@ function SolutionsTab() {
           <div className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl space-y-5 border border-border z-10 animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <div>
-                <h3 className="font-display font-bold text-lg text-foreground">Edit Solution Price</h3>
+                <h3 className="font-display font-bold text-lg text-foreground">
+                  Edit Solution Price
+                </h3>
                 <p className="text-xs text-muted-foreground">{editSolution.title}</p>
               </div>
               <button
@@ -1109,7 +1165,8 @@ function SolutionsTab() {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-1">
-                  Discount Percentage (%) <span className="text-muted-foreground font-normal">(Optional)</span>
+                  Discount Percentage (%){" "}
+                  <span className="text-muted-foreground font-normal">(Optional)</span>
                 </label>
                 <input
                   type="number"
