@@ -128,6 +128,7 @@ export function ProductDetailView({ productId }: { productId: string }) {
     liveAvailableStock !== null ? liveAvailableStock : availableStock;
 
   const handleAction = async (buyNow: boolean = false) => {
+    if (isCheckingStock) return;
     setIsBuyNow(buyNow);
 
     // 1. If entire product is out of stock across all variants, show restock notice
@@ -311,16 +312,18 @@ export function ProductDetailView({ productId }: { productId: string }) {
         <div className="inline-flex items-center border border-border rounded-full bg-surface/50">
           <button
             type="button"
+            disabled={isCheckingStock}
             onClick={() => setQty((q) => Math.max(1, q - 1))}
-            className="h-10 w-10 grid place-items-center hover:bg-secondary rounded-full transition-colors cursor-pointer"
+            className="h-10 w-10 grid place-items-center hover:bg-secondary rounded-full transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Minus className="size-4 text-foreground" />
           </button>
           <span className="w-10 text-center font-semibold text-sm select-none text-foreground">{qty}</span>
           <button
             type="button"
+            disabled={isCheckingStock}
             onClick={() => setQty((q) => q + 1)}
-            className="h-10 w-10 grid place-items-center hover:bg-secondary rounded-full transition-colors cursor-pointer"
+            className="h-10 w-10 grid place-items-center hover:bg-secondary rounded-full transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Plus className="size-4 text-foreground" />
           </button>
@@ -448,11 +451,11 @@ export function ProductDetailView({ productId }: { productId: string }) {
                 <div
                   className={cn(
                     "inline-flex items-center border border-border rounded-full bg-surface/50",
-                    isOutOfStock && "opacity-50 pointer-events-none",
+                    (isOutOfStock || isCheckingStock) && "opacity-50 pointer-events-none",
                   )}
                 >
                   <button
-                    disabled={isOutOfStock}
+                    disabled={isOutOfStock || isCheckingStock}
                     onClick={() => setQty((q) => Math.max(1, q - 1))}
                     className="h-12 w-12 grid place-items-center hover:bg-secondary rounded-full transition-colors cursor-pointer disabled:cursor-not-allowed"
                   >
@@ -460,7 +463,7 @@ export function ProductDetailView({ productId }: { productId: string }) {
                   </button>
                   <span className="w-8 text-center font-semibold text-sm">{qty}</span>
                   <button
-                    disabled={isOutOfStock}
+                    disabled={isOutOfStock || isCheckingStock}
                     onClick={() => setQty((q) => q + 1)}
                     className="h-12 w-12 grid place-items-center hover:bg-secondary rounded-full transition-colors cursor-pointer disabled:cursor-not-allowed"
                   >
@@ -468,24 +471,38 @@ export function ProductDetailView({ productId }: { productId: string }) {
                   </button>
                 </div>
                 <button
+                  type="button"
+                  disabled={isOutOfStock || isCheckingStock}
                   onClick={() => {
                     setIsBuyNow(false);
                     handleAction(false);
                   }}
-                  className="flex-1 h-12 rounded-full font-display font-semibold inline-flex items-center justify-center gap-2 transition-colors shadow-sm bg-brand-pink text-ink hover:bg-ink hover:text-white cursor-pointer"
+                  className="flex-1 h-12 rounded-full font-display font-semibold inline-flex items-center justify-center gap-2 transition-colors shadow-sm bg-brand-pink text-ink hover:bg-ink hover:text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <ShoppingBag className="size-4" /> Add to cart
+                  {isCheckingStock && !isBuyNow ? (
+                    <Loader2 className="size-5 animate-spin" />
+                  ) : (
+                    <>
+                      <ShoppingBag className="size-4" /> Add to cart
+                    </>
+                  )}
                 </button>
               </div>
               {!isOutOfStock && (
                 <button
+                  type="button"
+                  disabled={isCheckingStock}
                   onClick={() => {
                     setIsBuyNow(true);
                     handleAction(true);
                   }}
-                  className="w-full h-12 rounded-full bg-foreground text-background font-display font-semibold hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
+                  className="w-full h-12 rounded-full bg-foreground text-background font-display font-semibold hover:opacity-90 transition-opacity cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  Buy now
+                  {isCheckingStock && isBuyNow ? (
+                    <Loader2 className="size-5 animate-spin" />
+                  ) : (
+                    "Buy now"
+                  )}
                 </button>
               )}
             </div>
