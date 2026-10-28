@@ -1,4 +1,4 @@
-﻿# EIMAH Brand Studio
+﻿# EIMAH
 
 > Premium retail merchandising, corporate gifting, and business procurement web platform.
 
@@ -6,13 +6,13 @@
 [![TanStack Start](https://img.shields.io/badge/TanStack-Start-FF4154?logo=react&logoColor=white)](https://tanstack.com/start)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-CSS_v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database_%26_Auth-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
 
 ---
 
 ## Overview
 
-**EIMAH Brand Studio** is a full-featured e-commerce and procurement web platform designed for luxury retail, bespoke merchandising, and large-scale corporate procurement. The platform combines an editorial storefront with a comprehensive back-office operations suite.
+**EIMAH** is an enterprise e-commerce and procurement web platform designed for luxury retail, bespoke merchandising, and large-scale corporate procurement. The platform combines a high-performance customer storefront with a full-suite back-office administrative portal.
 
 ---
 
@@ -20,21 +20,21 @@
 
 ### Storefront & Merchandising
 * **Editorial Home Experience**: Responsive hero, brand value propositions, infinite marquee ticker, and featured collections.
-* **Curated Product Catalog**: Instant search, real-time category filtering, sorting, and tag filtering.
-* **Rich Product Detail View**: Multi-image zoom gallery, real-time stock counters, variant pickers, and related recommendations.
+* **Curated Product Catalog**: Instant search, dynamic category filtering, price sorting, and responsive product grids.
+* **Rich Product Detail View**: Multi-image zoom gallery, real-time stock counters, variant pickers, and specifications.
 * **Customer Wishlist & Cart Drawer**: Slide-out cart drawer with live subtotal calculations and saved wishlist.
 
 ### Corporate Procurement & Solutions
 * **Business Sourcing & Procurement**: Custom portals for corporate bulk orders and overseas sourcing.
 * **EIMAH Academy**: Training and certification application management for brand procurement.
 
-### Seamless Checkout & Logistics
-* **Multi-Step Checkout**: Instant address autofill, Fez logistics shipping cost calculator, and delivery selection.
-* **Payment Gateways**: Integrated Flutterwave and Paystack payment processing with instant verification.
-* **Live Order Tracking**: Customer self-service order lookup with milestone tracking (Placed, Processing, Dispatched, Delivered).
+### Commerce & Payments
+* **Multi-Step Checkout**: Instant address autofill, logistics shipping cost calculation, and delivery selection.
+* **Payment Gateways**: Integrated payment processing with instant verification.
+* **Live Order Tracking**: Customer self-service order lookup with real-time milestone tracking.
 
 ### Administrative Management Suite
-* **Executive Dashboard**: Key revenue metrics, order velocity, and sales performance charts.
+* **Executive Dashboard**: Revenue metrics, order velocity, and sales performance charts.
 * **Catalog Management**: Real-time product CRUD, category image uploads, and inventory level adjustments.
 * **Order Fulfillment**: Live pipeline management, delivery status dispatch, and store pickup verification.
 * **In-Store POS Terminal**: Physical register with offline cart capability and quick checkout receipt generation.
@@ -50,50 +50,13 @@
 * **Language**: TypeScript
 * **Styling**: Tailwind CSS v4 & Tailwind Animate
 * **UI Components**: Radix UI Primitives & Lucide React
-* **Database & Auth**: PostgreSQL via [Supabase](https://supabase.com)
+* **Database & Auth**: PostgreSQL via Supabase
 * **Payments**: Flutterwave & Paystack APIs
 * **Logistics**: Fez Delivery API
 
 ---
 
-## Getting Started
+## Ownership & License
 
-### Prerequisites
-* [Node.js](https://nodejs.org/) (v18.x or v20.x recommended)
-* `npm` or `bun`
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/molarewaju77/EIMAH.git
-   cd EIMAH
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   bun install
-   ```
-
-3. **Configure environment variables:**
-   Create a `.env` file in the root directory:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_project_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   VITE_FLUTTERWAVE_PUBLIC_KEY=your_flutterwave_public_key
-   ```
-
-4. **Start the local development server:**
-   ```bash
-   npm run dev
-   ```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## License
-
-Private repository. All rights reserved &copy; EIMAH Brand Studio.
+This software and its documentation are proprietary to **EIMAH**.  
+All rights reserved &copy; EIMAH. Unauthorized copying, distribution, or reproduction of any part of this repository is strictly prohibited.
