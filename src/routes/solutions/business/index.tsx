@@ -3,7 +3,7 @@ import { ArrowRight, Building2, CheckCircle2, Search, Briefcase, Globe, Ship } f
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { useSolutionsQuery } from "@/hooks/queries/useContentQuery";
 import { formatNaira } from "@/lib/mock-data";
-import heroImgUrl from "@/assets/solutions-hero.png";
+import heroImgUrl from "@/assets/solutions-hero.jpg";
 
 export const Route = createFileRoute("/solutions/business/")({
   component: BusinessSolutionsIndexPage,
