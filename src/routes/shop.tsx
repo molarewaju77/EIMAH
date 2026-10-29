@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useSearch, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { SlidersHorizontal, Search, X } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ProductCard } from "@/components/site/ProductCard";
@@ -31,13 +31,22 @@ export const Route = createFileRoute("/shop")({
   validateSearch: (s: Record<string, unknown>): ShopSearch => {
     const activeCat = typeof s.cat === "string" ? s.cat : typeof s.category === "string" ? s.category : undefined;
     const inStock = s.inStock === true || s.inStock === "true" || s.in_stock === true || s.in_stock === "true";
+    const rawPage = s.page;
+    const parsedPage =
+      typeof rawPage === "number"
+        ? rawPage
+        : typeof rawPage === "string"
+          ? parseInt(rawPage, 10)
+          : undefined;
+    const validPage = parsedPage && !isNaN(parsedPage) && parsedPage > 0 ? parsedPage : undefined;
+
     return {
       cat: activeCat,
       category: activeCat,
       sort: typeof s.sort === "string" ? s.sort : undefined,
       inStock: inStock ? true : undefined,
       max: typeof s.max === "number" ? s.max : undefined,
-      page: typeof s.page === "number" ? s.page : undefined,
+      page: validPage,
     };
   },
   head: () => ({
@@ -52,6 +61,32 @@ export const Route = createFileRoute("/shop")({
 
 const PER_PAGE = 12;
 
+function getPaginationRange(currentPage: number, totalPages: number): (number | "ellipsis")[] {
+  if (totalPages <= 5) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
+  // When near the start (Page 1 or 2): show [1, 2, 3, "ellipsis", totalPages]
+  if (currentPage <= 2) {
+    return [1, 2, 3, "ellipsis", totalPages];
+  }
+
+  // When near the end (last 2 pages): show ["ellipsis", totalPages - 2, totalPages - 1, totalPages]
+  if (currentPage >= totalPages - 1) {
+    return ["ellipsis", totalPages - 2, totalPages - 1, totalPages];
+  }
+
+  // When 2 pages away from the end (e.g. Page 7 of 9): show ["ellipsis", totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
+  if (currentPage === totalPages - 2) {
+    return ["ellipsis", totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  }
+
+  // In the middle (Pages 3, 4, 5, etc.): Page 1 tucks into the left ellipsis
+  // e.g. on Page 3: ["ellipsis", 2, 3, 4, "ellipsis", totalPages]
+  // e.g. on Page 4: ["ellipsis", 3, 4, 5, "ellipsis", totalPages]
+  return ["ellipsis", currentPage - 1, currentPage, currentPage + 1, "ellipsis", totalPages];
+}
+
 function ShopPage() {
   const search = useSearch({ from: "/shop" });
   const activeCat = search.category || search.cat;
@@ -60,6 +95,7 @@ function ShopPage() {
       initialCat={activeCat}
       initialSort={search.sort}
       initialInStock={Boolean(search.inStock)}
+      initialPage={search.page || 1}
     />
   );
 }
@@ -68,10 +104,12 @@ export function ShopInner({
   initialCat,
   initialSort,
   initialInStock = false,
+  initialPage = 1,
 }: {
   initialCat?: string;
   initialSort?: string;
   initialInStock?: boolean;
+  initialPage?: number;
 }) {
   const nav = useNavigate();
   const [cat, setCat] = useState<string | undefined>(initialCat);
@@ -79,7 +117,7 @@ export function ShopInner({
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [inStock, setInStock] = useState(initialInStock);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(initialPage);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [isTabSwitching, setIsTabSwitching] = useState(false);
 
@@ -91,23 +129,27 @@ export function ShopInner({
     return () => clearTimeout(handler);
   }, [searchQuery]);
 
+  // Sync page state whenever URL query param changes (e.g. browser back/forward or reload)
+  useEffect(() => {
+    if (initialPage && initialPage !== page) {
+      setPage(initialPage);
+    }
+  }, [initialPage]);
+
   // Sync category filter whenever URL query param changes
   useEffect(() => {
     setCat(initialCat);
-    setPage(1);
   }, [initialCat]);
 
   // Sync inStock filter whenever URL query param changes
   useEffect(() => {
     setInStock(Boolean(initialInStock));
-    setPage(1);
   }, [initialInStock]);
 
   // Sync sort filter whenever URL query param changes
   useEffect(() => {
     if (initialSort) {
       setSort(initialSort);
-      setPage(1);
     }
   }, [initialSort]);
 
@@ -133,6 +175,10 @@ export function ShopInner({
   const products = productsData?.products || [];
   const totalCount = productsData?.totalCount || 0;
   const totalPages = productsData?.totalPages || 1;
+
+  const paginationRange = useMemo(() => {
+    return getPaginationRange(page, totalPages);
+  }, [page, totalPages]);
 
   const isSearching =
     searchQuery.trim() !== debouncedSearch.trim() ||
@@ -227,6 +273,13 @@ export function ShopInner({
   const handlePageChange = (newPage: number) => {
     if (isFiltering || isLoading) return;
     setPage(newPage);
+    nav({
+      to: "/shop",
+      search: (prev: any) => ({
+        ...prev,
+        page: newPage > 1 ? newPage : undefined,
+      }),
+    });
     window.scrollTo({ top: 0, behavior: "auto" });
   };
 
@@ -381,32 +434,56 @@ export function ShopInner({
             )}
 
             {!isFiltering && !(isLoading && !productsData) && totalPages > 1 && (
-              <div className="mt-12 flex items-center justify-center gap-2">
+              <div className="mt-12 flex items-center justify-center gap-1.5 sm:gap-2 select-none">
                 <button
                   disabled={page === 1}
                   onClick={() => handlePageChange(Math.max(1, page - 1))}
-                  className="h-9 px-3 rounded-lg text-sm border border-border hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  aria-label="Previous page"
+                  className="h-9 px-3 rounded-lg text-sm border border-border hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer font-medium"
                 >
                   Prev
                 </button>
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handlePageChange(i + 1)}
-                    className={cn(
-                      "h-9 min-w-9 px-3 rounded-lg text-sm border cursor-pointer font-medium",
-                      page === i + 1
-                        ? "bg-foreground text-background border-foreground font-semibold"
-                        : "border-border hover:bg-secondary transition-colors"
-                    )}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
+                {paginationRange.map((item, idx) => {
+                  if (item === "ellipsis") {
+                    const isLeft = idx === 0;
+                    const jumpTarget = isLeft ? Math.max(1, page - 2) : Math.min(totalPages, page + 2);
+                    return (
+                      <button
+                        key={`ellipsis-${idx}`}
+                        type="button"
+                        onClick={() => handlePageChange(jumpTarget)}
+                        title={isLeft ? "Jump 2 pages back" : "Jump 2 pages forward"}
+                        aria-label={isLeft ? "Jump back" : "Jump forward"}
+                        className="h-9 min-w-7 sm:min-w-8 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer text-sm tracking-widest font-medium select-none"
+                      >
+                        …
+                      </button>
+                    );
+                  }
+
+                  const isCurrent = page === item;
+                  return (
+                    <button
+                      key={item}
+                      onClick={() => handlePageChange(item)}
+                      aria-label={`Page ${item}`}
+                      aria-current={isCurrent ? "page" : undefined}
+                      className={cn(
+                        "h-9 min-w-8 sm:min-w-9 px-2 sm:px-3 rounded-lg text-sm border cursor-pointer font-medium transition-colors",
+                        isCurrent
+                          ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                          : "border-border hover:bg-secondary transition-colors text-foreground"
+                      )}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
                 <button
                   disabled={page === totalPages}
                   onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
-                  className="h-9 px-3 rounded-lg text-sm border border-border hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  aria-label="Next page"
+                  className="h-9 px-3 rounded-lg text-sm border border-border hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer font-medium"
                 >
                   Next
                 </button>
