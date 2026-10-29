@@ -345,14 +345,16 @@ export function ShopInner({
   return (
     <SiteLayout>
       <div className="container-eimah pt-12 pb-14 md:pt-10 md:pb-24">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4 md:mb-10">
           <div>
             <h1 className="font-display font-bold text-3xl md:text-4xl tracking-tight">
               {cat ? activeCategories.find((c) => c.slug === cat)?.name || cat : "All products"}
             </h1>
           </div>
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <div className="relative flex-1 md:flex-initial md:min-w-[240px]">
+
+          {/* Desktop Search & Sort (hidden on mobile, static on desktop) */}
+          <div className="hidden md:flex items-center gap-3">
+            <div className="relative min-w-[240px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
               <input
                 type="text"
@@ -373,9 +375,47 @@ export function ShopInner({
               )}
             </div>
 
+            <select
+              value={sort}
+              onChange={(e) => handleSortChange(e.target.value)}
+              className="border border-border rounded-xl h-10 px-3 text-sm bg-background cursor-pointer outline-none focus:border-ink"
+            >
+              <option value="featured">Featured</option>
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Mobile Sticky Search & Filter Bar (sticky on mobile view only) */}
+        <div className="md:hidden sticky top-16 z-40 bg-background/95 backdrop-blur-md py-2.5 -mx-4 px-4 sm:-mx-5 sm:px-5 border-b border-border/50 mb-6">
+          <div className="flex items-center gap-2.5 w-full">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="w-full h-10 pl-9 pr-9 rounded-xl border border-border bg-background/90 focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => handleSearchChange("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 rounded-md cursor-pointer transition-colors"
+                  aria-label="Clear search"
+                >
+                  <X className="size-3.5" />
+                </button>
+              )}
+            </div>
+
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
-                <button className="md:hidden inline-flex items-center gap-2 border border-border rounded-xl px-3 h-10 text-sm hover:bg-surface transition-colors cursor-pointer">
+                <button className="inline-flex items-center gap-2 border border-border rounded-xl px-3.5 h-10 text-sm font-medium bg-background/90 hover:bg-surface transition-colors cursor-pointer shrink-0">
                   <SlidersHorizontal className="size-4" /> Filters
                 </button>
               </SheetTrigger>
@@ -386,18 +426,6 @@ export function ShopInner({
                 <div className="pt-4 overflow-y-auto max-h-[calc(85vh-90px)]">{Filters}</div>
               </SheetContent>
             </Sheet>
-
-            <select
-              value={sort}
-              onChange={(e) => handleSortChange(e.target.value)}
-              className="border border-border rounded-xl h-10 px-3 text-sm bg-background hidden sm:block cursor-pointer outline-none focus:border-ink"
-            >
-              <option value="featured">Featured</option>
-              <option value="newest">Newest</option>
-              <option value="price-asc">Price: low to high</option>
-              <option value="price-desc">Price: high to low</option>
-              <option value="name">Name</option>
-            </select>
           </div>
         </div>
 
