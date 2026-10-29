@@ -382,7 +382,7 @@ export async function insertSolutionApplication(
   const { error } = await supabase.from("solution_applications").insert({
     id: app.id,
     txn_id: app.txnId || `TXN-${Math.floor(1000 + Math.random() * 9000)}`,
-    solution_id: app.solutionId || "S-01",
+    solution_id: app.solutionId || "S-02",
     solution_title: app.solutionTitle || "Solution Service",
     category,
     full_name: app.fullName || "",

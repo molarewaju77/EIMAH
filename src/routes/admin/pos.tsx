@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Search, Plus, Trash2, ShoppingCart, User, AlertCircle, Check, X } from "lucide-react";
 import { usePos } from "@/lib/pos-store";
@@ -9,11 +9,64 @@ import { useCustomersQuery, CUSTOMERS_QUERY_KEY } from "@/hooks/queries/useCusto
 import { useCreateOrderMutation } from "@/hooks/queries/useOrdersQuery";
 import { usePickupStationsQuery } from "@/hooks/queries/usePickupStationsQuery";
 import { customerService } from "@/services/customerService";
+import { fezDeliveryService } from "@/services/fezDeliveryService";
 import { products, formatNaira, generateTrackingId } from "@/lib/mock-data";
 import type { Product } from "@/lib/mock-data";
 import { toast } from "react-toastify";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
+
+const FEZ_DEFAULT_STATES = [
+  "Abia",
+  "Adamawa",
+  "Akwa Ibom",
+  "Anambra",
+  "Bauchi",
+  "Bayelsa",
+  "Benue",
+  "Borno",
+  "Cross River",
+  "Delta",
+  "Ebonyi",
+  "Edo",
+  "Ekiti",
+  "Enugu",
+  "FCT",
+  "Gombe",
+  "Imo",
+  "Jigawa",
+  "Kaduna",
+  "Kano",
+  "Katsina",
+  "Kebbi",
+  "Kogi",
+  "Kwara",
+  "Lagos",
+  "Nasarawa",
+  "Niger",
+  "Ogun",
+  "Ondo",
+  "Osun",
+  "Oyo",
+  "Plateau",
+  "Rivers",
+  "Sokoto",
+  "Taraba",
+  "Yobe",
+  "Zamfara",
+];
+
+function normalizeNigerianState(stateName?: string, stateList = FEZ_DEFAULT_STATES): string {
+  if (!stateName) return "";
+  const s = stateName.toLowerCase().replace(/state/gi, "").trim();
+  if (s.includes("federal capital") || s.includes("abuja") || s === "fct") {
+    return "FCT";
+  }
+  const match = stateList.find(
+    (ns) => ns.toLowerCase() === s || ns.toLowerCase().includes(s) || s.includes(ns.toLowerCase()),
+  );
+  return match || stateName;
+}
 
 export const Route = createFileRoute("/admin/pos")({
   component: PosPage,
@@ -60,6 +113,30 @@ function PosPage() {
     city: "",
     state: "",
   });
+
+  const [availableStates, setAvailableStates] = useState<string[]>(FEZ_DEFAULT_STATES);
+  const [estimatedDeliveryTime, setEstimatedDeliveryTime] = useState<string>("24 – 48 Hours");
+  const [priceFetchError, setPriceFetchError] = useState<string | null>(null);
+  const [showEditAddressModal, setShowEditAddressModal] = useState(false);
+  const [customerAddressForm, setCustomerAddressForm] = useState({
+    address: "",
+    city: "",
+    state: "",
+  });
+
+  // Pre-load active Fez delivery states on mount
+  useEffect(() => {
+    fezDeliveryService
+      .getStates()
+      .then((states) => {
+        if (states && states.length > 0) {
+          setAvailableStates(states);
+        }
+      })
+      .catch((err) => {
+        console.warn("[POS] Failed to load Fez states, using fallback list:", err);
+      });
+  }, []);
 
   const activeFilterCount = selectedCategory !== "all" ? 1 : 0;
 
@@ -131,20 +208,78 @@ function PosPage() {
   const [courierPricesLoaded, setCourierPricesLoaded] = useState(false);
   const [loadingPrices, setLoadingPrices] = useState(false);
 
-  const handleGetPrices = () => {
-    if (!pos.customer || !pos.customer.address || !pos.customer.city || !pos.customer.state) {
-      toast.error("Please add a customer with full address details first.");
+  // Invalidate courier price quote when items change
+  useEffect(() => {
+    setCourierPricesLoaded(false);
+    setPriceFetchError(null);
+  }, [pos.items]);
+
+  // Invalidate courier price quote when customer address details change
+  useEffect(() => {
+    setCourierPricesLoaded(false);
+    setPriceFetchError(null);
+  }, [pos.customer?.address, pos.customer?.city, pos.customer?.state]);
+
+  const handleGetPrices = async () => {
+    if (!pos.customer) {
+      toast.error("Please select or add a customer to the order first.");
       return;
     }
+    if (!pos.customer.address || !pos.customer.city || !pos.customer.state) {
+      toast.error("Please complete the customer's delivery address, city, and state.");
+      setCustomerAddressForm({
+        address: pos.customer.address || "",
+        city: pos.customer.city || "",
+        state: normalizeNigerianState(pos.customer.state || "", availableStates),
+      });
+      setShowEditAddressModal(true);
+      return;
+    }
+    if (pos.items.length === 0) {
+      toast.error("Please add at least one product to the order first.");
+      return;
+    }
+
     setLoadingPrices(true);
-    setTimeout(() => {
-      setLoadingPrices(false);
+    setPriceFetchError(null);
+
+    try {
+      const calculatedWeight = pos.items.reduce(
+        (sum, item) =>
+          sum + (Number(item.qty) || 0) * (Number((item.product as any)?.weight) || 0),
+        0,
+      );
+      const subtotal = pos.getSubtotal();
+      const normalizedState = normalizeNigerianState(pos.customer.state, availableStates);
+
+      const quote = await fezDeliveryService.getDeliveryCost({
+        recipientState: normalizedState,
+        recipientCity: pos.customer.city,
+        weightInKg: calculatedWeight > 0 ? calculatedWeight : 1,
+        itemsValue: subtotal > 0 ? subtotal : 10000,
+      });
+
+      pos.setShippingFee(quote.cost);
+      setEstimatedDeliveryTime(quote.estimatedDelivery || "24 – 48 Hours");
       setCourierPricesLoaded(true);
-      const sub = pos.getSubtotal();
-      const fee = sub > 75000 ? 0 : 3500;
-      pos.setShippingFee(fee);
-      toast.success("Delivery prices calculated.");
-    }, 800);
+      toast.success(`Fez Delivery fee calculated: ${formatNaira(quote.cost)}`);
+    } catch (err: any) {
+      setCourierPricesLoaded(false);
+      const rawMsg = String(err?.message || err || "");
+      const isNetwork =
+        !navigator.onLine ||
+        /fetch|network|load failed|timeout|connection|econnrefused|failed to fetch/i.test(rawMsg);
+      const friendlyMsg = isNetwork
+        ? "Unable to connect to Fez Delivery. Please check internet connection and try again."
+        : rawMsg && !rawMsg.includes("fetch") && !rawMsg.includes("Error:")
+          ? rawMsg
+          : "Unable to calculate Fez delivery fee. Please verify the customer address/state and try again.";
+
+      setPriceFetchError(friendlyMsg);
+      toast.error(friendlyMsg);
+    } finally {
+      setLoadingPrices(false);
+    }
   };
 
   const handleCreateOrder = () => {
@@ -202,6 +337,7 @@ function PosPage() {
         paymentStatus: pos.paymentStatus === "Paid" ? "Successful" : "Pending",
         deliveryMethod: pos.deliveryMethod,
         status: pos.paymentStatus === "Paid" ? "Paid" : "Processing",
+        internalNotes: pos.paymentMethod ? `Payment Method: ${pos.paymentMethod}` : undefined,
         trackingHistory: [
           {
             status: pos.paymentStatus === "Paid" ? "Paid" : "Processing",
@@ -281,19 +417,70 @@ function PosPage() {
               <User className="size-4" /> Customer
             </h2>
             {pos.customer ? (
-              <div className="flex justify-between items-center p-3 rounded-lg border border-brand-pink bg-brand-pink/5">
-                <div>
-                  <p className="font-medium text-ink">{pos.customer.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {pos.customer.email} • {pos.customer.phone}
-                  </p>
+              <div className="p-3.5 rounded-lg border border-brand-pink bg-brand-pink/5 space-y-2">
+                <div className="flex justify-between items-start gap-2">
+                  <div>
+                    <p className="font-semibold text-ink text-sm">{pos.customer.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {pos.customer.email} • {pos.customer.phone}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCustomerAddressForm({
+                          address: pos.customer?.address || "",
+                          city: pos.customer?.city || "",
+                          state: normalizeNigerianState(pos.customer?.state || "", availableStates),
+                        });
+                        setShowEditAddressModal(true);
+                      }}
+                      className="text-xs text-brand-pink hover:underline font-semibold cursor-pointer"
+                    >
+                      Edit Address
+                    </button>
+                    <span className="text-muted-foreground/40">•</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        pos.setCustomer(null);
+                        setCourierPricesLoaded(false);
+                      }}
+                      className="text-xs text-muted-foreground hover:text-ink font-medium cursor-pointer"
+                    >
+                      Change
+                    </button>
+                  </div>
                 </div>
-                <button
-                  onClick={() => pos.setCustomer(null)}
-                  className="text-sm text-brand-pink hover:underline font-medium cursor-pointer"
-                >
-                  Change
-                </button>
+
+                {/* Delivery Address Details */}
+                <div className="pt-2 border-t border-brand-pink/20 text-xs">
+                  {pos.customer.address && pos.customer.city && pos.customer.state ? (
+                    <p className="text-muted-foreground">
+                      <span className="font-medium text-ink">Delivery Address: </span>
+                      {pos.customer.address}, {pos.customer.city}, {pos.customer.state}
+                    </p>
+                  ) : (
+                    <div className="flex items-center justify-between text-amber-700 bg-amber-500/10 px-2.5 py-1.5 rounded-md border border-amber-500/20">
+                      <span>⚠️ Missing delivery address details</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCustomerAddressForm({
+                            address: pos.customer?.address || "",
+                            city: pos.customer?.city || "",
+                            state: normalizeNigerianState(pos.customer?.state || "", availableStates),
+                          });
+                          setShowEditAddressModal(true);
+                        }}
+                        className="text-xs font-semibold underline text-amber-800 cursor-pointer ml-2"
+                      >
+                        Add Address
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <div className="space-y-4">
@@ -316,10 +503,11 @@ function PosPage() {
                               name: c.name,
                               email: c.email,
                               phone: c.phone,
-                              address: (c as any).address || c.city || "",
+                              address: (c as any).address || "",
                               city: c.city || "",
-                              state: (c as any).state || "Lagos",
+                              state: normalizeNigerianState((c as any).state || "", availableStates),
                             });
+                            setCourierPricesLoaded(false);
                             setCustomerSearch("");
                           }}
                           className="p-2.5 hover:bg-surface cursor-pointer transition-colors flex items-center justify-between text-xs"
@@ -624,26 +812,53 @@ function PosPage() {
                 </div>
 
                 {pos.deliveryMethod === "Courier" ? (
-                  <div className="pt-1">
+                  <div className="pt-1 space-y-2">
                     {loadingPrices ? (
-                      <div className="p-2.5 bg-surface border border-border rounded-md text-xs text-muted-foreground flex items-center justify-center gap-2">
-                        <div className="size-3 border-2 border-brand-pink border-t-transparent rounded-full animate-spin" />
-                        Fetching delivery prices...
+                      <div className="p-3 bg-surface border border-border rounded-lg text-xs text-muted-foreground flex items-center justify-center gap-2.5">
+                        <div className="size-3.5 border-2 border-brand-pink border-t-transparent rounded-full animate-spin" />
+                        <span>Calculating Fez Delivery fee...</span>
                       </div>
                     ) : !courierPricesLoaded ? (
-                      <button
-                        type="button"
-                        onClick={handleGetPrices}
-                        className="w-full h-9 bg-ink text-white font-semibold text-xs rounded-md hover:bg-black transition-colors cursor-pointer"
-                      >
-                        Get Delivery Prices
-                      </button>
+                      <div className="space-y-2">
+                        {priceFetchError && (
+                          <div className="rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-400 p-3 text-xs flex gap-2 items-start">
+                            <AlertCircle className="size-4 shrink-0 mt-0.5 text-rose-600" />
+                            <p className="leading-relaxed">{priceFetchError}</p>
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          onClick={handleGetPrices}
+                          className="w-full h-9 bg-ink text-white font-semibold text-xs rounded-md hover:bg-black transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-xs"
+                        >
+                          {priceFetchError ? "Retry Get Delivery Prices" : "Get Delivery Prices (Fez)"}
+                        </button>
+                      </div>
                     ) : (
-                      <div className="p-2.5 rounded-md bg-surface border border-border text-xs flex justify-between items-center font-medium">
-                        <span>Standard Courier Shipping</span>
-                        <span className="font-semibold text-ink">
-                          {pos.shippingFee === 0 ? "Free" : formatNaira(pos.shippingFee)}
-                        </span>
+                      <div className="p-3 rounded-lg bg-surface border border-brand-pink/40 text-xs flex justify-between items-center font-medium shadow-xs">
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-7 w-7 rounded-full bg-brand-pink/15 text-ink font-bold text-[10px] grid place-items-center shrink-0">
+                            FEZ
+                          </div>
+                          <div>
+                            <p className="font-semibold text-ink text-xs">Fez Delivery Express</p>
+                            <p className="text-[11px] text-muted-foreground">
+                              Estimated Delivery: {estimatedDeliveryTime}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-bold text-sm text-ink block">
+                            {pos.shippingFee === 0 ? "Free" : formatNaira(pos.shippingFee)}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleGetPrices}
+                            className="text-[10px] text-brand-pink hover:underline cursor-pointer"
+                          >
+                            Recalculate
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -854,6 +1069,10 @@ function PosPage() {
               className="p-5 space-y-4"
               onSubmit={(e) => {
                 e.preventDefault();
+                if (!newCustomer.state) {
+                  toast.error("Please select a delivery state.");
+                  return;
+                }
                 pos.setCustomer(newCustomer);
                 toast.success("Customer added to order");
                 setShowCustomerModal(false);
@@ -915,22 +1134,132 @@ function PosPage() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-medium text-muted-foreground block">State</label>
-                  <input
+                  <label className="text-xs font-medium text-muted-foreground block">
+                    State (Nigeria) *
+                  </label>
+                  <select
                     required
-                    type="text"
                     value={newCustomer.state}
                     onChange={(e) => setNewCustomer({ ...newCustomer, state: e.target.value })}
-                    className="w-full h-10 px-3 rounded-md border border-border focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm"
-                  />
+                    className="w-full h-10 px-3 rounded-md border border-border bg-white focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm cursor-pointer"
+                  >
+                    <option value="">Select Nigerian State...</option>
+                    {availableStates.map((st) => (
+                      <option key={st} value={st}>
+                        {st}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full h-10 bg-ink text-white font-semibold rounded-md hover:bg-black transition-colors"
+                  className="w-full h-10 bg-ink text-white font-semibold rounded-md hover:bg-black transition-colors cursor-pointer"
                 >
                   Save & Add to Order
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Customer Address Modal */}
+      {showEditAddressModal && pos.customer && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex justify-between items-center p-4 border-b border-border">
+              <h3 className="font-semibold text-ink">Edit Customer Delivery Address</h3>
+              <button
+                onClick={() => setShowEditAddressModal(false)}
+                className="text-muted-foreground hover:text-ink cursor-pointer"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+            <form
+              className="p-5 space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!customerAddressForm.state) {
+                  toast.error("Please select a delivery state.");
+                  return;
+                }
+                pos.setCustomer({
+                  ...pos.customer!,
+                  address: customerAddressForm.address,
+                  city: customerAddressForm.city,
+                  state: customerAddressForm.state,
+                });
+                setCourierPricesLoaded(false);
+                toast.success("Delivery address updated");
+                setShowEditAddressModal(false);
+              }}
+            >
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-muted-foreground block">
+                  Delivery Street Address *
+                </label>
+                <input
+                  required
+                  type="text"
+                  value={customerAddressForm.address}
+                  onChange={(e) =>
+                    setCustomerAddressForm({ ...customerAddressForm, address: e.target.value })
+                  }
+                  placeholder="e.g. 14 Admiralty Way, Lekki Phase 1"
+                  className="w-full h-10 px-3 rounded-md border border-border focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-medium text-muted-foreground block">City *</label>
+                  <input
+                    required
+                    type="text"
+                    value={customerAddressForm.city}
+                    onChange={(e) =>
+                      setCustomerAddressForm({ ...customerAddressForm, city: e.target.value })
+                    }
+                    placeholder="e.g. Lekki / Ikeja"
+                    className="w-full h-10 px-3 rounded-md border border-border focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-medium text-muted-foreground block">
+                    State (Nigeria) *
+                  </label>
+                  <select
+                    required
+                    value={customerAddressForm.state}
+                    onChange={(e) =>
+                      setCustomerAddressForm({ ...customerAddressForm, state: e.target.value })
+                    }
+                    className="w-full h-10 px-3 rounded-md border border-border bg-white focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm cursor-pointer"
+                  >
+                    <option value="">Select Nigerian State...</option>
+                    {availableStates.map((st) => (
+                      <option key={st} value={st}>
+                        {st}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="pt-2 flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowEditAddressModal(false)}
+                  className="px-4 h-10 rounded-md border border-border text-sm font-medium hover:bg-secondary cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 h-10 bg-ink text-white font-semibold text-sm rounded-md hover:bg-black transition-colors cursor-pointer"
+                >
+                  Save Address
                 </button>
               </div>
             </form>

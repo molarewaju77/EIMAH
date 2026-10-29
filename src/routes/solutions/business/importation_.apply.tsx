@@ -5,6 +5,7 @@ import { formatNaira } from "@/lib/mock-data";
 import { useSolutionItemQuery } from "@/hooks/queries/useContentQuery";
 import { useSolutionFlutterwaveCheckout } from "@/hooks/useSolutionFlutterwaveCheckout";
 import { PaymentSuccessModal } from "@/components/site/PaymentSuccessModal";
+import { BrandOverlayLoader } from "@/components/site/BrandOverlayLoader";
 import { Footer } from "@/components/site/Footer";
 
 export const Route = createFileRoute("/solutions/business/importation_/apply")({
@@ -125,11 +126,11 @@ function BusinessImportationApplyPage() {
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={isProcessing}
+                disabled={isProcessing || isVerifying}
                 className="w-full bg-black text-white hover:bg-zinc-800 font-semibold text-sm sm:text-base py-3.5 px-6 rounded-md transition-colors shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-75 min-h-[48px]"
               >
                 {isProcessing ? (
-                  <Loader2 className="size-5 animate-spin mx-auto text-current" />
+                  <span>Redirecting to payment...</span>
                 ) : (
                   <span>Pay {formatNaira(effectivePrice)}</span>
                 )}
@@ -144,15 +145,19 @@ function BusinessImportationApplyPage() {
         <Footer />
       </div>
 
-      {/* Verification Overlay */}
-      {isVerifying && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-          <div className="bg-background border border-border rounded-md p-6 shadow-2xl flex items-center gap-4 text-foreground font-medium animate-in zoom-in-95">
-            <Loader2 className="size-6 animate-spin text-emerald-500 shrink-0" />
-            <span>Confirming your payment...</span>
-          </div>
-        </div>
-      )}
+      {/* Brand Loader overlay while creating order & redirecting to Flutterwave */}
+      <BrandOverlayLoader
+        show={isProcessing}
+        mode="fixed"
+        label="Redirecting to secure payment..."
+      />
+
+      {/* Brand Loader overlay while verifying payment */}
+      <BrandOverlayLoader
+        show={isVerifying}
+        mode="fixed"
+        label="Verifying payment..."
+      />
 
       {/* Payment Success Modal */}
       <PaymentSuccessModal data={successModalData} onClose={closeSuccessModal} />

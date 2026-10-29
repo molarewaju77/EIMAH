@@ -166,7 +166,7 @@ export function useSolutionFlutterwaveCheckout() {
             await insertSolutionApplication({
               id: appId,
               txnId: finalTxnId,
-              solutionId: draft?.solutionId || "S-01",
+              solutionId: draft?.solutionId || "S-02",
               solutionTitle: solutionTitle,
               solutionSlug: draft?.solutionSlug || "solutions",
               track: draft?.track || "Business",
@@ -390,8 +390,12 @@ export function useSolutionFlutterwaveCheckout() {
       });
 
       if (res?.link) {
-        setIsProcessing(false);
+        toast.info("Redirecting to Flutterwave secure checkout...", { autoClose: 3500 });
         window.location.href = res.link;
+        // Safety timeout to reset if browser stays on page or user cancels before navigation completes
+        setTimeout(() => {
+          setIsProcessing(false);
+        }, 8000);
       } else {
         throw new Error("Did not receive a valid checkout URL from Flutterwave.");
       }

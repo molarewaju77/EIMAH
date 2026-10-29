@@ -6,6 +6,7 @@ import { formatNaira } from "@/lib/mock-data";
 import { useSolutionItemQuery } from "@/hooks/queries/useContentQuery";
 import { useSolutionFlutterwaveCheckout } from "@/hooks/useSolutionFlutterwaveCheckout";
 import { PaymentSuccessModal } from "@/components/site/PaymentSuccessModal";
+import { BrandOverlayLoader } from "@/components/site/BrandOverlayLoader";
 
 export const Route = createFileRoute("/solutions/business/sourcing_/apply")({
   component: SourcingApplyPage,
@@ -162,7 +163,7 @@ export default function SourcingApplyPage() {
               <div className="mt-4">
                 <button
                   type="submit"
-                  disabled={isProcessing}
+                  disabled={isProcessing || isVerifying}
                   className="w-full bg-black text-white font-semibold text-xs sm:text-sm py-3.5 px-4 rounded-md hover:bg-zinc-900 transition-colors shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-75 min-h-[48px]"
                 >
                   {isProcessing ? (
@@ -184,15 +185,19 @@ export default function SourcingApplyPage() {
         </div>
       </main>
 
-      {/* Verification Overlay */}
-      {isVerifying && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-          <div className="bg-background border border-border rounded-md p-6 shadow-2xl flex items-center gap-4 text-foreground font-medium animate-in zoom-in-95">
-            <Loader2 className="size-6 animate-spin text-amber-500 shrink-0" />
-            <span>Confirming your payment...</span>
-          </div>
-        </div>
-      )}
+      {/* Brand Loader overlay while creating order & redirecting to Flutterwave */}
+      <BrandOverlayLoader
+        show={isProcessing}
+        mode="fixed"
+        label="Redirecting to secure payment..."
+      />
+
+      {/* Brand Loader overlay while verifying payment */}
+      <BrandOverlayLoader
+        show={isVerifying}
+        mode="fixed"
+        label="Verifying payment..."
+      />
 
       {/* Payment Success Modal */}
       <PaymentSuccessModal data={successModalData} onClose={closeSuccessModal} />
