@@ -402,7 +402,7 @@ export function ShopInner({
         </div>
 
         <div className="grid md:grid-cols-12 gap-8 items-start w-full min-w-0">
-          <aside className="hidden md:block md:col-span-4 lg:col-span-3 border border-border/60 bg-white rounded-2xl p-6 shadow-sm sticky top-24">
+          <aside className="hidden md:block md:col-span-4 lg:col-span-3 border border-border/60 bg-white rounded-2xl p-6 shadow-sm sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto">
             {Filters}
           </aside>
           <div className={cn("md:col-span-8 lg:col-span-9 relative w-full min-w-0", (isFiltering || (isLoading && !productsData) || products.length === 0) && "min-h-[220px] md:min-h-[260px]")}>
