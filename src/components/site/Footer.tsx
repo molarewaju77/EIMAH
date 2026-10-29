@@ -85,10 +85,11 @@ export function Footer() {
             title="Shop"
             links={[
               { l: "All products", h: "/shop" },
-              { l: "Clothing", h: "/shop/clothing" },
-              { l: "Shoes", h: "/shop/shoes" },
-              { l: "Bags", h: "/shop/bags" },
-              { l: "Gifts & Sets", h: "/shop/gifts-sets" },
+              { l: "Accessories", h: "/shop", search: { category: "accessories" } },
+              { l: "Bags", h: "/shop", search: { category: "bags" } },
+              { l: "Creator Tools", h: "/shop", search: { category: "creator-tools" } },
+              { l: "Footwears", h: "/shop", search: { category: "footwears" } },
+              { l: "Home Essentials", h: "/shop", search: { category: "home-essentials" } },
             ]}
           />
           <FooterCol
@@ -174,14 +175,24 @@ function SocialLink({
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { l: string; h: string }[] }) {
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string;
+  links: { l: string; h: string; search?: Record<string, string> }[];
+}) {
   return (
     <div className="md:col-span-2">
       <h4 className="text-xs uppercase tracking-widest text-white/50 mb-4">{title}</h4>
       <ul className="space-y-2.5 text-sm">
-        {links.map((l) => (
-          <li key={l.h}>
-            <Link to={l.h} className="text-white/85 hover:text-brand-pink transition-colors">
+        {links.map((l, idx) => (
+          <li key={`${l.h}-${l.l}-${idx}`}>
+            <Link
+              to={l.h as any}
+              search={l.search as any}
+              className="text-white/85 hover:text-brand-pink transition-colors"
+            >
               {l.l}
             </Link>
           </li>
