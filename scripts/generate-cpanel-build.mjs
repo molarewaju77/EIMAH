@@ -8,6 +8,19 @@ const serverPath = path.resolve(root, ".output/server/index.mjs");
 const publicDir = path.resolve(root, ".output/public");
 
 async function main() {
+  // When deploying to Vercel, Nitro outputs to .vercel/output instead of .output/
+  // Vercel manages its own serverless/edge deployment, so skip cPanel generation.
+  if (process.env.VERCEL) {
+    console.log("Vercel deployment environment detected. Skipping cPanel build script.");
+    return;
+  }
+
+  // Ensure server file exists before attempting to import it
+  if (!fs.existsSync(serverPath)) {
+    console.log(`Server file not found at ${serverPath}. Skipping cPanel build script.`);
+    return;
+  }
+
   console.log("Generating index.html from TanStack Start server...");
   const serverModule = await import(`file://${serverPath.replace(/\\/g, "/")}`);
   const handler = serverModule.default;
@@ -64,11 +77,6 @@ async function main() {
   console.log(`Wrote .htaccess to ${htaccessPath}`);
 
   // Automatically package build.zip (for local Windows/cPanel workflows)
-  // On Vercel / CI environments, skip or package safely without failing the build.
-  if (process.env.VERCEL) {
-    console.log("Vercel deployment environment detected. Skipping cPanel build.zip packaging.");
-    return;
-  }
 
   try {
     console.log("Packaging build.zip for cPanel...");
