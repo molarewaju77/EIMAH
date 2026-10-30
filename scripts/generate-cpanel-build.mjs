@@ -63,20 +63,41 @@ async function main() {
   fs.writeFileSync(htaccessPath, htaccessContent, "utf-8");
   console.log(`Wrote .htaccess to ${htaccessPath}`);
 
-  // Automatically package build.zip
-  console.log("Packaging build.zip for cPanel...");
-  const zipPath = path.resolve(root, "build.zip");
-  if (fs.existsSync(zipPath)) {
-    fs.unlinkSync(zipPath);
+  // Automatically package build.zip (for local Windows/cPanel workflows)
+  // On Vercel / CI environments, skip or package safely without failing the build.
+  if (process.env.VERCEL) {
+    console.log("Vercel deployment environment detected. Skipping cPanel build.zip packaging.");
+    return;
   }
 
-  const { execSync } = await import("node:child_process");
-  const psCmd = `powershell -NoProfile -Command "Get-ChildItem -Path '${publicDir.replace(/'/g, "''")}' -Force | Compress-Archive -DestinationPath '${zipPath.replace(/'/g, "''")}' -Force"`;
-  execSync(psCmd, { stdio: "inherit" });
-  console.log(`Successfully generated ready-to-upload build.zip at: ${zipPath}`);
+  try {
+    console.log("Packaging build.zip for cPanel...");
+    const zipPath = path.resolve(root, "build.zip");
+    if (fs.existsSync(zipPath)) {
+      fs.unlinkSync(zipPath);
+    }
+
+    const { execSync } = await import("node:child_process");
+    if (process.platform === "win32") {
+      const psCmd = `powershell -NoProfile -Command "Get-ChildItem -Path '${publicDir.replace(/'/g, "''")}' -Force | Compress-Archive -DestinationPath '${zipPath.replace(/'/g, "''")}' -Force"`;
+      execSync(psCmd, { stdio: "inherit" });
+      console.log(`Successfully generated ready-to-upload build.zip at: ${zipPath}`);
+    } else {
+      // Linux / macOS fallback
+      try {
+        execSync(`cd "${publicDir}" && zip -r "${zipPath}" .`, { stdio: "inherit" });
+        console.log(`Successfully generated ready-to-upload build.zip at: ${zipPath}`);
+      } catch {
+        console.log("Note: zip command not found or skipped on this platform.");
+      }
+    }
+  } catch (zipError) {
+    console.warn("Notice: build.zip could not be packaged automatically:", zipError.message);
+  }
 }
 
 main().catch((err) => {
   console.error("Error generating static files:", err);
   process.exit(1);
 });
+
