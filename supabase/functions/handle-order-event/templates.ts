@@ -220,9 +220,9 @@ const sharedStyles = `
 
 const headerHtml = `
   <div class="header">
-    <a href="https://emah-brand-studio.vercel.app" target="_blank" style="text-decoration: none; display: inline-block;">
+    <a href="https://eimah.com" target="_blank" style="text-decoration: none; display: inline-block;">
       <img 
-        src="https://emah-brand-studio.vercel.app/eimah-logo.svg" 
+        src="https://eimah.com/eimah-logo.svg" 
         alt="EIMAH." 
         class="logo-img"
         style="height: 24px; max-height: 24px; width: auto; display: block; border: 0;"
@@ -289,7 +289,7 @@ export const orderCourierReceivedTemplate = `<!DOCTYPE html>
         </div>
 
         <div class="btn-container">
-          <a href="https://emah-brand-studio.vercel.app/track?id={{trackingId}}" class="btn">Track Your Order Live</a>
+          <a href="https://eimah.com/track?id={{trackingId}}" class="btn">Track Your Order Live</a>
         </div>
 
         <div class="section-heading">Order Breakdown</div>
@@ -373,7 +373,7 @@ export const orderCourierShippedTemplate = `<!DOCTYPE html>
         </p>
 
         <div class="btn-container">
-          <a href="https://emah-brand-studio.vercel.app/track?id={{trackingId}}" class="btn">Track Your Order Live</a>
+          <a href="https://eimah.com/track?id={{trackingId}}" class="btn">Track Your Order Live</a>
         </div>
 
         <div class="signoff">
@@ -429,10 +429,10 @@ export const orderCourierDeliveredTemplate = `<!DOCTYPE html>
         </p>
 
         <div class="btn-container">
-          <a href="https://emah-brand-studio.vercel.app/feedback?order={{orderId}}" class="btn">Leave a Review</a>
+          <a href="https://eimah.com/feedback?order={{orderId}}" class="btn">Leave a Review</a>
         </div>
 
-        <a href="https://emah-brand-studio.vercel.app/shop" class="promo-banner">
+        <a href="https://eimah.com/shop" class="promo-banner">
           ✦ Discover New Collections – Shop Eimah ✦
         </a>
 
@@ -480,7 +480,7 @@ export const orderPickupReceivedTemplate = `<!DOCTYPE html>
         </div>
 
         <div class="btn-container">
-          <a href="https://emah-brand-studio.vercel.app/track?id={{trackingId}}" class="btn">Track Your Order Live</a>
+          <a href="https://eimah.com/track?id={{trackingId}}" class="btn">Track Your Order Live</a>
         </div>
 
         <div class="section-heading">Order Breakdown</div>
@@ -601,7 +601,7 @@ export const orderPickupCollectedTemplate = `<!DOCTYPE html>
           We’d love to hear about your experience. If you have any questions or need assistance, please contact us at <a href="mailto:hello@eimah.com" style="color: #0f172a; font-weight: 500;">hello@eimah.com</a>.
         </p>
 
-        <a href="https://emah-brand-studio.vercel.app/shop" class="promo-banner">
+        <a href="https://eimah.com/shop" class="promo-banner">
           ✦ Discover New Collections – Shop Eimah ✦
         </a>
 
@@ -663,7 +663,7 @@ export const orderAdminAlertTemplate = `<!DOCTYPE html>
         </table>
 
         <div class="btn-container">
-          <a href="https://emah-brand-studio.vercel.app/admin/orders" class="btn">View in Admin Portal</a>
+          <a href="https://eimah.com/admin/orders" class="btn">View in Admin Portal</a>
         </div>
       </div>
       ${footerHtml}

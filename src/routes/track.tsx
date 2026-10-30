@@ -202,7 +202,7 @@ function TrackPage() {
                 {
                   n: "1",
                   title: "Find your ID",
-                  body: "Check your order confirmation email or SMS for yourEMH tracking ID.",
+                  body: "Check your order confirmation email for your EMH tracking ID.",
                 },
                 {
                   n: "2",

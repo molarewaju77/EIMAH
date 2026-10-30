@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
     const safeReference = String(orderId).trim();
 
     // Base redirect_url without pre-existing query strings
-    let redirectUrl = callbackUrl || "https://emahbrandstudio.com/checkout";
+    let redirectUrl = callbackUrl || "https://eimah.com/checkout";
     if (redirectUrl.includes("?")) {
       redirectUrl = redirectUrl.split("?")[0];
     }

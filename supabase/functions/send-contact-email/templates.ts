@@ -148,9 +148,9 @@ const sharedStyles = `
 
 const headerHtml = `
   <div class="header">
-    <a href="https://emah-brand-studio.vercel.app" target="_blank" style="text-decoration: none; display: inline-block;">
+    <a href="https://eimah.com" target="_blank" style="text-decoration: none; display: inline-block;">
       <img 
-        src="https://emah-brand-studio.vercel.app/eimah-logo.svg" 
+        src="https://eimah.com/eimah-logo.svg" 
         alt="EIMAH." 
         class="logo-img"
         style="height: 24px; max-height: 24px; width: auto; display: block; border: 0;"

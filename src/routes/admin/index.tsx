@@ -204,6 +204,10 @@ function AdminDashboard() {
                     <Cell key={i} fill={CAT_COLORS[i % CAT_COLORS.length]} />
                   ))}
                 </Pie>
+                <Tooltip
+                  formatter={(v: any) => [formatNaira(Number(v)), "Revenue"]}
+                  contentStyle={{ borderRadius: 10, border: "1px solid #eee", fontSize: 12 }}
+                />
                 <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: 11 }} />
               </PieChart>
             </ResponsiveContainer>
