@@ -124,29 +124,8 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-eimah py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/50">
+        <div className="container-eimah py-6 flex justify-center items-center text-xs text-white/50 text-center">
           <p>© {new Date().getFullYear()} EIMAH. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-4 text-white/50">
-            <Link to="/company-policy" className="hover:text-white transition-colors">
-              Company Policy
-            </Link>
-            <span>·</span>
-            <Link to="/terms" className="hover:text-white transition-colors">
-              Terms
-            </Link>
-            <span>·</span>
-            <Link to="/privacy" className="hover:text-white transition-colors">
-              Privacy
-            </Link>
-            <span>·</span>
-            <Link to="/delivery-policy" className="hover:text-white transition-colors">
-              Delivery
-            </Link>
-            <span>·</span>
-            <Link to="/refund-policy" className="hover:text-white transition-colors">
-              Returns & Exchange
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
