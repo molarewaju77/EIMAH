@@ -324,7 +324,7 @@ export function ProductCard({ product }: { product: Product }) {
           setQuantity(1);
           setOpen(true);
         }}
-        className="w-full mt-2.5 sm:mt-3 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-ink dark:text-neutral-100 hover:border-ink hover:bg-ink hover:text-white dark:hover:bg-white dark:hover:text-ink dark:hover:border-white text-sm font-semibold py-2.5 px-2 rounded-md flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-2xs truncate"
+        className="w-full mt-2.5 sm:mt-3 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-ink dark:text-neutral-100 hover:bg-brand-pink hover:border-brand-pink hover:text-ink text-sm font-semibold py-2.5 px-2 rounded-md flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-2xs truncate"
       >
         <ShoppingBag className="size-4 shrink-0" />
         <span className="truncate">Add to cart</span>
