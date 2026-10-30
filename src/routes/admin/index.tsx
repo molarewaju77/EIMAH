@@ -27,6 +27,7 @@ import { useDashboardStatsQuery } from "@/hooks/queries/useDashboardStatsQuery";
 import { Loader } from "@/components/ui/loader";
 import { salesSeries } from "@/lib/admin-data";
 import { formatNaira } from "@/lib/mock-data";
+import { formatCompactNaira } from "@/routes/admin/analytics";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -79,13 +80,21 @@ function AdminDashboard() {
     total: Number(o.total || 0),
   }));
 
-  const topCategories = [
-    { name: "Clothing", value: 3840000 },
-    { name: "Shoes", value: 2420000 },
-    { name: "Bags", value: 1980000 },
-    { name: "Home Essentials", value: 1450000 },
-    { name: "Gadgets", value: 920000 },
-  ];
+  const topCategories =
+    stats?.topCategories && stats.topCategories.length > 0
+      ? stats.topCategories
+      : [
+          { name: "Clothing", value: 3840000 },
+          { name: "Shoes", value: 2420000 },
+          { name: "Bags", value: 1980000 },
+          { name: "Home Essentials", value: 1450000 },
+          { name: "Gadgets", value: 920000 },
+        ];
+
+  const revenueChartData =
+    stats?.monthlyRevenue && stats.monthlyRevenue.length > 0
+      ? stats.monthlyRevenue
+      : salesSeries;
 
   const CAT_COLORS = ["#F590DD", "#7CF9CE", "#CAFF75", "#FFE784", "#0a0a0a"];
 
@@ -142,19 +151,26 @@ function AdminDashboard() {
         <SectionCard
           title="Revenue Analytics"
           action={
-            <span className="text-xs text-muted-foreground">Last 12 months (₦ millions)</span>
+            <span className="text-xs text-muted-foreground">This Year</span>
           }
           className="xl:col-span-2"
         >
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={salesSeries} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+              <BarChart data={revenueChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <CartesianGrid vertical={false} stroke="#eee" />
                 <XAxis dataKey="m" stroke="#999" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#999" fontSize={12} tickLine={false} axisLine={false} width={24} />
+                <YAxis
+                  stroke="#999"
+                  fontSize={11}
+                  tickLine={false}
+                  axisLine={false}
+                  width={44}
+                  tickFormatter={formatCompactNaira}
+                />
                 <Tooltip
                   contentStyle={{ borderRadius: 10, border: "1px solid #eee", fontSize: 12 }}
-                  formatter={(v: number) => [`₦${v}M`, "Revenue"]}
+                  formatter={(v: any) => [formatNaira(Number(v)), "Revenue"]}
                 />
                 <Bar dataKey="revenue" fill="#0a0a0a" radius={[6, 6, 0, 0]} />
               </BarChart>

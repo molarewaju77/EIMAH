@@ -1,5 +1,23 @@
 import { supabase } from "@/lib/supabase";
-import { adminProducts, adminOrders, adminCustomers, type AdminProduct, type AdminOrder } from "@/lib/admin-data";
+import {
+  adminProducts,
+  adminOrders,
+  adminCustomers,
+  salesSeries,
+  type AdminProduct,
+  type AdminOrder,
+} from "@/lib/admin-data";
+
+export type MonthlyRevenuePoint = {
+  m: string;
+  revenue: number;
+  orders: number;
+};
+
+export type CategoryRevenuePoint = {
+  name: string;
+  value: number;
+};
 
 export type DashboardStats = {
   totalRevenue: number;
@@ -10,6 +28,8 @@ export type DashboardStats = {
   totalProfit: number;
   recentOrders: Partial<AdminOrder>[];
   topProducts: Partial<AdminProduct>[];
+  monthlyRevenue?: MonthlyRevenuePoint[];
+  topCategories?: CategoryRevenuePoint[];
 };
 
 function getLocalFallbackStats(): DashboardStats {
@@ -23,6 +43,18 @@ function getLocalFallbackStats(): DashboardStats {
     totalProfit: Math.round(totalRev * 0.34),
     recentOrders: adminOrders.slice(0, 6),
     topProducts: [...adminProducts].sort((a, b) => b.sold - a.sold).slice(0, 5),
+    monthlyRevenue: salesSeries.map((s) => ({
+      m: s.m,
+      revenue: s.revenue * 1000000,
+      orders: s.orders,
+    })),
+    topCategories: [
+      { name: "Clothing", value: 3840000 },
+      { name: "Shoes", value: 2420000 },
+      { name: "Bags", value: 1980000 },
+      { name: "Home Essentials", value: 1450000 },
+      { name: "Gadgets", value: 920000 },
+    ],
   };
 }
 

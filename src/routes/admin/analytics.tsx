@@ -16,6 +16,7 @@ import {
 import { Calendar, X } from "lucide-react";
 import { MetricCard, SectionCard } from "@/components/admin/parts";
 import { useProductsQuery } from "@/hooks/queries/useProductsQuery";
+import { useDashboardStatsQuery } from "@/hooks/queries/useDashboardStatsQuery";
 import { salesSeries } from "@/lib/admin-data";
 import { formatNaira } from "@/lib/mock-data";
 import { Loader } from "@/components/ui/loader";
@@ -41,6 +42,7 @@ export function formatCompactNaira(val: number): string {
 
 function AnalyticsPage() {
   const { data: products = [], isLoading } = useProductsQuery();
+  const { data: stats } = useDashboardStatsQuery();
   const [range, setRange] = useState("Last 30 days");
   const [cat, setCat] = useState("all");
   const [startDate, setStartDate] = useState("");
@@ -158,54 +160,63 @@ function AnalyticsPage() {
       </div>
 
       {/* Revenue & Sales Trend Charts */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
-        <SectionCard title="Revenue Trend" className="xl:col-span-2 border border-border bg-white rounded-3xl shadow-xs p-4 sm:p-6">
-          <div className="h-64 sm:h-72 w-full pt-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={salesSeries} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="rev" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#F590DD" stopOpacity={0.4} />
-                    <stop offset="100%" stopColor="#F590DD" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid vertical={false} stroke="#eee" />
-                <XAxis dataKey="m" stroke="#999" fontSize={11} tickLine={false} axisLine={false} />
-                <YAxis
-                  stroke="#999"
-                  fontSize={11}
-                  tickLine={false}
-                  axisLine={false}
-                  width={40}
-                  tickFormatter={formatCompactNaira}
-                />
-                <Tooltip
-                  formatter={(val: any) => [formatNaira(Number(val)), "Revenue"]}
-                  contentStyle={{ borderRadius: 12, border: "1px solid #eee", fontSize: 12 }}
-                />
-                <Area dataKey="revenue" stroke="#F590DD" fill="url(#rev)" strokeWidth={2.5} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </SectionCard>
+      {(() => {
+        const chartSeries =
+          stats?.monthlyRevenue && stats.monthlyRevenue.length > 0
+            ? stats.monthlyRevenue
+            : salesSeries;
 
-        <SectionCard title="Sales Trend" className="border border-border bg-white rounded-3xl shadow-xs p-4 sm:p-6">
-          <div className="h-64 sm:h-72 w-full pt-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={salesSeries} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-                <CartesianGrid vertical={false} stroke="#eee" />
-                <XAxis dataKey="m" stroke="#999" fontSize={11} tickLine={false} axisLine={false} />
-                <YAxis stroke="#999" fontSize={11} tickLine={false} axisLine={false} width={30} />
-                <Tooltip
-                  formatter={(val: any) => [val, "Orders"]}
-                  contentStyle={{ borderRadius: 12, border: "1px solid #eee", fontSize: 12 }}
-                />
-                <Line dataKey="orders" stroke="#0a0a0a" strokeWidth={2.5} dot={{ r: 3 }} />
-              </LineChart>
-            </ResponsiveContainer>
+        return (
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+            <SectionCard title="Revenue Trend" className="xl:col-span-2 border border-border bg-white rounded-3xl shadow-xs p-4 sm:p-6">
+              <div className="h-64 sm:h-72 w-full pt-2">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={chartSeries} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="rev" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stopColor="#F590DD" stopOpacity={0.4} />
+                        <stop offset="100%" stopColor="#F590DD" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid vertical={false} stroke="#eee" />
+                    <XAxis dataKey="m" stroke="#999" fontSize={11} tickLine={false} axisLine={false} />
+                    <YAxis
+                      stroke="#999"
+                      fontSize={11}
+                      tickLine={false}
+                      axisLine={false}
+                      width={40}
+                      tickFormatter={formatCompactNaira}
+                    />
+                    <Tooltip
+                      formatter={(val: any) => [formatNaira(Number(val)), "Revenue"]}
+                      contentStyle={{ borderRadius: 12, border: "1px solid #eee", fontSize: 12 }}
+                    />
+                    <Area dataKey="revenue" stroke="#F590DD" fill="url(#rev)" strokeWidth={2.5} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </SectionCard>
+
+            <SectionCard title="Sales Trend" className="border border-border bg-white rounded-3xl shadow-xs p-4 sm:p-6">
+              <div className="h-64 sm:h-72 w-full pt-2">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={chartSeries} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+                    <CartesianGrid vertical={false} stroke="#eee" />
+                    <XAxis dataKey="m" stroke="#999" fontSize={11} tickLine={false} axisLine={false} />
+                    <YAxis stroke="#999" fontSize={11} tickLine={false} axisLine={false} width={30} />
+                    <Tooltip
+                      formatter={(val: any) => [val, "Orders"]}
+                      contentStyle={{ borderRadius: 12, border: "1px solid #eee", fontSize: 12 }}
+                    />
+                    <Line dataKey="orders" stroke="#0a0a0a" strokeWidth={2.5} dot={{ r: 3 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </SectionCard>
           </div>
-        </SectionCard>
-      </div>
+        );
+      })()}
 
       {/* Category Performance & Top Products */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">

@@ -398,6 +398,14 @@ export function ShopInner({
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
+                onFocus={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  setTimeout(() => {
+                    if (window.scrollY > 0) {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }, 120);
+                }}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 className="w-full h-10 pl-9 pr-9 rounded-xl border border-border bg-background/90 focus:border-ink focus:ring-1 focus:ring-ink outline-none text-sm"
               />
