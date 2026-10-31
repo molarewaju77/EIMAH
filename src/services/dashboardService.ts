@@ -1,12 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import {
-  adminProducts,
-  adminOrders,
-  adminCustomers,
-  salesSeries,
-  type AdminProduct,
-  type AdminOrder,
-} from "@/lib/admin-data";
+import type { AdminProduct, AdminOrder } from "@/lib/admin-data";
 
 export type MonthlyRevenuePoint = {
   m: string;
@@ -32,29 +25,24 @@ export type DashboardStats = {
   topCategories?: CategoryRevenuePoint[];
 };
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 function getLocalFallbackStats(): DashboardStats {
-  const totalRev = adminOrders.reduce((n, o) => n + o.total, 0);
   return {
-    totalRevenue: totalRev,
-    totalOrders: adminOrders.length,
-    totalProducts: adminProducts.length,
-    totalCustomers: adminCustomers.length,
-    totalSold: adminProducts.reduce((n, p) => n + p.sold, 0),
-    totalProfit: Math.round(totalRev * 0.34),
-    recentOrders: adminOrders.slice(0, 6),
-    topProducts: [...adminProducts].sort((a, b) => b.sold - a.sold).slice(0, 5),
-    monthlyRevenue: salesSeries.map((s) => ({
-      m: s.m,
-      revenue: s.revenue * 1000000,
-      orders: s.orders,
+    totalRevenue: 0,
+    totalOrders: 0,
+    totalProducts: 0,
+    totalCustomers: 0,
+    totalSold: 0,
+    totalProfit: 0,
+    recentOrders: [],
+    topProducts: [],
+    monthlyRevenue: MONTHS.map((m) => ({
+      m,
+      revenue: 0,
+      orders: 0,
     })),
-    topCategories: [
-      { name: "Clothing", value: 3840000 },
-      { name: "Shoes", value: 2420000 },
-      { name: "Bags", value: 1980000 },
-      { name: "Home Essentials", value: 1450000 },
-      { name: "Gadgets", value: 920000 },
-    ],
+    topCategories: [],
   };
 }
 
