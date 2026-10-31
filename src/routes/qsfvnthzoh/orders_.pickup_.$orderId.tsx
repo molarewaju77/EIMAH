@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { ArrowLeft, Printer, Truck, Store, MapPin, ChevronDown, Copy, Check } from "lucide-react";
+import { ArrowLeft, Printer, Store, MapPin, Phone, ChevronDown, Copy, Check } from "lucide-react";
 import { toast } from "react-toastify";
 import { StatusPill } from "@/components/admin/parts";
 import { type AdminOrderStatus } from "@/lib/admin-store";
@@ -8,36 +8,29 @@ import {
   useOrderDetailQuery,
   useUpdateOrderStatusMutation,
   useUpdateOrderNotesMutation,
-  useUpdateOrderWaybillMutation,
 } from "@/hooks/queries/useOrdersQuery";
 import { formatNaira } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/orders_/$orderId")({
-  component: OrderDetailsPage,
+export const Route = createFileRoute("/qsfvnthzoh/orders_/pickup_/$orderId")({
+  component: PickupOrderDetailsPage,
 });
 
-const COURIER_STATUSES: AdminOrderStatus[] = ["Paid", "Processing", "Shipped", "Delivered"];
-const PICKUP_STATUSES: AdminOrderStatus[] = ["Paid", "Processing", "Ready for Pick-up", "Collected"];
+const STATUSES: AdminOrderStatus[] = ["Paid", "Processing", "Ready for Pick-up", "Collected"];
 
-function OrderDetailsPage() {
+function PickupOrderDetailsPage() {
   const { orderId } = Route.useParams();
   const { data: order, isLoading } = useOrderDetailQuery(orderId);
   const statusMutation = useUpdateOrderStatusMutation();
   const notesMutation = useUpdateOrderNotesMutation();
-  const waybillMutation = useUpdateOrderWaybillMutation();
 
   const [notes, setNotes] = useState("");
-  const [waybill, setWaybill] = useState("");
   const [copiedTracking, setCopiedTracking] = useState(false);
   const [pendingStatus, setPendingStatus] = useState<AdminOrderStatus | null>(null);
 
   useEffect(() => {
-    if (order) {
-      setNotes(order.internalNotes || "");
-      setWaybill(order.waybillNumber || "");
-    }
+    if (order) setNotes(order.internalNotes || "");
   }, [order]);
 
   if (isLoading) {
@@ -53,38 +46,25 @@ function OrderDetailsPage() {
       <div className="py-16 text-center space-y-4">
         <h2 className="text-xl font-bold font-display text-foreground">Order Not Found</h2>
         <p className="text-muted-foreground text-xs">
-          No order was found with ID <span className="font-mono">{orderId}</span>.
+          No pick-up order was found with ID <span className="font-mono">{orderId}</span>.
         </p>
         <Link
-          to="/admin/orders"
+          to="/qsfvnthzoh/orders/pickup"
           className="inline-flex items-center gap-2 px-4 h-9 rounded-full bg-black text-white text-xs font-medium hover:bg-neutral-800 transition-colors"
         >
-          <ArrowLeft className="size-3.5" /> Return to Orders
+          <ArrowLeft className="size-3.5" /> Return to Pick-up Orders
         </Link>
       </div>
     );
   }
 
-  const isPickup = order.deliveryMethod === "Pickup Station";
-  const statusList = isPickup ? PICKUP_STATUSES : COURIER_STATUSES;
-
   const handleSaveNotes = async () => {
     if (notesMutation.isPending) return;
     try {
       await notesMutation.mutateAsync({ id: order.id, notes });
+      toast.success("Internal notes saved successfully.");
     } catch {
       toast.error("Failed to save notes.");
-    }
-  };
-
-  const handleSaveWaybill = async () => {
-    if (waybillMutation.isPending) return;
-    const trimmedWaybill = waybill.trim();
-    try {
-      await waybillMutation.mutateAsync({ id: order.id, waybillNumber: trimmedWaybill });
-      toast.success("Waybill number saved.");
-    } catch {
-      toast.error("Failed to save waybill number.");
     }
   };
 
@@ -132,10 +112,10 @@ function OrderDetailsPage() {
       {/* Top Bar Navigation */}
       <div className="flex items-center justify-between gap-4 mb-5 sm:mb-6">
         <Link
-          to="/admin/orders"
+          to="/qsfvnthzoh/orders/pickup"
           className="inline-flex items-center gap-2 h-9 px-4.5 rounded-full border border-border bg-white text-xs font-semibold text-foreground hover:bg-ink hover:text-white hover:border-ink transition-all shadow-2xs cursor-pointer"
         >
-          <ArrowLeft className="size-3.5" /> Back to Courier Orders
+          <ArrowLeft className="size-3.5" /> Back to Pick-up Orders
         </Link>
 
         <button
@@ -156,9 +136,9 @@ function OrderDetailsPage() {
             <div className="space-y-1 min-w-0 flex-1">
               <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
                 <h1 className="font-display font-bold text-xl sm:text-2xl text-foreground">
-                  Courier Order {order.id}
+                  Pick-up Order {order.id}
                 </h1>
-                <StatusPill status={order.status} />
+                <StatusPill value={order.status} />
               </div>
               <div className="flex items-center gap-2 flex-wrap text-xs pt-0.5">
                 <span className="text-muted-foreground">Tracking ID:</span>
@@ -196,7 +176,7 @@ function OrderDetailsPage() {
 
           {/* Desktop Quick Status Pill Bar */}
           <div className="hidden md:flex items-center gap-1 p-1 bg-secondary/50 rounded-full border border-border">
-            {statusList.map((s) => {
+            {STATUSES.map((s) => {
               const isActive = order.status === s;
               const isThisPending = statusMutation.isPending && pendingStatus === s;
               return (
@@ -234,7 +214,7 @@ function OrderDetailsPage() {
               onChange={(e) => handleStatusChange(e.target.value as AdminOrderStatus)}
               className="w-full h-9 rounded-xl border border-border bg-surface px-3 pr-8 text-xs font-semibold text-foreground focus:outline-none focus:border-foreground appearance-none cursor-pointer"
             >
-              {statusList.map((s) => (
+              {STATUSES.map((s) => (
                 <option key={s} value={s}>
                   {s}
                 </option>
@@ -300,19 +280,23 @@ function OrderDetailsPage() {
               ))}
             </div>
 
-            {/* Subtle Price Breakdown Box */}
-            <div className="rounded-2xl bg-secondary/30 p-4 space-y-2 text-xs border border-border/50">
-              <div className="flex justify-between text-muted-foreground font-normal">
+            {/* Subtotal / Pickup Fee / Total Price Summary */}
+            <div className="border-t border-border/60 pt-4 space-y-2 text-xs">
+              <div className="flex justify-between text-muted-foreground">
                 <span>Subtotal</span>
-                <span>{formatNaira(order.subtotal || order.total)}</span>
+                <span className="font-medium text-foreground">{formatNaira(order.subtotal)}</span>
               </div>
-              <div className="flex justify-between text-muted-foreground font-normal">
-                <span>Delivery</span>
-                <span>{order.shippingFee > 0 ? formatNaira(order.shippingFee) : "Free"}</span>
+              <div className="flex justify-between text-muted-foreground">
+                <span>Pick-up Station Handling Fee</span>
+                <span className="font-medium text-emerald-600">
+                  {order.shippingFee === 0 ? "Free" : formatNaira(order.shippingFee)}
+                </span>
               </div>
-              <div className="flex justify-between text-sm font-semibold text-foreground pt-2 border-t border-border/50">
-                <span>Total Paid</span>
-                <span className="font-display font-bold text-base">{formatNaira(order.total)}</span>
+              <div className="flex justify-between text-sm font-bold text-foreground pt-2 border-t border-border/40">
+                <span>Total Amount Paid</span>
+                <span className="font-display font-bold text-base text-foreground">
+                  {formatNaira(order.total)}
+                </span>
               </div>
             </div>
           </div>
@@ -321,12 +305,13 @@ function OrderDetailsPage() {
           <div className="rounded-3xl bg-white p-4 sm:p-6 shadow-2xs border border-border space-y-3">
             <h3 className="font-display font-semibold text-base text-foreground">Internal Notes</h3>
             <p className="text-xs text-muted-foreground font-normal">
-              Private staff notes regarding processing, gate passes, or customer updates.
+              Staff notes regarding customer verification, package identification, or collection
+              timeline.
             </p>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Enter internal order notes..."
+              placeholder="Enter internal pick-up notes..."
               rows={3}
               className="w-full rounded-2xl border border-border bg-white p-3.5 text-xs focus:outline-none focus:border-foreground/60 transition-all"
             />
@@ -351,7 +336,7 @@ function OrderDetailsPage() {
 
         {/* Right Column (1 Col): Clean Information Grid */}
         <div className="space-y-5">
-          {/* Customer & Shipping Info Grid Card */}
+          {/* Customer & Contact Info Card */}
           <div className="rounded-3xl bg-white p-4 sm:p-6 shadow-2xs border border-border space-y-5">
             <h3 className="font-display font-semibold text-base text-foreground border-b border-border/50 pb-3">
               Customer Info
@@ -379,22 +364,22 @@ function OrderDetailsPage() {
 
               <div>
                 <span className="text-muted-foreground text-[11px] block font-normal mb-0.5">
-                  Phone Number
+                  Pickup Contact Phone
                 </span>
                 <a
                   href={`tel:${order.phone}`}
                   className="font-medium text-foreground hover:underline block"
                 >
-                  {order.phone || "+234 803 391 91477"}
+                  {order.phone}
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Delivery & Payment Card */}
+          {/* Pick-up Station & Payment Card */}
           <div className="rounded-3xl bg-white p-4 sm:p-6 shadow-2xs border border-border space-y-5">
             <h3 className="font-display font-semibold text-base text-foreground border-b border-border/50 pb-3">
-              Fulfillment & Payment
+              Pick-up Station Details
             </h3>
 
             <div className="space-y-4 text-xs">
@@ -402,14 +387,12 @@ function OrderDetailsPage() {
                 <span className="text-muted-foreground text-[11px] block font-normal mb-0.5">
                   Delivery Type
                 </span>
-                <p className="font-semibold text-foreground text-sm">
-                  {isPickup ? "Pickup Station" : "Courier Delivery"}
-                </p>
+                <p className="font-semibold text-foreground text-sm">Pickup Station</p>
               </div>
 
               <div>
                 <span className="text-muted-foreground text-[11px] block font-normal mb-0.5">
-                  Total Parcel Weight
+                  Total Package Weight
                 </span>
                 <p className="font-semibold text-foreground text-sm">{totalWeight} kg</p>
               </div>
@@ -423,37 +406,12 @@ function OrderDetailsPage() {
 
               <div className="pt-2 border-t border-border/50">
                 <span className="text-muted-foreground text-[11px] block font-normal mb-1">
-                  {isPickup ? "Pick-up Hub Location" : "Delivery Destination Address"}
+                  Assigned Station Hub Address
                 </span>
                 <p className="font-medium text-foreground leading-relaxed text-xs">
-                  {order.address || "Main Pickup Station"}
+                  {order.address || "Main Pickup Station Hub"}
                 </p>
               </div>
-
-              {!isPickup && (
-                <div className="pt-2 border-t border-border/50 space-y-1.5">
-                  <span className="text-muted-foreground text-[11px] block font-normal">
-                    Fez Waybill / Tracking Reference (Optional)
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={waybill}
-                      onChange={(e) => setWaybill(e.target.value)}
-                      placeholder="e.g. FEZ-892182"
-                      className="flex-1 h-9 rounded-xl border border-border bg-surface px-3 text-xs font-mono font-medium focus:outline-none focus:border-foreground"
-                    />
-                    <button
-                      type="button"
-                      disabled={waybillMutation.isPending || waybill === (order.waybillNumber || "")}
-                      onClick={handleSaveWaybill}
-                      className="h-9 px-3.5 rounded-xl bg-ink text-white text-xs font-semibold hover:bg-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0"
-                    >
-                      {waybillMutation.isPending ? "Saving..." : "Save"}
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

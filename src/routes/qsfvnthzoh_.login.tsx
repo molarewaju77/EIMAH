@@ -6,12 +6,12 @@ import logoUrl from "@/assets/eimah-logo.svg";
 import { useAdminAuth, isClientAuthed } from "@/lib/admin-store";
 import { supabase } from "@/lib/supabase";
 
-export const Route = createFileRoute("/admin-login")({
+export const Route = createFileRoute("/qsfvnthzoh_/login")({
   ssr: false,
   beforeLoad: () => {
     if (isClientAuthed()) {
       throw redirect({
-        to: "/admin",
+        to: "/qsfvnthzoh",
       });
     }
   },
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/admin-login")({
     meta: [
       { title: "Admin Login EIMAH" },
       { name: "description", content: "Sign in to the EIMAH administration console." },
+      { name: "robots", content: "noindex, nofollow" },
     ],
   }),
 });
@@ -36,7 +37,7 @@ function AdminLogin() {
 
   useEffect(() => {
     if (isClientAuthed()) {
-      nav({ to: "/admin", replace: true });
+      nav({ to: "/qsfvnthzoh", replace: true });
     }
   }, [nav]);
 
@@ -75,7 +76,7 @@ function AdminLogin() {
 
       login(email.trim(), userName);
       toast.success(`Welcome back, ${userName}!`);
-      nav({ to: "/admin" });
+      nav({ to: "/qsfvnthzoh" });
     } catch (err: any) {
       setError(err?.message || "An unexpected error occurred during sign in.");
       toast.error("Sign in failed");

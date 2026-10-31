@@ -19,7 +19,7 @@ import { useOrdersQuery } from "@/hooks/queries/useOrdersQuery";
 import { formatNaira } from "@/lib/mock-data";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/deliveries_/$deliveryId")({
+export const Route = createFileRoute("/qsfvnthzoh/deliveries_/$deliveryId")({
   component: DeliveryDetailsPage,
   head: () => ({
     meta: [{ name: "robots", content: "noindex" }],
@@ -81,7 +81,7 @@ function DeliveryDetailsPage() {
           No delivery record with ID <span className="font-mono">{deliveryId}</span>.
         </p>
         <Link
-          to="/admin/deliveries"
+          to="/qsfvnthzoh/deliveries"
           className="inline-flex items-center gap-2 px-4 h-9 rounded-full bg-black text-white text-xs font-medium hover:bg-neutral-800 transition-colors"
         >
           <ArrowLeft className="size-3.5" /> Return to Deliveries
@@ -107,7 +107,7 @@ function DeliveryDetailsPage() {
       {/* Back */}
       <div className="flex items-center justify-between gap-4 mb-5 sm:mb-6">
         <Link
-          to="/admin/deliveries"
+          to="/qsfvnthzoh/deliveries"
           className="inline-flex items-center gap-2 h-9 px-4.5 rounded-full border border-border bg-white text-xs font-semibold text-foreground hover:bg-ink hover:text-white hover:border-ink transition-all shadow-2xs cursor-pointer"
         >
           <ArrowLeft className="size-3.5" /> Back to Deliveries
@@ -115,7 +115,7 @@ function DeliveryDetailsPage() {
 
         {/* {order && (
           <Link
-            to="/admin/orders/$orderId"
+            to="/qsfvnthzoh/orders/$orderId"
             params={{ orderId: order.id }}
             className="inline-flex items-center gap-2 h-9 px-4.5 rounded-full border border-border bg-white text-xs font-semibold text-foreground hover:bg-ink hover:text-white hover:border-ink transition-all shadow-2xs cursor-pointer"
           >
@@ -351,7 +351,7 @@ function DeliveryDetailsPage() {
                     </span>
                   </div>
                   <Link
-                    to="/admin/orders/$orderId"
+                    to="/qsfvnthzoh/orders/$orderId"
                     params={{ orderId: order.id }}
                     className="inline-flex items-center gap-1 text-xs text-brand-pink font-semibold hover:underline cursor-pointer"
                   >

@@ -42,37 +42,37 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { to: "/admin", label: "Dashboard", icon: LayoutGrid, exact: true },
-  { to: "/admin/products", label: "Products", icon: Package },
+  { to: "/qsfvnthzoh", label: "Dashboard", icon: LayoutGrid, exact: true },
+  { to: "/qsfvnthzoh/products", label: "Products", icon: Package },
   {
-    to: "/admin/orders",
+    to: "/qsfvnthzoh/orders",
     label: "Orders",
     icon: ShoppingCart,
     children: [
-      { to: "/admin/orders", label: "Courier Orders", icon: Truck, exact: true },
-      { to: "/admin/orders/pickup", label: "Pick-up Orders", icon: Store },
+      { to: "/qsfvnthzoh/orders", label: "Courier Orders", icon: Truck, exact: true },
+      { to: "/qsfvnthzoh/orders/pickup", label: "Pick-up Orders", icon: Store },
     ],
   },
-  { to: "/admin/pos", label: "Create Order (POS)", icon: ShoppingCart },
-  { to: "/admin/customers", label: "Customers", icon: Users },
-  { to: "/admin/categories", label: "Categories", icon: Tag },
-  { to: "/admin/applications", label: "Applications", icon: FileText },
-  { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
-  { to: "/admin/content", label: "Content Management", icon: Megaphone },
-  { to: "/admin/transactions", label: "Transactions", icon: CreditCard },
+  { to: "/qsfvnthzoh/pos", label: "Create Order (POS)", icon: ShoppingCart },
+  { to: "/qsfvnthzoh/customers", label: "Customers", icon: Users },
+  { to: "/qsfvnthzoh/categories", label: "Categories", icon: Tag },
+  { to: "/qsfvnthzoh/applications", label: "Applications", icon: FileText },
+  { to: "/qsfvnthzoh/analytics", label: "Analytics", icon: BarChart3 },
+  { to: "/qsfvnthzoh/content", label: "Content Management", icon: Megaphone },
+  { to: "/qsfvnthzoh/transactions", label: "Transactions", icon: CreditCard },
   /*
   {
-    to: "/admin/payments",
+    to: "/qsfvnthzoh/payments",
     label: "Payments",
     icon: CreditCard,
     children: [
-      { to: "/admin/payments", label: "Orders Payments", icon: ShoppingCart, exact: true },
-      { to: "/admin/payments/solutions", label: "Solutions Payments", icon: Briefcase },
+      { to: "/qsfvnthzoh/payments", label: "Orders Payments", icon: ShoppingCart, exact: true },
+      { to: "/qsfvnthzoh/payments/solutions", label: "Solutions Payments", icon: Briefcase },
     ],
   },
   */
-  { to: "/admin/reports", label: "Reports & Exports", icon: FileDown },
-  { to: "/admin/settings", label: "Settings", icon: Settings },
+  { to: "/qsfvnthzoh/reports", label: "Reports & Exports", icon: FileDown },
+  { to: "/qsfvnthzoh/settings", label: "Settings", icon: Settings },
 ];
 
 export function AdminLayout({ children }: { children: ReactNode }) {
@@ -83,7 +83,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!isClientAuthed()) {
-      nav({ to: "/admin-login", replace: true });
+      nav({ to: "/qsfvnthzoh/login", replace: true });
     }
   }, [pathname, nav]);
 
@@ -106,7 +106,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
 
   const onLogout = () => {
     logout();
-    nav({ to: "/admin-login" });
+    nav({ to: "/qsfvnthzoh/login" });
   };
   return (
     <div className="min-h-screen bg-[#f6f6f4] text-foreground flex">
@@ -166,7 +166,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
 
         {/* Mobile Breadcrumb (After Navbar) */}
         <div className="lg:hidden px-4 sm:px-6 pt-3 pb-1">
-          {pathname === "/admin" || pathname === "/admin/" ? (
+          {pathname === "/qsfvnthzoh" || pathname === "/qsfvnthzoh/" ? (
             <span className="font-display font-medium text-xs text-foreground">Dashboard</span>
           ) : (
             <nav className="flex items-center gap-1.5 text-xs font-display tracking-tight flex-wrap">
@@ -223,8 +223,8 @@ function SidebarInner({
   onCloseMobile?: () => void;
 }) {
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
-    "/admin/orders": true,
-    "/admin/payments": true,
+    "/qsfvnthzoh/orders": true,
+    "/qsfvnthzoh/payments": true,
   });
 
   const isActive = (to: string, exact?: boolean) =>
@@ -237,7 +237,7 @@ function SidebarInner({
   return (
     <>
       <div className="h-14 flex items-center justify-between px-4 border-b border-border">
-        <Link to="/admin" className="flex items-center">
+        <Link to="/qsfvnthzoh" className="flex items-center">
           <img src={logoUrl} alt="EIMAH" className="h-5 w-auto" />
         </Link>
         {showClose && (
@@ -364,80 +364,80 @@ function SidebarInner({
 // ---------- Global Header ----------
 
 const ROUTE_TITLES: Record<string, string> = {
-  "/admin": "Dashboard",
-  "/admin/products": "Products",
-  "/admin/orders": "Courier Orders",
-  "/admin/orders/pickup": "Pick-up Orders",
-  "/admin/pos": "Create Order (POS)",
-  "/admin/customers": "Customers",
-  "/admin/deliveries": "Deliveries",
-  "/admin/categories": "Categories",
-  "/admin/solutions": "Solutions",
-  "/admin/analytics": "Analytics",
-  "/admin/content": "Content Management",
-  "/admin/transactions": "Transactions",
-  "/admin/payments": "Orders Payments",
-  "/admin/payments/solutions": "Solutions Payments",
-  "/admin/reports": "Reports & Exports",
-  "/admin/settings": "Settings",
+  "/qsfvnthzoh": "Dashboard",
+  "/qsfvnthzoh/products": "Products",
+  "/qsfvnthzoh/orders": "Courier Orders",
+  "/qsfvnthzoh/orders/pickup": "Pick-up Orders",
+  "/qsfvnthzoh/pos": "Create Order (POS)",
+  "/qsfvnthzoh/customers": "Customers",
+  "/qsfvnthzoh/deliveries": "Deliveries",
+  "/qsfvnthzoh/categories": "Categories",
+  "/qsfvnthzoh/solutions": "Solutions",
+  "/qsfvnthzoh/analytics": "Analytics",
+  "/qsfvnthzoh/content": "Content Management",
+  "/qsfvnthzoh/transactions": "Transactions",
+  "/qsfvnthzoh/payments": "Orders Payments",
+  "/qsfvnthzoh/payments/solutions": "Solutions Payments",
+  "/qsfvnthzoh/reports": "Reports & Exports",
+  "/qsfvnthzoh/settings": "Settings",
 };
 
 function getHeaderCrumbs(pathname: string): { label: string; to?: string }[] {
-  if (pathname === "/admin" || pathname === "/admin/") {
+  if (pathname === "/qsfvnthzoh" || pathname === "/qsfvnthzoh/") {
     return [{ label: "Dashboard" }];
   }
 
   const title = ROUTE_TITLES[pathname];
   if (title) {
-    return [{ label: "Dashboard", to: "/admin" }, { label: title }];
+    return [{ label: "Dashboard", to: "/qsfvnthzoh" }, { label: title }];
   }
 
   const cleanPath = pathname.replace(/\/$/, "");
 
   // Special handling for solutions payments
-  if (cleanPath.startsWith("/admin/payments/solutions")) {
+  if (cleanPath.startsWith("/qsfvnthzoh/payments/solutions")) {
     return [
-      { label: "Dashboard", to: "/admin" },
-      { label: "Payments", to: "/admin/payments" },
+      { label: "Dashboard", to: "/qsfvnthzoh" },
+      { label: "Payments", to: "/qsfvnthzoh/payments" },
       { label: "Solutions Payments" },
     ];
   }
 
   // Special handling for solutions
-  if (cleanPath.startsWith("/admin/solutions/")) {
+  if (cleanPath.startsWith("/qsfvnthzoh/solutions/")) {
     const solutionId = cleanPath.split("/").pop() || "";
     return [
-      { label: "Dashboard", to: "/admin" },
-      { label: "Solutions", to: "/admin/solutions" },
+      { label: "Dashboard", to: "/qsfvnthzoh" },
+      { label: "Solutions", to: "/qsfvnthzoh/solutions" },
       { label: solutionId },
     ];
   }
 
   // Special handling for pick-up orders
-  if (cleanPath.startsWith("/admin/orders/pickup/")) {
+  if (cleanPath.startsWith("/qsfvnthzoh/orders/pickup/")) {
     const orderId = cleanPath.split("/").pop() || "";
     return [
-      { label: "Dashboard", to: "/admin" },
-      { label: "Pick-up Orders", to: "/admin/orders/pickup" },
+      { label: "Dashboard", to: "/qsfvnthzoh" },
+      { label: "Pick-up Orders", to: "/qsfvnthzoh/orders/pickup" },
       { label: orderId },
     ];
   }
 
   // Special handling for courier orders
-  if (cleanPath.startsWith("/admin/orders/")) {
+  if (cleanPath.startsWith("/qsfvnthzoh/orders/")) {
     const orderId = cleanPath.split("/").pop() || "";
     return [
-      { label: "Dashboard", to: "/admin" },
-      { label: "Courier Orders", to: "/admin/orders" },
+      { label: "Dashboard", to: "/qsfvnthzoh" },
+      { label: "Courier Orders", to: "/qsfvnthzoh/orders" },
       { label: orderId },
     ];
   }
 
   const parts = cleanPath.split("/").filter(Boolean);
-  const crumbs: { label: string; to?: string }[] = [{ label: "Dashboard", to: "/admin" }];
+  const crumbs: { label: string; to?: string }[] = [{ label: "Dashboard", to: "/qsfvnthzoh" }];
 
   if (parts.length > 1) {
-    let acc = "/admin";
+    let acc = "/qsfvnthzoh";
     for (let i = 1; i < parts.length; i++) {
       acc += `/${parts[i]}`;
       const label =
@@ -454,7 +454,7 @@ function getHeaderCrumbs(pathname: string): { label: string; to?: string }[] {
 function GlobalAdminHeader({ pathname }: { pathname: string }) {
   const admin = useAdminAuth((s) => s.admin);
   const crumbs = getHeaderCrumbs(pathname);
-  const isDashboard = pathname === "/admin" || pathname === "/admin/";
+  const isDashboard = pathname === "/qsfvnthzoh" || pathname === "/qsfvnthzoh/";
 
   return (
     <header className="hidden lg:flex items-center justify-between gap-4 px-8 pt-6 pb-2">

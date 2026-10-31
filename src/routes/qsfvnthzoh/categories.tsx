@@ -13,7 +13,7 @@ import {
   useDeleteCategoryMutation,
 } from "@/hooks/queries/useCategoriesQuery";
 
-export const Route = createFileRoute("/admin/categories")({
+export const Route = createFileRoute("/qsfvnthzoh/categories")({
   component: CategoriesPage,
   head: () => ({ meta: [{ title: "Categories — EIMAH Admin" }, { name: "robots", content: "noindex" }] }),
 });

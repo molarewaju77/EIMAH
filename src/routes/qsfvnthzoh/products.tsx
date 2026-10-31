@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
 import { uploadImageToSupabase } from "@/lib/storage";
 
-export const Route = createFileRoute("/admin/products")({
+export const Route = createFileRoute("/qsfvnthzoh/products")({
   component: ProductsPage,
   head: () => ({
     meta: [{ title: "Products — EIMAH Admin" }, { name: "robots", content: "noindex" }],

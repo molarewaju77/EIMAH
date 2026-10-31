@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "react-toastify";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/applications_/$applicationId")({
+export const Route = createFileRoute("/qsfvnthzoh/applications_/$applicationId")({
   component: ApplicationDetailsPage,
   head: () => ({
     meta: [{ title: "Application Details — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -96,7 +96,7 @@ export default function ApplicationDetailsPage() {
           No application was found with ID <span className="font-mono">{applicationId}</span>.
         </p>
         <Link
-          to="/admin/applications"
+          to="/qsfvnthzoh/applications"
           className="inline-flex items-center gap-2 px-4 h-9 rounded-full bg-black text-white text-xs font-medium hover:bg-neutral-800 transition-colors"
         >
           <ArrowLeft className="size-3.5" /> Return to Applications
@@ -149,7 +149,7 @@ export default function ApplicationDetailsPage() {
       {/* Top Bar Navigation */}
       <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6 print:hidden">
         <Link
-          to="/admin/applications"
+          to="/qsfvnthzoh/applications"
           className="inline-flex items-center gap-2 h-9 px-4 rounded-full border border-border bg-white text-xs font-semibold text-foreground hover:bg-ink hover:text-white transition-colors shadow-2xs cursor-pointer"
         >
           <ArrowLeft className="size-3.5" /> Back to Applications

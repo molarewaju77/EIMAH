@@ -23,7 +23,7 @@ import { useCategoriesQuery } from "@/hooks/queries/useCategoriesQuery";
 import { formatNaira } from "@/lib/mock-data";
 import { getPopupTargetUrl, getBannerTargetUrl, adminCategories } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/admin/content")({
+export const Route = createFileRoute("/qsfvnthzoh/content")({
   component: ContentPage,
   head: () => ({
     meta: [{ title: "Content Management — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -37,7 +37,7 @@ function ContentPage() {
   return (
     <div>
       <AdminPageHeader
-        crumbs={[{ label: "Dashboard", to: "/admin" }, { label: "Content Management" }]}
+        crumbs={[{ label: "Dashboard", to: "/qsfvnthzoh" }, { label: "Content Management" }]}
       />
       <div className="mb-6 border-b border-border overflow-x-auto">
         <div className="flex gap-1 min-w-max">

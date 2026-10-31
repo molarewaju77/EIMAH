@@ -2,12 +2,12 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { isClientAuthed } from "@/lib/admin-store";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/qsfvnthzoh")({
   ssr: false,
   beforeLoad: () => {
     if (!isClientAuthed()) {
       throw redirect({
-        to: "/admin-login",
+        to: "/qsfvnthzoh/login",
       });
     }
   },

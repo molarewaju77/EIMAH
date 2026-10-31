@@ -7,9 +7,9 @@ import { type PaymentStatus } from "@/lib/admin-data";
 import { formatNaira } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
-import { formatDateString } from "@/routes/admin/payments";
+import { formatDateString } from "@/routes/qsfvnthzoh/payments";
 
-export const Route = createFileRoute("/admin/transactions")({
+export const Route = createFileRoute("/qsfvnthzoh/transactions")({
   component: TransactionsPage,
   head: () => ({
     meta: [{ title: "Transactions — EIMAH Admin" }, { name: "robots", content: "noindex" }],

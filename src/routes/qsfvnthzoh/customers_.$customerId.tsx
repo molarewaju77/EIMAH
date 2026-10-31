@@ -12,7 +12,7 @@ import { usePos } from "@/lib/pos-store";
 import { formatNaira } from "@/lib/mock-data";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/customers_/$customerId")({
+export const Route = createFileRoute("/qsfvnthzoh/customers_/$customerId")({
   component: CustomerDetailsPage,
 });
 
@@ -46,7 +46,7 @@ function CustomerDetailsPage() {
           No customer was found with ID <span className="font-mono">{customerId}</span>.
         </p>
         <Link
-          to="/admin/customers"
+          to="/qsfvnthzoh/customers"
           className="inline-flex items-center gap-2 px-4 h-9 rounded-full bg-black text-white text-xs font-medium hover:bg-neutral-800 transition-colors"
         >
           <ArrowLeft className="size-3.5" /> Return to Customers
@@ -76,7 +76,7 @@ function CustomerDetailsPage() {
       state: customer.state || "Lagos",
     });
     toast.success(`Customer ${customer.name} selected for POS order`);
-    nav({ to: "/admin/pos" });
+    nav({ to: "/qsfvnthzoh/pos" });
   };
 
   const initials = customer.name
@@ -92,7 +92,7 @@ function CustomerDetailsPage() {
       {/* Top Bar Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
         <Link
-          to="/admin/customers"
+          to="/qsfvnthzoh/customers"
           className="inline-flex items-center justify-center gap-2 h-9 px-4.5 rounded-full border border-border bg-white text-xs font-semibold text-foreground hover:bg-ink hover:text-white hover:border-ink transition-all shadow-2xs cursor-pointer w-fit"
         >
           <ArrowLeft className="size-3.5" /> Back to Customers
@@ -228,7 +228,7 @@ function CustomerDetailsPage() {
                         {formatNaira(o.total)}
                       </span>
                       <Link
-                        to="/admin/orders/$orderId"
+                        to="/qsfvnthzoh/orders/$orderId"
                         params={{ orderId: o.id }}
                         className="inline-flex items-center gap-1 text-xs text-brand-pink font-semibold hover:underline cursor-pointer"
                       >

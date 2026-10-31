@@ -11,8 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CompanyPolicyRouteImport } from './routes/company-policy'
@@ -20,39 +18,41 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DeliveryPolicyRouteImport } from './routes/delivery-policy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as QsfvnthzohRouteImport } from './routes/qsfvnthzoh'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TrackRouteImport } from './routes/track'
 import { Route as WishlistRouteImport } from './routes/wishlist'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
-import { Route as AdminApplicationsRouteImport } from './routes/admin/applications'
-import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
-import { Route as AdminContentRouteImport } from './routes/admin/content'
-import { Route as AdminCustomersRouteImport } from './routes/admin/customers'
-import { Route as AdminDeliveriesRouteImport } from './routes/admin/deliveries'
-import { Route as AdminOrdersRouteImport } from './routes/admin/orders'
-import { Route as AdminPaymentsRouteImport } from './routes/admin/payments'
-import { Route as AdminPosRouteImport } from './routes/admin/pos'
-import { Route as AdminProductsRouteImport } from './routes/admin/products'
-import { Route as AdminReportsRouteImport } from './routes/admin/reports'
-import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
-import { Route as AdminSolutionsRouteImport } from './routes/admin/solutions'
-import { Route as AdminTransactionsRouteImport } from './routes/admin/transactions'
 import { Route as PoliciesSlugRouteImport } from './routes/policies.$slug'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as QsfvnthzohIndexRouteImport } from './routes/qsfvnthzoh/index'
+import { Route as QsfvnthzohAnalyticsRouteImport } from './routes/qsfvnthzoh/analytics'
+import { Route as QsfvnthzohApplicationsRouteImport } from './routes/qsfvnthzoh/applications'
+import { Route as QsfvnthzohCategoriesRouteImport } from './routes/qsfvnthzoh/categories'
+import { Route as QsfvnthzohContentRouteImport } from './routes/qsfvnthzoh/content'
+import { Route as QsfvnthzohCustomersRouteImport } from './routes/qsfvnthzoh/customers'
+import { Route as QsfvnthzohDeliveriesRouteImport } from './routes/qsfvnthzoh/deliveries'
+import { Route as QsfvnthzohOrdersRouteImport } from './routes/qsfvnthzoh/orders'
+import { Route as QsfvnthzohPaymentsRouteImport } from './routes/qsfvnthzoh/payments'
+import { Route as QsfvnthzohPosRouteImport } from './routes/qsfvnthzoh/pos'
+import { Route as QsfvnthzohProductsRouteImport } from './routes/qsfvnthzoh/products'
+import { Route as QsfvnthzohReportsRouteImport } from './routes/qsfvnthzoh/reports'
+import { Route as QsfvnthzohSettingsRouteImport } from './routes/qsfvnthzoh/settings'
+import { Route as QsfvnthzohSolutionsRouteImport } from './routes/qsfvnthzoh/solutions'
+import { Route as QsfvnthzohTransactionsRouteImport } from './routes/qsfvnthzoh/transactions'
+import { Route as QsfvnthzohLoginRouteImport } from './routes/qsfvnthzoh_.login'
 import { Route as SolutionsIndexRouteImport } from './routes/solutions/index'
 import { Route as SolutionsAcademyRouteImport } from './routes/solutions/academy'
 import { Route as SolutionsBusinessRouteImport } from './routes/solutions/business'
-import { Route as AdminApplicationsApplicationIdRouteImport } from './routes/admin/applications_.$applicationId'
-import { Route as AdminCustomersCustomerIdRouteImport } from './routes/admin/customers_.$customerId'
-import { Route as AdminDeliveriesDeliveryIdRouteImport } from './routes/admin/deliveries_.$deliveryId'
-import { Route as AdminOrdersOrderIdRouteImport } from './routes/admin/orders_.$orderId'
-import { Route as AdminOrdersPickupRouteImport } from './routes/admin/orders_.pickup'
-import { Route as AdminPaymentsSolutionsRouteImport } from './routes/admin/payments_.solutions'
-import { Route as AdminSolutionPaymentsRegistrationIdRouteImport } from './routes/admin/solution-payments_.$registrationId'
+import { Route as QsfvnthzohApplicationsApplicationIdRouteImport } from './routes/qsfvnthzoh/applications_.$applicationId'
+import { Route as QsfvnthzohCustomersCustomerIdRouteImport } from './routes/qsfvnthzoh/customers_.$customerId'
+import { Route as QsfvnthzohDeliveriesDeliveryIdRouteImport } from './routes/qsfvnthzoh/deliveries_.$deliveryId'
+import { Route as QsfvnthzohOrdersOrderIdRouteImport } from './routes/qsfvnthzoh/orders_.$orderId'
+import { Route as QsfvnthzohOrdersPickupRouteImport } from './routes/qsfvnthzoh/orders_.pickup'
+import { Route as QsfvnthzohPaymentsSolutionsRouteImport } from './routes/qsfvnthzoh/payments_.solutions'
+import { Route as QsfvnthzohSolutionPaymentsRegistrationIdRouteImport } from './routes/qsfvnthzoh/solution-payments_.$registrationId'
 import { Route as SolutionsAcademyIndexRouteImport } from './routes/solutions/academy/index'
 import { Route as SolutionsAcademyImportationRouteImport } from './routes/solutions/academy/importation'
 import { Route as SolutionsAcademyProcurementRouteImport } from './routes/solutions/academy/procurement'
@@ -60,7 +60,7 @@ import { Route as SolutionsBusinessIndexRouteImport } from './routes/solutions/b
 import { Route as SolutionsBusinessImportationRouteImport } from './routes/solutions/business/importation'
 import { Route as SolutionsBusinessProcurementRouteImport } from './routes/solutions/business/procurement'
 import { Route as SolutionsBusinessSourcingRouteImport } from './routes/solutions/business/sourcing'
-import { Route as AdminOrdersPickupOrderIdRouteImport } from './routes/admin/orders_.pickup_.$orderId'
+import { Route as QsfvnthzohOrdersPickupOrderIdRouteImport } from './routes/qsfvnthzoh/orders_.pickup_.$orderId'
 import { Route as SolutionsAcademyImportationApplyRouteImport } from './routes/solutions/academy/importation_.apply'
 import { Route as SolutionsAcademyProcurementApplyRouteImport } from './routes/solutions/academy/procurement_.apply'
 import { Route as SolutionsBusinessImportationApplyRouteImport } from './routes/solutions/business/importation_.apply'
@@ -75,16 +75,6 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/admin-login',
-  path: '/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -122,6 +112,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QsfvnthzohRoute = QsfvnthzohRouteImport.update({
+  id: '/qsfvnthzoh',
+  path: '/qsfvnthzoh',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RefundPolicyRoute = RefundPolicyRouteImport.update({
   id: '/refund-policy',
   path: '/refund-policy',
@@ -152,81 +147,6 @@ const WishlistRoute = WishlistRouteImport.update({
   path: '/wishlist',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
-  id: '/applications',
-  path: '/applications',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
-  id: '/categories',
-  path: '/categories',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminContentRoute = AdminContentRouteImport.update({
-  id: '/content',
-  path: '/content',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminCustomersRoute = AdminCustomersRouteImport.update({
-  id: '/customers',
-  path: '/customers',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminDeliveriesRoute = AdminDeliveriesRouteImport.update({
-  id: '/deliveries',
-  path: '/deliveries',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminOrdersRoute = AdminOrdersRouteImport.update({
-  id: '/orders',
-  path: '/orders',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
-  id: '/payments',
-  path: '/payments',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPosRoute = AdminPosRouteImport.update({
-  id: '/pos',
-  path: '/pos',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminProductsRoute = AdminProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminReportsRoute = AdminReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSettingsRoute = AdminSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSolutionsRoute = AdminSolutionsRouteImport.update({
-  id: '/solutions',
-  path: '/solutions',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminTransactionsRoute = AdminTransactionsRouteImport.update({
-  id: '/transactions',
-  path: '/transactions',
-  getParentRoute: () => AdminRoute,
-} as any)
 const PoliciesSlugRoute = PoliciesSlugRouteImport.update({
   id: '/policies/$slug',
   path: '/policies/$slug',
@@ -235,6 +155,86 @@ const PoliciesSlugRoute = PoliciesSlugRouteImport.update({
 const ProductIdRoute = ProductIdRouteImport.update({
   id: '/product/$id',
   path: '/product/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QsfvnthzohIndexRoute = QsfvnthzohIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohAnalyticsRoute = QsfvnthzohAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohApplicationsRoute = QsfvnthzohApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohCategoriesRoute = QsfvnthzohCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohContentRoute = QsfvnthzohContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohCustomersRoute = QsfvnthzohCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohDeliveriesRoute = QsfvnthzohDeliveriesRouteImport.update({
+  id: '/deliveries',
+  path: '/deliveries',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohOrdersRoute = QsfvnthzohOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohPaymentsRoute = QsfvnthzohPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohPosRoute = QsfvnthzohPosRouteImport.update({
+  id: '/pos',
+  path: '/pos',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohProductsRoute = QsfvnthzohProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohReportsRoute = QsfvnthzohReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohSettingsRoute = QsfvnthzohSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohSolutionsRoute = QsfvnthzohSolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohTransactionsRoute = QsfvnthzohTransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => QsfvnthzohRoute,
+} as any)
+const QsfvnthzohLoginRoute = QsfvnthzohLoginRouteImport.update({
+  id: '/qsfvnthzoh_/login',
+  path: '/qsfvnthzoh/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
@@ -252,44 +252,45 @@ const SolutionsBusinessRoute = SolutionsBusinessRouteImport.update({
   path: '/business',
   getParentRoute: () => SolutionsRoute,
 } as any)
-const AdminApplicationsApplicationIdRoute =
-  AdminApplicationsApplicationIdRouteImport.update({
+const QsfvnthzohApplicationsApplicationIdRoute =
+  QsfvnthzohApplicationsApplicationIdRouteImport.update({
     id: '/applications_/$applicationId',
     path: '/applications/$applicationId',
-    getParentRoute: () => AdminRoute,
+    getParentRoute: () => QsfvnthzohRoute,
   } as any)
-const AdminCustomersCustomerIdRoute =
-  AdminCustomersCustomerIdRouteImport.update({
+const QsfvnthzohCustomersCustomerIdRoute =
+  QsfvnthzohCustomersCustomerIdRouteImport.update({
     id: '/customers_/$customerId',
     path: '/customers/$customerId',
-    getParentRoute: () => AdminRoute,
+    getParentRoute: () => QsfvnthzohRoute,
   } as any)
-const AdminDeliveriesDeliveryIdRoute =
-  AdminDeliveriesDeliveryIdRouteImport.update({
+const QsfvnthzohDeliveriesDeliveryIdRoute =
+  QsfvnthzohDeliveriesDeliveryIdRouteImport.update({
     id: '/deliveries_/$deliveryId',
     path: '/deliveries/$deliveryId',
-    getParentRoute: () => AdminRoute,
+    getParentRoute: () => QsfvnthzohRoute,
   } as any)
-const AdminOrdersOrderIdRoute = AdminOrdersOrderIdRouteImport.update({
+const QsfvnthzohOrdersOrderIdRoute = QsfvnthzohOrdersOrderIdRouteImport.update({
   id: '/orders_/$orderId',
   path: '/orders/$orderId',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => QsfvnthzohRoute,
 } as any)
-const AdminOrdersPickupRoute = AdminOrdersPickupRouteImport.update({
+const QsfvnthzohOrdersPickupRoute = QsfvnthzohOrdersPickupRouteImport.update({
   id: '/orders_/pickup',
   path: '/orders/pickup',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => QsfvnthzohRoute,
 } as any)
-const AdminPaymentsSolutionsRoute = AdminPaymentsSolutionsRouteImport.update({
-  id: '/payments_/solutions',
-  path: '/payments/solutions',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSolutionPaymentsRegistrationIdRoute =
-  AdminSolutionPaymentsRegistrationIdRouteImport.update({
+const QsfvnthzohPaymentsSolutionsRoute =
+  QsfvnthzohPaymentsSolutionsRouteImport.update({
+    id: '/payments_/solutions',
+    path: '/payments/solutions',
+    getParentRoute: () => QsfvnthzohRoute,
+  } as any)
+const QsfvnthzohSolutionPaymentsRegistrationIdRoute =
+  QsfvnthzohSolutionPaymentsRegistrationIdRouteImport.update({
     id: '/solution-payments_/$registrationId',
     path: '/solution-payments/$registrationId',
-    getParentRoute: () => AdminRoute,
+    getParentRoute: () => QsfvnthzohRoute,
   } as any)
 const SolutionsAcademyIndexRoute = SolutionsAcademyIndexRouteImport.update({
   id: '/',
@@ -331,11 +332,11 @@ const SolutionsBusinessSourcingRoute =
     path: '/sourcing',
     getParentRoute: () => SolutionsBusinessRoute,
   } as any)
-const AdminOrdersPickupOrderIdRoute =
-  AdminOrdersPickupOrderIdRouteImport.update({
+const QsfvnthzohOrdersPickupOrderIdRoute =
+  QsfvnthzohOrdersPickupOrderIdRouteImport.update({
     id: '/orders_/pickup_/$orderId',
     path: '/orders/pickup/$orderId',
-    getParentRoute: () => AdminRoute,
+    getParentRoute: () => QsfvnthzohRoute,
   } as any)
 const SolutionsAcademyImportationApplyRoute =
   SolutionsAcademyImportationApplyRouteImport.update({
@@ -371,8 +372,6 @@ const SolutionsBusinessSourcingApplyRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRouteWithChildren
-  '/admin-login': typeof AdminLoginRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/company-policy': typeof CompanyPolicyRoute
@@ -380,39 +379,41 @@ export interface FileRoutesByFullPath {
   '/delivery-policy': typeof DeliveryPolicyRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
+  '/qsfvnthzoh': typeof QsfvnthzohRouteWithChildren
   '/refund-policy': typeof RefundPolicyRoute
   '/shop': typeof ShopRoute
   '/solutions': typeof SolutionsRouteWithChildren
   '/terms': typeof TermsRoute
   '/track': typeof TrackRoute
   '/wishlist': typeof WishlistRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/applications': typeof AdminApplicationsRoute
-  '/admin/categories': typeof AdminCategoriesRoute
-  '/admin/content': typeof AdminContentRoute
-  '/admin/customers': typeof AdminCustomersRoute
-  '/admin/deliveries': typeof AdminDeliveriesRoute
-  '/admin/orders': typeof AdminOrdersRoute
-  '/admin/payments': typeof AdminPaymentsRoute
-  '/admin/pos': typeof AdminPosRoute
-  '/admin/products': typeof AdminProductsRoute
-  '/admin/reports': typeof AdminReportsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/solutions': typeof AdminSolutionsRoute
-  '/admin/transactions': typeof AdminTransactionsRoute
   '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$id': typeof ProductIdRoute
+  '/qsfvnthzoh/analytics': typeof QsfvnthzohAnalyticsRoute
+  '/qsfvnthzoh/applications': typeof QsfvnthzohApplicationsRoute
+  '/qsfvnthzoh/categories': typeof QsfvnthzohCategoriesRoute
+  '/qsfvnthzoh/content': typeof QsfvnthzohContentRoute
+  '/qsfvnthzoh/customers': typeof QsfvnthzohCustomersRoute
+  '/qsfvnthzoh/deliveries': typeof QsfvnthzohDeliveriesRoute
+  '/qsfvnthzoh/orders': typeof QsfvnthzohOrdersRoute
+  '/qsfvnthzoh/payments': typeof QsfvnthzohPaymentsRoute
+  '/qsfvnthzoh/pos': typeof QsfvnthzohPosRoute
+  '/qsfvnthzoh/products': typeof QsfvnthzohProductsRoute
+  '/qsfvnthzoh/reports': typeof QsfvnthzohReportsRoute
+  '/qsfvnthzoh/settings': typeof QsfvnthzohSettingsRoute
+  '/qsfvnthzoh/solutions': typeof QsfvnthzohSolutionsRoute
+  '/qsfvnthzoh/transactions': typeof QsfvnthzohTransactionsRoute
+  '/qsfvnthzoh/login': typeof QsfvnthzohLoginRoute
   '/solutions/academy': typeof SolutionsAcademyRouteWithChildren
   '/solutions/business': typeof SolutionsBusinessRouteWithChildren
-  '/admin/': typeof AdminIndexRoute
+  '/qsfvnthzoh/': typeof QsfvnthzohIndexRoute
   '/solutions/': typeof SolutionsIndexRoute
-  '/admin/applications/$applicationId': typeof AdminApplicationsApplicationIdRoute
-  '/admin/customers/$customerId': typeof AdminCustomersCustomerIdRoute
-  '/admin/deliveries/$deliveryId': typeof AdminDeliveriesDeliveryIdRoute
-  '/admin/orders/$orderId': typeof AdminOrdersOrderIdRoute
-  '/admin/orders/pickup': typeof AdminOrdersPickupRoute
-  '/admin/payments/solutions': typeof AdminPaymentsSolutionsRoute
-  '/admin/solution-payments/$registrationId': typeof AdminSolutionPaymentsRegistrationIdRoute
+  '/qsfvnthzoh/applications/$applicationId': typeof QsfvnthzohApplicationsApplicationIdRoute
+  '/qsfvnthzoh/customers/$customerId': typeof QsfvnthzohCustomersCustomerIdRoute
+  '/qsfvnthzoh/deliveries/$deliveryId': typeof QsfvnthzohDeliveriesDeliveryIdRoute
+  '/qsfvnthzoh/orders/$orderId': typeof QsfvnthzohOrdersOrderIdRoute
+  '/qsfvnthzoh/orders/pickup': typeof QsfvnthzohOrdersPickupRoute
+  '/qsfvnthzoh/payments/solutions': typeof QsfvnthzohPaymentsSolutionsRoute
+  '/qsfvnthzoh/solution-payments/$registrationId': typeof QsfvnthzohSolutionPaymentsRegistrationIdRoute
   '/solutions/academy/importation': typeof SolutionsAcademyImportationRoute
   '/solutions/academy/procurement': typeof SolutionsAcademyProcurementRoute
   '/solutions/business/importation': typeof SolutionsBusinessImportationRoute
@@ -420,7 +421,7 @@ export interface FileRoutesByFullPath {
   '/solutions/business/sourcing': typeof SolutionsBusinessSourcingRoute
   '/solutions/academy/': typeof SolutionsAcademyIndexRoute
   '/solutions/business/': typeof SolutionsBusinessIndexRoute
-  '/admin/orders/pickup/$orderId': typeof AdminOrdersPickupOrderIdRoute
+  '/qsfvnthzoh/orders/pickup/$orderId': typeof QsfvnthzohOrdersPickupOrderIdRoute
   '/solutions/academy/importation/apply': typeof SolutionsAcademyImportationApplyRoute
   '/solutions/academy/procurement/apply': typeof SolutionsAcademyProcurementApplyRoute
   '/solutions/business/importation/apply': typeof SolutionsBusinessImportationApplyRoute
@@ -430,7 +431,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin-login': typeof AdminLoginRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/company-policy': typeof CompanyPolicyRoute
@@ -443,31 +443,32 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/track': typeof TrackRoute
   '/wishlist': typeof WishlistRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/applications': typeof AdminApplicationsRoute
-  '/admin/categories': typeof AdminCategoriesRoute
-  '/admin/content': typeof AdminContentRoute
-  '/admin/customers': typeof AdminCustomersRoute
-  '/admin/deliveries': typeof AdminDeliveriesRoute
-  '/admin/orders': typeof AdminOrdersRoute
-  '/admin/payments': typeof AdminPaymentsRoute
-  '/admin/pos': typeof AdminPosRoute
-  '/admin/products': typeof AdminProductsRoute
-  '/admin/reports': typeof AdminReportsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/solutions': typeof AdminSolutionsRoute
-  '/admin/transactions': typeof AdminTransactionsRoute
   '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$id': typeof ProductIdRoute
-  '/admin': typeof AdminIndexRoute
+  '/qsfvnthzoh/analytics': typeof QsfvnthzohAnalyticsRoute
+  '/qsfvnthzoh/applications': typeof QsfvnthzohApplicationsRoute
+  '/qsfvnthzoh/categories': typeof QsfvnthzohCategoriesRoute
+  '/qsfvnthzoh/content': typeof QsfvnthzohContentRoute
+  '/qsfvnthzoh/customers': typeof QsfvnthzohCustomersRoute
+  '/qsfvnthzoh/deliveries': typeof QsfvnthzohDeliveriesRoute
+  '/qsfvnthzoh/orders': typeof QsfvnthzohOrdersRoute
+  '/qsfvnthzoh/payments': typeof QsfvnthzohPaymentsRoute
+  '/qsfvnthzoh/pos': typeof QsfvnthzohPosRoute
+  '/qsfvnthzoh/products': typeof QsfvnthzohProductsRoute
+  '/qsfvnthzoh/reports': typeof QsfvnthzohReportsRoute
+  '/qsfvnthzoh/settings': typeof QsfvnthzohSettingsRoute
+  '/qsfvnthzoh/solutions': typeof QsfvnthzohSolutionsRoute
+  '/qsfvnthzoh/transactions': typeof QsfvnthzohTransactionsRoute
+  '/qsfvnthzoh/login': typeof QsfvnthzohLoginRoute
+  '/qsfvnthzoh': typeof QsfvnthzohIndexRoute
   '/solutions': typeof SolutionsIndexRoute
-  '/admin/applications/$applicationId': typeof AdminApplicationsApplicationIdRoute
-  '/admin/customers/$customerId': typeof AdminCustomersCustomerIdRoute
-  '/admin/deliveries/$deliveryId': typeof AdminDeliveriesDeliveryIdRoute
-  '/admin/orders/$orderId': typeof AdminOrdersOrderIdRoute
-  '/admin/orders/pickup': typeof AdminOrdersPickupRoute
-  '/admin/payments/solutions': typeof AdminPaymentsSolutionsRoute
-  '/admin/solution-payments/$registrationId': typeof AdminSolutionPaymentsRegistrationIdRoute
+  '/qsfvnthzoh/applications/$applicationId': typeof QsfvnthzohApplicationsApplicationIdRoute
+  '/qsfvnthzoh/customers/$customerId': typeof QsfvnthzohCustomersCustomerIdRoute
+  '/qsfvnthzoh/deliveries/$deliveryId': typeof QsfvnthzohDeliveriesDeliveryIdRoute
+  '/qsfvnthzoh/orders/$orderId': typeof QsfvnthzohOrdersOrderIdRoute
+  '/qsfvnthzoh/orders/pickup': typeof QsfvnthzohOrdersPickupRoute
+  '/qsfvnthzoh/payments/solutions': typeof QsfvnthzohPaymentsSolutionsRoute
+  '/qsfvnthzoh/solution-payments/$registrationId': typeof QsfvnthzohSolutionPaymentsRegistrationIdRoute
   '/solutions/academy/importation': typeof SolutionsAcademyImportationRoute
   '/solutions/academy/procurement': typeof SolutionsAcademyProcurementRoute
   '/solutions/business/importation': typeof SolutionsBusinessImportationRoute
@@ -475,7 +476,7 @@ export interface FileRoutesByTo {
   '/solutions/business/sourcing': typeof SolutionsBusinessSourcingRoute
   '/solutions/academy': typeof SolutionsAcademyIndexRoute
   '/solutions/business': typeof SolutionsBusinessIndexRoute
-  '/admin/orders/pickup/$orderId': typeof AdminOrdersPickupOrderIdRoute
+  '/qsfvnthzoh/orders/pickup/$orderId': typeof QsfvnthzohOrdersPickupOrderIdRoute
   '/solutions/academy/importation/apply': typeof SolutionsAcademyImportationApplyRoute
   '/solutions/academy/procurement/apply': typeof SolutionsAcademyProcurementApplyRoute
   '/solutions/business/importation/apply': typeof SolutionsBusinessImportationApplyRoute
@@ -486,8 +487,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRouteWithChildren
-  '/admin-login': typeof AdminLoginRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/company-policy': typeof CompanyPolicyRoute
@@ -495,39 +494,41 @@ export interface FileRoutesById {
   '/delivery-policy': typeof DeliveryPolicyRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
+  '/qsfvnthzoh': typeof QsfvnthzohRouteWithChildren
   '/refund-policy': typeof RefundPolicyRoute
   '/shop': typeof ShopRoute
   '/solutions': typeof SolutionsRouteWithChildren
   '/terms': typeof TermsRoute
   '/track': typeof TrackRoute
   '/wishlist': typeof WishlistRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/applications': typeof AdminApplicationsRoute
-  '/admin/categories': typeof AdminCategoriesRoute
-  '/admin/content': typeof AdminContentRoute
-  '/admin/customers': typeof AdminCustomersRoute
-  '/admin/deliveries': typeof AdminDeliveriesRoute
-  '/admin/orders': typeof AdminOrdersRoute
-  '/admin/payments': typeof AdminPaymentsRoute
-  '/admin/pos': typeof AdminPosRoute
-  '/admin/products': typeof AdminProductsRoute
-  '/admin/reports': typeof AdminReportsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/solutions': typeof AdminSolutionsRoute
-  '/admin/transactions': typeof AdminTransactionsRoute
   '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$id': typeof ProductIdRoute
+  '/qsfvnthzoh/analytics': typeof QsfvnthzohAnalyticsRoute
+  '/qsfvnthzoh/applications': typeof QsfvnthzohApplicationsRoute
+  '/qsfvnthzoh/categories': typeof QsfvnthzohCategoriesRoute
+  '/qsfvnthzoh/content': typeof QsfvnthzohContentRoute
+  '/qsfvnthzoh/customers': typeof QsfvnthzohCustomersRoute
+  '/qsfvnthzoh/deliveries': typeof QsfvnthzohDeliveriesRoute
+  '/qsfvnthzoh/orders': typeof QsfvnthzohOrdersRoute
+  '/qsfvnthzoh/payments': typeof QsfvnthzohPaymentsRoute
+  '/qsfvnthzoh/pos': typeof QsfvnthzohPosRoute
+  '/qsfvnthzoh/products': typeof QsfvnthzohProductsRoute
+  '/qsfvnthzoh/reports': typeof QsfvnthzohReportsRoute
+  '/qsfvnthzoh/settings': typeof QsfvnthzohSettingsRoute
+  '/qsfvnthzoh/solutions': typeof QsfvnthzohSolutionsRoute
+  '/qsfvnthzoh/transactions': typeof QsfvnthzohTransactionsRoute
+  '/qsfvnthzoh_/login': typeof QsfvnthzohLoginRoute
   '/solutions/academy': typeof SolutionsAcademyRouteWithChildren
   '/solutions/business': typeof SolutionsBusinessRouteWithChildren
-  '/admin/': typeof AdminIndexRoute
+  '/qsfvnthzoh/': typeof QsfvnthzohIndexRoute
   '/solutions/': typeof SolutionsIndexRoute
-  '/admin/applications_/$applicationId': typeof AdminApplicationsApplicationIdRoute
-  '/admin/customers_/$customerId': typeof AdminCustomersCustomerIdRoute
-  '/admin/deliveries_/$deliveryId': typeof AdminDeliveriesDeliveryIdRoute
-  '/admin/orders_/$orderId': typeof AdminOrdersOrderIdRoute
-  '/admin/orders_/pickup': typeof AdminOrdersPickupRoute
-  '/admin/payments_/solutions': typeof AdminPaymentsSolutionsRoute
-  '/admin/solution-payments_/$registrationId': typeof AdminSolutionPaymentsRegistrationIdRoute
+  '/qsfvnthzoh/applications_/$applicationId': typeof QsfvnthzohApplicationsApplicationIdRoute
+  '/qsfvnthzoh/customers_/$customerId': typeof QsfvnthzohCustomersCustomerIdRoute
+  '/qsfvnthzoh/deliveries_/$deliveryId': typeof QsfvnthzohDeliveriesDeliveryIdRoute
+  '/qsfvnthzoh/orders_/$orderId': typeof QsfvnthzohOrdersOrderIdRoute
+  '/qsfvnthzoh/orders_/pickup': typeof QsfvnthzohOrdersPickupRoute
+  '/qsfvnthzoh/payments_/solutions': typeof QsfvnthzohPaymentsSolutionsRoute
+  '/qsfvnthzoh/solution-payments_/$registrationId': typeof QsfvnthzohSolutionPaymentsRegistrationIdRoute
   '/solutions/academy/importation': typeof SolutionsAcademyImportationRoute
   '/solutions/academy/procurement': typeof SolutionsAcademyProcurementRoute
   '/solutions/business/importation': typeof SolutionsBusinessImportationRoute
@@ -535,7 +536,7 @@ export interface FileRoutesById {
   '/solutions/business/sourcing': typeof SolutionsBusinessSourcingRoute
   '/solutions/academy/': typeof SolutionsAcademyIndexRoute
   '/solutions/business/': typeof SolutionsBusinessIndexRoute
-  '/admin/orders_/pickup_/$orderId': typeof AdminOrdersPickupOrderIdRoute
+  '/qsfvnthzoh/orders_/pickup_/$orderId': typeof QsfvnthzohOrdersPickupOrderIdRoute
   '/solutions/academy/importation_/apply': typeof SolutionsAcademyImportationApplyRoute
   '/solutions/academy/procurement_/apply': typeof SolutionsAcademyProcurementApplyRoute
   '/solutions/business/importation_/apply': typeof SolutionsBusinessImportationApplyRoute
@@ -547,8 +548,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/admin'
-    | '/admin-login'
     | '/cart'
     | '/checkout'
     | '/company-policy'
@@ -556,39 +555,41 @@ export interface FileRouteTypes {
     | '/delivery-policy'
     | '/login'
     | '/privacy'
+    | '/qsfvnthzoh'
     | '/refund-policy'
     | '/shop'
     | '/solutions'
     | '/terms'
     | '/track'
     | '/wishlist'
-    | '/admin/analytics'
-    | '/admin/applications'
-    | '/admin/categories'
-    | '/admin/content'
-    | '/admin/customers'
-    | '/admin/deliveries'
-    | '/admin/orders'
-    | '/admin/payments'
-    | '/admin/pos'
-    | '/admin/products'
-    | '/admin/reports'
-    | '/admin/settings'
-    | '/admin/solutions'
-    | '/admin/transactions'
     | '/policies/$slug'
     | '/product/$id'
+    | '/qsfvnthzoh/analytics'
+    | '/qsfvnthzoh/applications'
+    | '/qsfvnthzoh/categories'
+    | '/qsfvnthzoh/content'
+    | '/qsfvnthzoh/customers'
+    | '/qsfvnthzoh/deliveries'
+    | '/qsfvnthzoh/orders'
+    | '/qsfvnthzoh/payments'
+    | '/qsfvnthzoh/pos'
+    | '/qsfvnthzoh/products'
+    | '/qsfvnthzoh/reports'
+    | '/qsfvnthzoh/settings'
+    | '/qsfvnthzoh/solutions'
+    | '/qsfvnthzoh/transactions'
+    | '/qsfvnthzoh/login'
     | '/solutions/academy'
     | '/solutions/business'
-    | '/admin/'
+    | '/qsfvnthzoh/'
     | '/solutions/'
-    | '/admin/applications/$applicationId'
-    | '/admin/customers/$customerId'
-    | '/admin/deliveries/$deliveryId'
-    | '/admin/orders/$orderId'
-    | '/admin/orders/pickup'
-    | '/admin/payments/solutions'
-    | '/admin/solution-payments/$registrationId'
+    | '/qsfvnthzoh/applications/$applicationId'
+    | '/qsfvnthzoh/customers/$customerId'
+    | '/qsfvnthzoh/deliveries/$deliveryId'
+    | '/qsfvnthzoh/orders/$orderId'
+    | '/qsfvnthzoh/orders/pickup'
+    | '/qsfvnthzoh/payments/solutions'
+    | '/qsfvnthzoh/solution-payments/$registrationId'
     | '/solutions/academy/importation'
     | '/solutions/academy/procurement'
     | '/solutions/business/importation'
@@ -596,7 +597,7 @@ export interface FileRouteTypes {
     | '/solutions/business/sourcing'
     | '/solutions/academy/'
     | '/solutions/business/'
-    | '/admin/orders/pickup/$orderId'
+    | '/qsfvnthzoh/orders/pickup/$orderId'
     | '/solutions/academy/importation/apply'
     | '/solutions/academy/procurement/apply'
     | '/solutions/business/importation/apply'
@@ -606,7 +607,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/admin-login'
     | '/cart'
     | '/checkout'
     | '/company-policy'
@@ -619,31 +619,32 @@ export interface FileRouteTypes {
     | '/terms'
     | '/track'
     | '/wishlist'
-    | '/admin/analytics'
-    | '/admin/applications'
-    | '/admin/categories'
-    | '/admin/content'
-    | '/admin/customers'
-    | '/admin/deliveries'
-    | '/admin/orders'
-    | '/admin/payments'
-    | '/admin/pos'
-    | '/admin/products'
-    | '/admin/reports'
-    | '/admin/settings'
-    | '/admin/solutions'
-    | '/admin/transactions'
     | '/policies/$slug'
     | '/product/$id'
-    | '/admin'
+    | '/qsfvnthzoh/analytics'
+    | '/qsfvnthzoh/applications'
+    | '/qsfvnthzoh/categories'
+    | '/qsfvnthzoh/content'
+    | '/qsfvnthzoh/customers'
+    | '/qsfvnthzoh/deliveries'
+    | '/qsfvnthzoh/orders'
+    | '/qsfvnthzoh/payments'
+    | '/qsfvnthzoh/pos'
+    | '/qsfvnthzoh/products'
+    | '/qsfvnthzoh/reports'
+    | '/qsfvnthzoh/settings'
+    | '/qsfvnthzoh/solutions'
+    | '/qsfvnthzoh/transactions'
+    | '/qsfvnthzoh/login'
+    | '/qsfvnthzoh'
     | '/solutions'
-    | '/admin/applications/$applicationId'
-    | '/admin/customers/$customerId'
-    | '/admin/deliveries/$deliveryId'
-    | '/admin/orders/$orderId'
-    | '/admin/orders/pickup'
-    | '/admin/payments/solutions'
-    | '/admin/solution-payments/$registrationId'
+    | '/qsfvnthzoh/applications/$applicationId'
+    | '/qsfvnthzoh/customers/$customerId'
+    | '/qsfvnthzoh/deliveries/$deliveryId'
+    | '/qsfvnthzoh/orders/$orderId'
+    | '/qsfvnthzoh/orders/pickup'
+    | '/qsfvnthzoh/payments/solutions'
+    | '/qsfvnthzoh/solution-payments/$registrationId'
     | '/solutions/academy/importation'
     | '/solutions/academy/procurement'
     | '/solutions/business/importation'
@@ -651,7 +652,7 @@ export interface FileRouteTypes {
     | '/solutions/business/sourcing'
     | '/solutions/academy'
     | '/solutions/business'
-    | '/admin/orders/pickup/$orderId'
+    | '/qsfvnthzoh/orders/pickup/$orderId'
     | '/solutions/academy/importation/apply'
     | '/solutions/academy/procurement/apply'
     | '/solutions/business/importation/apply'
@@ -661,8 +662,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
-    | '/admin'
-    | '/admin-login'
     | '/cart'
     | '/checkout'
     | '/company-policy'
@@ -670,39 +669,41 @@ export interface FileRouteTypes {
     | '/delivery-policy'
     | '/login'
     | '/privacy'
+    | '/qsfvnthzoh'
     | '/refund-policy'
     | '/shop'
     | '/solutions'
     | '/terms'
     | '/track'
     | '/wishlist'
-    | '/admin/analytics'
-    | '/admin/applications'
-    | '/admin/categories'
-    | '/admin/content'
-    | '/admin/customers'
-    | '/admin/deliveries'
-    | '/admin/orders'
-    | '/admin/payments'
-    | '/admin/pos'
-    | '/admin/products'
-    | '/admin/reports'
-    | '/admin/settings'
-    | '/admin/solutions'
-    | '/admin/transactions'
     | '/policies/$slug'
     | '/product/$id'
+    | '/qsfvnthzoh/analytics'
+    | '/qsfvnthzoh/applications'
+    | '/qsfvnthzoh/categories'
+    | '/qsfvnthzoh/content'
+    | '/qsfvnthzoh/customers'
+    | '/qsfvnthzoh/deliveries'
+    | '/qsfvnthzoh/orders'
+    | '/qsfvnthzoh/payments'
+    | '/qsfvnthzoh/pos'
+    | '/qsfvnthzoh/products'
+    | '/qsfvnthzoh/reports'
+    | '/qsfvnthzoh/settings'
+    | '/qsfvnthzoh/solutions'
+    | '/qsfvnthzoh/transactions'
+    | '/qsfvnthzoh_/login'
     | '/solutions/academy'
     | '/solutions/business'
-    | '/admin/'
+    | '/qsfvnthzoh/'
     | '/solutions/'
-    | '/admin/applications_/$applicationId'
-    | '/admin/customers_/$customerId'
-    | '/admin/deliveries_/$deliveryId'
-    | '/admin/orders_/$orderId'
-    | '/admin/orders_/pickup'
-    | '/admin/payments_/solutions'
-    | '/admin/solution-payments_/$registrationId'
+    | '/qsfvnthzoh/applications_/$applicationId'
+    | '/qsfvnthzoh/customers_/$customerId'
+    | '/qsfvnthzoh/deliveries_/$deliveryId'
+    | '/qsfvnthzoh/orders_/$orderId'
+    | '/qsfvnthzoh/orders_/pickup'
+    | '/qsfvnthzoh/payments_/solutions'
+    | '/qsfvnthzoh/solution-payments_/$registrationId'
     | '/solutions/academy/importation'
     | '/solutions/academy/procurement'
     | '/solutions/business/importation'
@@ -710,7 +711,7 @@ export interface FileRouteTypes {
     | '/solutions/business/sourcing'
     | '/solutions/academy/'
     | '/solutions/business/'
-    | '/admin/orders_/pickup_/$orderId'
+    | '/qsfvnthzoh/orders_/pickup_/$orderId'
     | '/solutions/academy/importation_/apply'
     | '/solutions/academy/procurement_/apply'
     | '/solutions/business/importation_/apply'
@@ -721,8 +722,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AdminRoute: typeof AdminRouteWithChildren
-  AdminLoginRoute: typeof AdminLoginRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   CompanyPolicyRoute: typeof CompanyPolicyRoute
@@ -730,6 +729,7 @@ export interface RootRouteChildren {
   DeliveryPolicyRoute: typeof DeliveryPolicyRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
+  QsfvnthzohRoute: typeof QsfvnthzohRouteWithChildren
   RefundPolicyRoute: typeof RefundPolicyRoute
   ShopRoute: typeof ShopRoute
   SolutionsRoute: typeof SolutionsRouteWithChildren
@@ -738,6 +738,7 @@ export interface RootRouteChildren {
   WishlistRoute: typeof WishlistRoute
   PoliciesSlugRoute: typeof PoliciesSlugRoute
   ProductIdRoute: typeof ProductIdRoute
+  QsfvnthzohLoginRoute: typeof QsfvnthzohLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -754,20 +755,6 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin-login': {
-      id: '/admin-login'
-      path: '/admin-login'
-      fullPath: '/admin-login'
-      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -819,6 +806,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/qsfvnthzoh': {
+      id: '/qsfvnthzoh'
+      path: '/qsfvnthzoh'
+      fullPath: '/qsfvnthzoh'
+      preLoaderRoute: typeof QsfvnthzohRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/refund-policy': {
       id: '/refund-policy'
       path: '/refund-policy'
@@ -861,111 +855,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WishlistRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/analytics': {
-      id: '/admin/analytics'
-      path: '/analytics'
-      fullPath: '/admin/analytics'
-      preLoaderRoute: typeof AdminAnalyticsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/applications': {
-      id: '/admin/applications'
-      path: '/applications'
-      fullPath: '/admin/applications'
-      preLoaderRoute: typeof AdminApplicationsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/categories': {
-      id: '/admin/categories'
-      path: '/categories'
-      fullPath: '/admin/categories'
-      preLoaderRoute: typeof AdminCategoriesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/content': {
-      id: '/admin/content'
-      path: '/content'
-      fullPath: '/admin/content'
-      preLoaderRoute: typeof AdminContentRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/customers': {
-      id: '/admin/customers'
-      path: '/customers'
-      fullPath: '/admin/customers'
-      preLoaderRoute: typeof AdminCustomersRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/deliveries': {
-      id: '/admin/deliveries'
-      path: '/deliveries'
-      fullPath: '/admin/deliveries'
-      preLoaderRoute: typeof AdminDeliveriesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/orders': {
-      id: '/admin/orders'
-      path: '/orders'
-      fullPath: '/admin/orders'
-      preLoaderRoute: typeof AdminOrdersRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/payments': {
-      id: '/admin/payments'
-      path: '/payments'
-      fullPath: '/admin/payments'
-      preLoaderRoute: typeof AdminPaymentsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pos': {
-      id: '/admin/pos'
-      path: '/pos'
-      fullPath: '/admin/pos'
-      preLoaderRoute: typeof AdminPosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/products': {
-      id: '/admin/products'
-      path: '/products'
-      fullPath: '/admin/products'
-      preLoaderRoute: typeof AdminProductsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/reports': {
-      id: '/admin/reports'
-      path: '/reports'
-      fullPath: '/admin/reports'
-      preLoaderRoute: typeof AdminReportsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/settings': {
-      id: '/admin/settings'
-      path: '/settings'
-      fullPath: '/admin/settings'
-      preLoaderRoute: typeof AdminSettingsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/solutions': {
-      id: '/admin/solutions'
-      path: '/solutions'
-      fullPath: '/admin/solutions'
-      preLoaderRoute: typeof AdminSolutionsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/transactions': {
-      id: '/admin/transactions'
-      path: '/transactions'
-      fullPath: '/admin/transactions'
-      preLoaderRoute: typeof AdminTransactionsRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/policies/$slug': {
       id: '/policies/$slug'
       path: '/policies/$slug'
@@ -978,6 +867,118 @@ declare module '@tanstack/react-router' {
       path: '/product/$id'
       fullPath: '/product/$id'
       preLoaderRoute: typeof ProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qsfvnthzoh/': {
+      id: '/qsfvnthzoh/'
+      path: '/'
+      fullPath: '/qsfvnthzoh/'
+      preLoaderRoute: typeof QsfvnthzohIndexRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/analytics': {
+      id: '/qsfvnthzoh/analytics'
+      path: '/analytics'
+      fullPath: '/qsfvnthzoh/analytics'
+      preLoaderRoute: typeof QsfvnthzohAnalyticsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/applications': {
+      id: '/qsfvnthzoh/applications'
+      path: '/applications'
+      fullPath: '/qsfvnthzoh/applications'
+      preLoaderRoute: typeof QsfvnthzohApplicationsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/categories': {
+      id: '/qsfvnthzoh/categories'
+      path: '/categories'
+      fullPath: '/qsfvnthzoh/categories'
+      preLoaderRoute: typeof QsfvnthzohCategoriesRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/content': {
+      id: '/qsfvnthzoh/content'
+      path: '/content'
+      fullPath: '/qsfvnthzoh/content'
+      preLoaderRoute: typeof QsfvnthzohContentRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/customers': {
+      id: '/qsfvnthzoh/customers'
+      path: '/customers'
+      fullPath: '/qsfvnthzoh/customers'
+      preLoaderRoute: typeof QsfvnthzohCustomersRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/deliveries': {
+      id: '/qsfvnthzoh/deliveries'
+      path: '/deliveries'
+      fullPath: '/qsfvnthzoh/deliveries'
+      preLoaderRoute: typeof QsfvnthzohDeliveriesRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/orders': {
+      id: '/qsfvnthzoh/orders'
+      path: '/orders'
+      fullPath: '/qsfvnthzoh/orders'
+      preLoaderRoute: typeof QsfvnthzohOrdersRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/payments': {
+      id: '/qsfvnthzoh/payments'
+      path: '/payments'
+      fullPath: '/qsfvnthzoh/payments'
+      preLoaderRoute: typeof QsfvnthzohPaymentsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/pos': {
+      id: '/qsfvnthzoh/pos'
+      path: '/pos'
+      fullPath: '/qsfvnthzoh/pos'
+      preLoaderRoute: typeof QsfvnthzohPosRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/products': {
+      id: '/qsfvnthzoh/products'
+      path: '/products'
+      fullPath: '/qsfvnthzoh/products'
+      preLoaderRoute: typeof QsfvnthzohProductsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/reports': {
+      id: '/qsfvnthzoh/reports'
+      path: '/reports'
+      fullPath: '/qsfvnthzoh/reports'
+      preLoaderRoute: typeof QsfvnthzohReportsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/settings': {
+      id: '/qsfvnthzoh/settings'
+      path: '/settings'
+      fullPath: '/qsfvnthzoh/settings'
+      preLoaderRoute: typeof QsfvnthzohSettingsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/solutions': {
+      id: '/qsfvnthzoh/solutions'
+      path: '/solutions'
+      fullPath: '/qsfvnthzoh/solutions'
+      preLoaderRoute: typeof QsfvnthzohSolutionsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh/transactions': {
+      id: '/qsfvnthzoh/transactions'
+      path: '/transactions'
+      fullPath: '/qsfvnthzoh/transactions'
+      preLoaderRoute: typeof QsfvnthzohTransactionsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
+    }
+    '/qsfvnthzoh_/login': {
+      id: '/qsfvnthzoh_/login'
+      path: '/qsfvnthzoh/login'
+      fullPath: '/qsfvnthzoh/login'
+      preLoaderRoute: typeof QsfvnthzohLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/solutions/': {
@@ -1001,54 +1002,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsBusinessRouteImport
       parentRoute: typeof SolutionsRoute
     }
-    '/admin/applications_/$applicationId': {
-      id: '/admin/applications_/$applicationId'
+    '/qsfvnthzoh/applications_/$applicationId': {
+      id: '/qsfvnthzoh/applications_/$applicationId'
       path: '/applications/$applicationId'
-      fullPath: '/admin/applications/$applicationId'
-      preLoaderRoute: typeof AdminApplicationsApplicationIdRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/applications/$applicationId'
+      preLoaderRoute: typeof QsfvnthzohApplicationsApplicationIdRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
-    '/admin/customers_/$customerId': {
-      id: '/admin/customers_/$customerId'
+    '/qsfvnthzoh/customers_/$customerId': {
+      id: '/qsfvnthzoh/customers_/$customerId'
       path: '/customers/$customerId'
-      fullPath: '/admin/customers/$customerId'
-      preLoaderRoute: typeof AdminCustomersCustomerIdRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/customers/$customerId'
+      preLoaderRoute: typeof QsfvnthzohCustomersCustomerIdRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
-    '/admin/deliveries_/$deliveryId': {
-      id: '/admin/deliveries_/$deliveryId'
+    '/qsfvnthzoh/deliveries_/$deliveryId': {
+      id: '/qsfvnthzoh/deliveries_/$deliveryId'
       path: '/deliveries/$deliveryId'
-      fullPath: '/admin/deliveries/$deliveryId'
-      preLoaderRoute: typeof AdminDeliveriesDeliveryIdRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/deliveries/$deliveryId'
+      preLoaderRoute: typeof QsfvnthzohDeliveriesDeliveryIdRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
-    '/admin/orders_/$orderId': {
-      id: '/admin/orders_/$orderId'
+    '/qsfvnthzoh/orders_/$orderId': {
+      id: '/qsfvnthzoh/orders_/$orderId'
       path: '/orders/$orderId'
-      fullPath: '/admin/orders/$orderId'
-      preLoaderRoute: typeof AdminOrdersOrderIdRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/orders/$orderId'
+      preLoaderRoute: typeof QsfvnthzohOrdersOrderIdRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
-    '/admin/orders_/pickup': {
-      id: '/admin/orders_/pickup'
+    '/qsfvnthzoh/orders_/pickup': {
+      id: '/qsfvnthzoh/orders_/pickup'
       path: '/orders/pickup'
-      fullPath: '/admin/orders/pickup'
-      preLoaderRoute: typeof AdminOrdersPickupRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/orders/pickup'
+      preLoaderRoute: typeof QsfvnthzohOrdersPickupRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
-    '/admin/payments_/solutions': {
-      id: '/admin/payments_/solutions'
+    '/qsfvnthzoh/payments_/solutions': {
+      id: '/qsfvnthzoh/payments_/solutions'
       path: '/payments/solutions'
-      fullPath: '/admin/payments/solutions'
-      preLoaderRoute: typeof AdminPaymentsSolutionsRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/payments/solutions'
+      preLoaderRoute: typeof QsfvnthzohPaymentsSolutionsRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
-    '/admin/solution-payments_/$registrationId': {
-      id: '/admin/solution-payments_/$registrationId'
+    '/qsfvnthzoh/solution-payments_/$registrationId': {
+      id: '/qsfvnthzoh/solution-payments_/$registrationId'
       path: '/solution-payments/$registrationId'
-      fullPath: '/admin/solution-payments/$registrationId'
-      preLoaderRoute: typeof AdminSolutionPaymentsRegistrationIdRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/solution-payments/$registrationId'
+      preLoaderRoute: typeof QsfvnthzohSolutionPaymentsRegistrationIdRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
     '/solutions/academy/': {
       id: '/solutions/academy/'
@@ -1099,12 +1100,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsBusinessSourcingRouteImport
       parentRoute: typeof SolutionsBusinessRoute
     }
-    '/admin/orders_/pickup_/$orderId': {
-      id: '/admin/orders_/pickup_/$orderId'
+    '/qsfvnthzoh/orders_/pickup_/$orderId': {
+      id: '/qsfvnthzoh/orders_/pickup_/$orderId'
       path: '/orders/pickup/$orderId'
-      fullPath: '/admin/orders/pickup/$orderId'
-      preLoaderRoute: typeof AdminOrdersPickupOrderIdRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/qsfvnthzoh/orders/pickup/$orderId'
+      preLoaderRoute: typeof QsfvnthzohOrdersPickupOrderIdRouteImport
+      parentRoute: typeof QsfvnthzohRoute
     }
     '/solutions/academy/importation_/apply': {
       id: '/solutions/academy/importation_/apply'
@@ -1144,60 +1145,63 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AdminRouteChildren {
-  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
-  AdminApplicationsRoute: typeof AdminApplicationsRoute
-  AdminCategoriesRoute: typeof AdminCategoriesRoute
-  AdminContentRoute: typeof AdminContentRoute
-  AdminCustomersRoute: typeof AdminCustomersRoute
-  AdminDeliveriesRoute: typeof AdminDeliveriesRoute
-  AdminOrdersRoute: typeof AdminOrdersRoute
-  AdminPaymentsRoute: typeof AdminPaymentsRoute
-  AdminPosRoute: typeof AdminPosRoute
-  AdminProductsRoute: typeof AdminProductsRoute
-  AdminReportsRoute: typeof AdminReportsRoute
-  AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminSolutionsRoute: typeof AdminSolutionsRoute
-  AdminTransactionsRoute: typeof AdminTransactionsRoute
-  AdminIndexRoute: typeof AdminIndexRoute
-  AdminApplicationsApplicationIdRoute: typeof AdminApplicationsApplicationIdRoute
-  AdminCustomersCustomerIdRoute: typeof AdminCustomersCustomerIdRoute
-  AdminDeliveriesDeliveryIdRoute: typeof AdminDeliveriesDeliveryIdRoute
-  AdminOrdersOrderIdRoute: typeof AdminOrdersOrderIdRoute
-  AdminOrdersPickupRoute: typeof AdminOrdersPickupRoute
-  AdminPaymentsSolutionsRoute: typeof AdminPaymentsSolutionsRoute
-  AdminSolutionPaymentsRegistrationIdRoute: typeof AdminSolutionPaymentsRegistrationIdRoute
-  AdminOrdersPickupOrderIdRoute: typeof AdminOrdersPickupOrderIdRoute
+interface QsfvnthzohRouteChildren {
+  QsfvnthzohAnalyticsRoute: typeof QsfvnthzohAnalyticsRoute
+  QsfvnthzohApplicationsRoute: typeof QsfvnthzohApplicationsRoute
+  QsfvnthzohCategoriesRoute: typeof QsfvnthzohCategoriesRoute
+  QsfvnthzohContentRoute: typeof QsfvnthzohContentRoute
+  QsfvnthzohCustomersRoute: typeof QsfvnthzohCustomersRoute
+  QsfvnthzohDeliveriesRoute: typeof QsfvnthzohDeliveriesRoute
+  QsfvnthzohOrdersRoute: typeof QsfvnthzohOrdersRoute
+  QsfvnthzohPaymentsRoute: typeof QsfvnthzohPaymentsRoute
+  QsfvnthzohPosRoute: typeof QsfvnthzohPosRoute
+  QsfvnthzohProductsRoute: typeof QsfvnthzohProductsRoute
+  QsfvnthzohReportsRoute: typeof QsfvnthzohReportsRoute
+  QsfvnthzohSettingsRoute: typeof QsfvnthzohSettingsRoute
+  QsfvnthzohSolutionsRoute: typeof QsfvnthzohSolutionsRoute
+  QsfvnthzohTransactionsRoute: typeof QsfvnthzohTransactionsRoute
+  QsfvnthzohIndexRoute: typeof QsfvnthzohIndexRoute
+  QsfvnthzohApplicationsApplicationIdRoute: typeof QsfvnthzohApplicationsApplicationIdRoute
+  QsfvnthzohCustomersCustomerIdRoute: typeof QsfvnthzohCustomersCustomerIdRoute
+  QsfvnthzohDeliveriesDeliveryIdRoute: typeof QsfvnthzohDeliveriesDeliveryIdRoute
+  QsfvnthzohOrdersOrderIdRoute: typeof QsfvnthzohOrdersOrderIdRoute
+  QsfvnthzohOrdersPickupRoute: typeof QsfvnthzohOrdersPickupRoute
+  QsfvnthzohPaymentsSolutionsRoute: typeof QsfvnthzohPaymentsSolutionsRoute
+  QsfvnthzohSolutionPaymentsRegistrationIdRoute: typeof QsfvnthzohSolutionPaymentsRegistrationIdRoute
+  QsfvnthzohOrdersPickupOrderIdRoute: typeof QsfvnthzohOrdersPickupOrderIdRoute
 }
 
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminAnalyticsRoute: AdminAnalyticsRoute,
-  AdminApplicationsRoute: AdminApplicationsRoute,
-  AdminCategoriesRoute: AdminCategoriesRoute,
-  AdminContentRoute: AdminContentRoute,
-  AdminCustomersRoute: AdminCustomersRoute,
-  AdminDeliveriesRoute: AdminDeliveriesRoute,
-  AdminOrdersRoute: AdminOrdersRoute,
-  AdminPaymentsRoute: AdminPaymentsRoute,
-  AdminPosRoute: AdminPosRoute,
-  AdminProductsRoute: AdminProductsRoute,
-  AdminReportsRoute: AdminReportsRoute,
-  AdminSettingsRoute: AdminSettingsRoute,
-  AdminSolutionsRoute: AdminSolutionsRoute,
-  AdminTransactionsRoute: AdminTransactionsRoute,
-  AdminIndexRoute: AdminIndexRoute,
-  AdminApplicationsApplicationIdRoute: AdminApplicationsApplicationIdRoute,
-  AdminCustomersCustomerIdRoute: AdminCustomersCustomerIdRoute,
-  AdminDeliveriesDeliveryIdRoute: AdminDeliveriesDeliveryIdRoute,
-  AdminOrdersOrderIdRoute: AdminOrdersOrderIdRoute,
-  AdminOrdersPickupRoute: AdminOrdersPickupRoute,
-  AdminPaymentsSolutionsRoute: AdminPaymentsSolutionsRoute,
-  AdminSolutionPaymentsRegistrationIdRoute:
-    AdminSolutionPaymentsRegistrationIdRoute,
-  AdminOrdersPickupOrderIdRoute: AdminOrdersPickupOrderIdRoute,
+const QsfvnthzohRouteChildren: QsfvnthzohRouteChildren = {
+  QsfvnthzohAnalyticsRoute: QsfvnthzohAnalyticsRoute,
+  QsfvnthzohApplicationsRoute: QsfvnthzohApplicationsRoute,
+  QsfvnthzohCategoriesRoute: QsfvnthzohCategoriesRoute,
+  QsfvnthzohContentRoute: QsfvnthzohContentRoute,
+  QsfvnthzohCustomersRoute: QsfvnthzohCustomersRoute,
+  QsfvnthzohDeliveriesRoute: QsfvnthzohDeliveriesRoute,
+  QsfvnthzohOrdersRoute: QsfvnthzohOrdersRoute,
+  QsfvnthzohPaymentsRoute: QsfvnthzohPaymentsRoute,
+  QsfvnthzohPosRoute: QsfvnthzohPosRoute,
+  QsfvnthzohProductsRoute: QsfvnthzohProductsRoute,
+  QsfvnthzohReportsRoute: QsfvnthzohReportsRoute,
+  QsfvnthzohSettingsRoute: QsfvnthzohSettingsRoute,
+  QsfvnthzohSolutionsRoute: QsfvnthzohSolutionsRoute,
+  QsfvnthzohTransactionsRoute: QsfvnthzohTransactionsRoute,
+  QsfvnthzohIndexRoute: QsfvnthzohIndexRoute,
+  QsfvnthzohApplicationsApplicationIdRoute:
+    QsfvnthzohApplicationsApplicationIdRoute,
+  QsfvnthzohCustomersCustomerIdRoute: QsfvnthzohCustomersCustomerIdRoute,
+  QsfvnthzohDeliveriesDeliveryIdRoute: QsfvnthzohDeliveriesDeliveryIdRoute,
+  QsfvnthzohOrdersOrderIdRoute: QsfvnthzohOrdersOrderIdRoute,
+  QsfvnthzohOrdersPickupRoute: QsfvnthzohOrdersPickupRoute,
+  QsfvnthzohPaymentsSolutionsRoute: QsfvnthzohPaymentsSolutionsRoute,
+  QsfvnthzohSolutionPaymentsRegistrationIdRoute:
+    QsfvnthzohSolutionPaymentsRegistrationIdRoute,
+  QsfvnthzohOrdersPickupOrderIdRoute: QsfvnthzohOrdersPickupOrderIdRoute,
 }
 
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+const QsfvnthzohRouteWithChildren = QsfvnthzohRoute._addFileChildren(
+  QsfvnthzohRouteChildren,
+)
 
 interface SolutionsAcademyRouteChildren {
   SolutionsAcademyImportationRoute: typeof SolutionsAcademyImportationRoute
@@ -1262,8 +1266,6 @@ const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AdminRoute: AdminRouteWithChildren,
-  AdminLoginRoute: AdminLoginRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   CompanyPolicyRoute: CompanyPolicyRoute,
@@ -1271,6 +1273,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeliveryPolicyRoute: DeliveryPolicyRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
+  QsfvnthzohRoute: QsfvnthzohRouteWithChildren,
   RefundPolicyRoute: RefundPolicyRoute,
   ShopRoute: ShopRoute,
   SolutionsRoute: SolutionsRouteWithChildren,
@@ -1279,6 +1282,7 @@ const rootRouteChildren: RootRouteChildren = {
   WishlistRoute: WishlistRoute,
   PoliciesSlugRoute: PoliciesSlugRoute,
   ProductIdRoute: ProductIdRoute,
+  QsfvnthzohLoginRoute: QsfvnthzohLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -68,7 +68,7 @@ function normalizeNigerianState(stateName?: string, stateList = FEZ_DEFAULT_STAT
   return match || stateName;
 }
 
-export const Route = createFileRoute("/admin/pos")({
+export const Route = createFileRoute("/qsfvnthzoh/pos")({
   component: PosPage,
 });
 
@@ -388,7 +388,7 @@ function PosPage() {
           toast.success("Order created successfully!");
           setCourierPricesLoaded(false);
           pos.clear();
-          nav({ to: "/admin/orders" });
+          nav({ to: "/qsfvnthzoh/orders" });
         },
         onError: (err) => {
           toast.error("Failed to create order: " + (err?.message || "Please try again."));

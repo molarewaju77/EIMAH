@@ -21,7 +21,7 @@ import { salesSeries } from "@/lib/admin-data";
 import { formatNaira } from "@/lib/mock-data";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/analytics")({
+export const Route = createFileRoute("/qsfvnthzoh/analytics")({
   component: AnalyticsPage,
   head: () => ({
     meta: [{ title: "Analytics — EIMAH Admin" }, { name: "robots", content: "noindex" }],

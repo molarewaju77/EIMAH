@@ -17,10 +17,10 @@ import { StatusPill } from "@/components/admin/parts";
 import { useSolutionPaymentsQuery, useUpdateSolutionPaymentStatusMutation, useSolutionsQuery } from "@/hooks/queries/useContentQuery";
 import { type PaymentStatus } from "@/lib/admin-store";
 import { formatNaira } from "@/lib/mock-data";
-import { formatDateString } from "@/routes/admin/payments";
+import { formatDateString } from "@/routes/qsfvnthzoh/payments";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/solution-payments_/$registrationId")({
+export const Route = createFileRoute("/qsfvnthzoh/solution-payments_/$registrationId")({
   component: SolutionRegistrationDetailsPage,
 });
 
@@ -56,7 +56,7 @@ function SolutionRegistrationDetailsPage() {
           <span className="font-mono">{registrationId}</span>.
         </p>
         <Link
-          to="/admin/payments"
+          to="/qsfvnthzoh/payments"
           className="inline-flex items-center gap-2 px-4 h-9 rounded-full bg-black text-white text-xs font-medium hover:bg-neutral-800 transition-colors"
         >
           <ArrowLeft className="size-3.5" /> Return to Payments
@@ -87,7 +87,7 @@ function SolutionRegistrationDetailsPage() {
         </div> */}
 
         <Link
-          to="/admin/payments"
+          to="/qsfvnthzoh/payments"
           className="inline-flex items-center gap-2 h-10 px-4 rounded-xl border border-border bg-white text-xs font-semibold hover:bg-secondary transition-colors cursor-pointer shadow-xs"
         >
           <ArrowLeft className="size-4" /> Back to Payments

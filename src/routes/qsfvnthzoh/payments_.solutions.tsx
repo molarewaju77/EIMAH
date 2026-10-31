@@ -10,9 +10,9 @@ import { useTransactionsQuery } from "@/hooks/queries/useTransactionsQuery";
 import { formatNaira } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
-import { formatDateString } from "@/routes/admin/payments";
+import { formatDateString } from "@/routes/qsfvnthzoh/payments";
 
-export const Route = createFileRoute("/admin/payments_/solutions")({
+export const Route = createFileRoute("/qsfvnthzoh/payments_/solutions")({
   component: SolutionsPaymentsPage,
   head: () => ({
     meta: [

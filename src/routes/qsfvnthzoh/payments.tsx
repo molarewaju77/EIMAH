@@ -14,7 +14,7 @@ import { formatNaira } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/payments")({
+export const Route = createFileRoute("/qsfvnthzoh/payments")({
   component: PaymentsPage,
   head: () => ({
     meta: [{ title: "Payments — EIMAH Admin" }, { name: "robots", content: "noindex" }],

@@ -8,7 +8,7 @@ import { formatNaira } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/orders_/pickup")({
+export const Route = createFileRoute("/qsfvnthzoh/orders_/pickup")({
   component: PickupOrdersPage,
   head: () => ({
     meta: [{ title: "Pick-up Orders — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -136,7 +136,7 @@ function PickupOrdersPage() {
       <div className="flex items-center justify-between gap-4 mb-4">
         <h2 className="font-display font-bold text-xl sm:text-2xl text-foreground">Pick-up Orders</h2>
         <Link
-          to="/admin/pos"
+          to="/qsfvnthzoh/pos"
           className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-brand-pink text-ink font-semibold text-xs sm:text-sm hover:bg-ink hover:text-white transition-colors cursor-pointer shrink-0 shadow-sm"
         >
           <Plus className="size-4" /> Create Order (POS)
@@ -448,7 +448,7 @@ function PickupOrdersPage() {
 
                     {/* Modern Dark Action Button */}
                     <Link
-                      to="/admin/orders/pickup/$orderId"
+                      to="/qsfvnthzoh/orders/pickup/$orderId"
                       params={{ orderId: o.id }}
                       className="w-full h-10 rounded-lg bg-ink text-white font-semibold text-xs hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                     >
@@ -479,7 +479,7 @@ function PickupOrdersPage() {
                     <tr key={o.id} className="hover:bg-secondary/30 transition-colors">
                       <td className="py-3.5 px-4 font-mono text-[14px] font-normal text-neutral-700 whitespace-nowrap">
                         <Link
-                          to="/admin/orders/pickup/$orderId"
+                          to="/qsfvnthzoh/orders/pickup/$orderId"
                           params={{ orderId: o.id }}
                           className="hover:underline hover:text-brand-pink font-medium text-neutral-900"
                         >
@@ -493,7 +493,7 @@ function PickupOrdersPage() {
                       </td>
                       <td className="py-3.5 px-4">
                         <Link
-                          to="/admin/orders/pickup/$orderId"
+                          to="/qsfvnthzoh/orders/pickup/$orderId"
                           params={{ orderId: o.id }}
                           className="block group"
                         >
@@ -521,7 +521,7 @@ function PickupOrdersPage() {
                       </td>
                       <td className="py-3.5 px-4 text-right whitespace-nowrap">
                         <Link
-                          to="/admin/orders/pickup/$orderId"
+                          to="/qsfvnthzoh/orders/pickup/$orderId"
                           params={{ orderId: o.id }}
                           className="p-1.5 rounded-lg hover:bg-secondary inline-flex text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                           aria-label="View order details"

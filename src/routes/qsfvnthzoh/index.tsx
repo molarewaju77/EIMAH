@@ -27,9 +27,9 @@ import { useDashboardStatsQuery } from "@/hooks/queries/useDashboardStatsQuery";
 import { Loader } from "@/components/ui/loader";
 import { salesSeries } from "@/lib/admin-data";
 import { formatNaira } from "@/lib/mock-data";
-import { formatCompactNaira } from "@/routes/admin/analytics";
+import { formatCompactNaira } from "@/routes/qsfvnthzoh/analytics";
 
-export const Route = createFileRoute("/admin/")({
+export const Route = createFileRoute("/qsfvnthzoh/")({
   component: AdminDashboard,
   head: () => ({
     meta: [
@@ -182,7 +182,7 @@ function AdminDashboard() {
           title="Top Categories"
           action={
             <Link
-              to="/admin/analytics"
+              to="/qsfvnthzoh/analytics"
               className="text-xs font-semibold inline-flex items-center gap-1 hover:text-brand-pink"
             >
               View <ArrowUpRight className="size-3" />
@@ -220,7 +220,7 @@ function AdminDashboard() {
           title="Recent Orders"
           action={
             <Link
-              to="/admin/orders"
+              to="/qsfvnthzoh/orders"
               className="text-xs font-semibold inline-flex items-center gap-1 hover:text-brand-pink whitespace-nowrap shrink-0"
             >
               View all <ArrowUpRight className="size-3" />
@@ -307,7 +307,7 @@ function AdminDashboard() {
           title="Top-Performing Products"
           action={
             <Link
-              to="/admin/products"
+              to="/qsfvnthzoh/products"
               className="text-xs font-semibold inline-flex items-center gap-1 hover:text-brand-pink"
             >
               View <ArrowUpRight className="size-3" />

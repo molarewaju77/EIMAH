@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
 import type { DeliveryStatus } from "@/lib/db/deliveries";
 
-export const Route = createFileRoute("/admin/deliveries")({
+export const Route = createFileRoute("/qsfvnthzoh/deliveries")({
   component: DeliveriesPage,
   head: () => ({
     meta: [{ title: "Deliveries — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -224,7 +224,7 @@ function DeliveriesPage() {
                   </div>
 
                   <Link
-                    to="/admin/deliveries/$deliveryId"
+                    to="/qsfvnthzoh/deliveries/$deliveryId"
                     params={{ deliveryId: d.id }}
                     className="w-full h-10 rounded-lg bg-ink text-white font-semibold text-xs hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                   >
@@ -252,7 +252,7 @@ function DeliveriesPage() {
                     <tr key={d.id} className="hover:bg-secondary/30 transition-colors">
                       <td className="py-3.5 px-4 font-mono text-[14px] font-normal text-neutral-700 whitespace-nowrap">
                         <Link
-                          to="/admin/deliveries/$deliveryId"
+                          to="/qsfvnthzoh/deliveries/$deliveryId"
                           params={{ deliveryId: d.id }}
                           className="hover:underline hover:text-brand-pink font-medium text-neutral-900"
                         >
@@ -261,7 +261,7 @@ function DeliveriesPage() {
                       </td>
                       <td className="py-3.5 px-4">
                         <Link
-                          to="/admin/deliveries/$deliveryId"
+                          to="/qsfvnthzoh/deliveries/$deliveryId"
                           params={{ deliveryId: d.id }}
                           className="block group"
                         >
@@ -285,7 +285,7 @@ function DeliveriesPage() {
                       </td>
                       <td className="py-3.5 px-4 text-right whitespace-nowrap">
                         <Link
-                          to="/admin/deliveries/$deliveryId"
+                          to="/qsfvnthzoh/deliveries/$deliveryId"
                           params={{ deliveryId: d.id }}
                           className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-neutral-900 inline-block cursor-pointer"
                           aria-label="View delivery"

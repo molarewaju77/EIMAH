@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "react-toastify";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/applications")({
+export const Route = createFileRoute("/qsfvnthzoh/applications")({
   component: ApplicationsPage,
   head: () => ({
     meta: [{ title: "Applications — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -521,7 +521,7 @@ export default function ApplicationsPage() {
 
                     <div>
                       <Link
-                        to="/admin/applications/$applicationId"
+                        to="/qsfvnthzoh/applications/$applicationId"
                         params={{ applicationId: app.id }}
                         className="font-bold text-base text-foreground hover:text-brand-pink transition-colors block"
                       >
@@ -554,7 +554,7 @@ export default function ApplicationsPage() {
 
                     <div className="pt-1">
                       <Link
-                        to="/admin/applications/$applicationId"
+                        to="/qsfvnthzoh/applications/$applicationId"
                         params={{ applicationId: app.id }}
                         className="w-full h-10 rounded-xl bg-ink text-white hover:bg-black font-semibold text-xs flex items-center justify-center transition-colors shadow-2xs"
                       >
@@ -587,7 +587,7 @@ export default function ApplicationsPage() {
                         {/* Applicant Name & ID (ID : SOL-xxxx) */}
                         <td className="py-4 px-5">
                           <Link
-                            to="/admin/applications/$applicationId"
+                            to="/qsfvnthzoh/applications/$applicationId"
                             params={{ applicationId: app.id }}
                             className="font-semibold text-foreground group-hover:text-brand-pink transition-colors block text-sm"
                           >
@@ -623,7 +623,7 @@ export default function ApplicationsPage() {
                           <div className="inline-flex items-center gap-1">
                             {/* View Eye Button */}
                             <Link
-                              to="/admin/applications/$applicationId"
+                              to="/qsfvnthzoh/applications/$applicationId"
                               params={{ applicationId: app.id }}
                               className="inline-flex items-center justify-center size-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                               title="View Application Details"
@@ -676,7 +676,7 @@ export default function ApplicationsPage() {
                                     <div className="border-t border-border/50 my-1" />
 
                                     <Link
-                                      to="/admin/applications/$applicationId"
+                                      to="/qsfvnthzoh/applications/$applicationId"
                                       params={{ applicationId: app.id }}
                                       className="w-full px-3 py-1.5 flex items-center gap-2 text-foreground hover:bg-secondary transition-colors cursor-pointer"
                                       onClick={() => setOpenActionId(null)}

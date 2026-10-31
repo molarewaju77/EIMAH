@@ -11,7 +11,7 @@ import { useCustomersQuery } from "@/hooks/queries/useCustomersQuery";
 import { buildReportData, exportAndDownloadReport, formatReportDate } from "@/lib/report-generator";
 import { adminCategories, type ExportRow } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/admin/reports")({
+export const Route = createFileRoute("/qsfvnthzoh/reports")({
   component: ReportsPage,
   head: () => ({
     meta: [{ title: "Reports — EIMAH Admin" }, { name: "robots", content: "noindex" }],

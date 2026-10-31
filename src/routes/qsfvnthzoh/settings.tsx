@@ -14,7 +14,7 @@ import { formatNaira } from "@/lib/mock-data";
 import { Trash2, Edit2, Plus, X } from "lucide-react";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/settings")({
+export const Route = createFileRoute("/qsfvnthzoh/settings")({
   component: SettingsPage,
   head: () => ({
     meta: [{ title: "Settings — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -28,7 +28,7 @@ function SettingsPage() {
   const [tab, setTab] = useState(TABS[0]);
   return (
     <div>
-      <AdminPageHeader crumbs={[{ label: "Dashboard", to: "/admin" }, { label: "Settings" }]} />
+      <AdminPageHeader crumbs={[{ label: "Dashboard", to: "/qsfvnthzoh" }, { label: "Settings" }]} />
       <div className="mb-6 border-b border-border overflow-x-auto">
         <div className="flex gap-1 min-w-max">
           {TABS.map((t) => (

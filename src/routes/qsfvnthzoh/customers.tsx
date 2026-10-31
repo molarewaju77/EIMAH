@@ -7,7 +7,7 @@ import { formatNaira } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/ui/loader";
 
-export const Route = createFileRoute("/admin/customers")({
+export const Route = createFileRoute("/qsfvnthzoh/customers")({
   component: CustomersPage,
   head: () => ({
     meta: [{ title: "Customers — EIMAH Admin" }, { name: "robots", content: "noindex" }],
@@ -320,7 +320,7 @@ function CustomersPage() {
                     </div>
                   </div>
                   <Link
-                    to="/admin/customers/$customerId"
+                    to="/qsfvnthzoh/customers/$customerId"
                     params={{ customerId: c.id }}
                     className="w-full h-10 rounded-lg bg-ink text-white font-semibold text-xs hover:bg-black transition-colors inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                   >
@@ -349,7 +349,7 @@ function CustomersPage() {
                     <tr key={c.id} className="hover:bg-secondary/30 transition-colors">
                       <td className="py-3.5 px-4">
                         <Link
-                          to="/admin/customers/$customerId"
+                          to="/qsfvnthzoh/customers/$customerId"
                           params={{ customerId: c.id }}
                           className="hover:underline"
                         >
@@ -382,7 +382,7 @@ function CustomersPage() {
                       </td>
                       <td className="py-3.5 px-4 text-right whitespace-nowrap">
                         <Link
-                          to="/admin/customers/$customerId"
+                          to="/qsfvnthzoh/customers/$customerId"
                           params={{ customerId: c.id }}
                           className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-neutral-900 transition-colors inline-block cursor-pointer"
                           aria-label="View customer profile"
